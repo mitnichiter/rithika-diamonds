@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bespoke Custom Jewellery Design | Rithika Diamonds</title>
+  
+  <!-- Premium Font Imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome CDN for Luxury UI Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* Global Variables & Brand Design Tokens */
+    :root {
+      --primary-navy: #020b16;      /* Main dark backdrop */
+      --header-dark: #021024;       /* Text dark color */
+      --accent-gold: #dfb470;       /* Gold branding highlights */
+      --white: #ffffff;
+      --light-blue-gray: #f8fafc;
+      --border-light: rgba(255, 255, 255, 0.12);
+      --border-gray: #e2e8f0;
+      --text-gray: #64748b;
+      --font-serif: 'Cormorant Garamond', serif;
+      --font-sans: 'Inter', sans-serif;
+      --transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* Global Base Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--white);
+      color: var(--header-dark);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ==========================================
+       1. TOP UTILITY BAR
+       ========================================== */
+    .top-bar {
+      background-color: var(--primary-navy);
+      color: rgba(255, 255, 255, 0.75);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 60px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .top-bar-left {
+      display: flex;
+      gap: 30px;
+    }
+
+    .top-bar-left span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .top-bar-left i {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .top-bar-right {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+
+    .top-bar-right span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .top-bar-right a {
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .top-bar-right a:hover {
+      color: var(--white);
+    }
+
+    /* ==========================================
+       2. MAIN NAVIGATION HEADER
+       ========================================== */
+    .main-header {
+      background-color: var(--white);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 60px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--header-dark);
+    }
+
+    .logo-svg {
+      color: var(--header-dark);
+      display: block;
+    }
+
+    .logo-text {
+      font-family: var(--font-serif);
+      font-size: 25px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-item {
+      color: var(--header-dark);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      position: relative;
+      padding: 8px 0;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .nav-item i {
+      font-size: 9px;
+      transition: var(--transition);
+    }
+
+    .nav-item:hover {
+      color: rgba(2, 16, 36, 0.7);
+    }
+
+    .nav-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background-color: var(--header-dark);
+      transition: var(--transition);
+    }
+
+    .nav-item:hover::after,
+    .nav-item.active::after {
+      width: 24px;
+    }
+
+    .nav-item.dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background-color: var(--white);
+      border: 1px solid #f1f5f9;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      list-style: none;
+      padding: 10px 0;
+      min-width: 180px;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      border-radius: 4px;
+    }
+
+    .nav-item.dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .dropdown-menu li a {
+      display: block;
+      padding: 10px 20px;
+      color: var(--header-dark);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      transition: var(--transition);
+    }
+
+    .dropdown-menu li a:hover {
+      background-color: var(--light-blue-gray);
+      color: var(--header-dark);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .action-btn {
+      background: none;
+      border: none;
+      color: var(--header-dark);
+      font-size: 17px;
+      cursor: pointer;
+      position: relative;
+      padding: 6px;
+      transition: var(--transition);
+    }
+
+    .action-btn:hover {
+      color: rgba(2, 16, 36, 0.7);
+    }
+
+    .badge-btn .badge {
+      position: absolute;
+      top: 0px;
+      right: -2px;
+      background-color: var(--header-dark);
+      color: var(--white);
+      font-size: 8px;
+      font-weight: 700;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu-toggle-cb {
+      display: none;
+    }
+
+    .menu-toggle-btn {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 22px;
+      height: 16px;
+      cursor: pointer;
+      z-index: 1010;
+    }
+
+    .menu-toggle-btn span {
+      display: block;
+      height: 2px;
+      width: 100%;
+      background-color: var(--header-dark);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* ==========================================
+       3. CUSTOM DESIGN HERO BANNER
+       ========================================== */
+    .hero-section {
+      position: relative;
+      background: linear-gradient(135deg, rgba(2, 11, 22, 0.95) 30%, rgba(2, 11, 22, 0.75) 60%, rgba(2, 11, 22, 0.45) 100%), 
+                  url('https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=1200&q=80') no-repeat center center / cover;
+      display: flex;
+      min-height: 500px;
+      height: calc(100vh - 120px);
+      max-height: 700px;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 40px 80px;
+      z-index: 2;
+    }
+
+    .hero-content {
+      max-width: 540px;
+      width: 100%;
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+
+    .hero-tag {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: 46px;
+      font-weight: 300;
+      line-height: 1.2;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-description {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 440px;
+      letter-spacing: 0.3px;
+    }
+
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background-color: var(--white);
+      color: var(--primary-navy);
+      padding: 15px 32px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: var(--transition);
+      border: 1px solid var(--white);
+      margin-top: 15px;
+    }
+
+    .hero-btn:hover {
+      background-color: transparent;
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .hero-btn i {
+      transition: transform 0.25s ease;
+    }
+
+    .hero-btn:hover i {
+      transform: translateX(4px);
+    }
+
+    .hero-right {
+      flex: 1.1;
+      background: linear-gradient(to right, rgba(2, 11, 22, 0.3) 0%, rgba(2, 11, 22, 0.45) 100%),
+                  url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1200&q=80') no-repeat center center / cover;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ==========================================
+       4. HOW IT WORKS SECTION
+       ========================================== */
+    .how-works-section {
+      padding: 80px 60px;
+      background-color: var(--white);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-header h2 {
+      font-family: var(--font-serif);
+      font-size: 30px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      color: var(--header-dark);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-header .separator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .section-header .separator-line {
+      height: 1px;
+      width: 60px;
+      background: linear-gradient(to right, transparent, var(--text-gray), transparent);
+    }
+
+    .section-header .diamond-bullet {
+      font-size: 8px;
+      color: var(--header-dark);
+      transform: rotate(45deg);
+    }
+
+    .steps-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .step-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 180px;
+    }
+
+    .step-icon-wrap {
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+      transition: var(--transition);
+    }
+
+    .step-item:hover .step-icon-wrap {
+      transform: scale(1.08);
+    }
+
+    .step-svg {
+      color: var(--accent-gold);
+      font-size: 32px;
+      filter: drop-shadow(0 2px 8px rgba(223, 180, 112, 0.1));
+    }
+
+    .step-number {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-color: var(--light-blue-gray);
+      border: 1px solid var(--border-gray);
+      color: var(--header-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 18px;
+      transition: var(--transition);
+    }
+
+    .step-item:hover .step-number {
+      background-color: var(--accent-gold);
+      border-color: var(--accent-gold);
+      color: var(--primary-navy);
+    }
+
+    .step-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+      color: var(--header-dark);
+    }
+
+    .step-desc {
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--text-gray);
+      font-weight: 300;
+    }
+
+    .step-connector {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 80px;
+    }
+
+    .connector-line {
+      width: 100%;
+      border-top: 1.5px dotted var(--border-gray);
+      position: relative;
+    }
+
+    .connector-line::after {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--accent-gold);
+    }
+
+    /* ==========================================
+       5. REQUEST FORM CONTAINER SECTION
+       ========================================== */
+    .request-form-section {
+      background-color: var(--light-blue-gray);
+      padding: 80px 60px;
+      border-top: 1px solid var(--border-gray);
+      border-bottom: 1px solid var(--border-gray);
+    }
+
+    .form-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: var(--white);
+      border: 1px solid var(--border-gray);
+      border-radius: 8px;
+      padding: 50px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .form-column {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .column-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--header-dark);
+      border-left: 2px solid var(--accent-gold);
+      padding-left: 10px;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .input-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-gray);
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      border: 1px solid var(--border-gray);
+      background-color: var(--white);
+      padding: 12px 16px;
+      border-radius: 4px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--header-dark);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .form-input::placeholder, .form-textarea::placeholder {
+      color: #94a3b8;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--header-dark);
+    }
+
+    /* Style the select dropdown indicator */
+    .form-select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      background-size: 16px;
+      padding-right: 40px;
+    }
+
+    /* Drag and Drop Container */
+    .upload-drag-area {
+      border: 2px dashed #cbd5e1;
+      background-color: var(--light-blue-gray);
+      border-radius: 4px;
+      padding: 30px 20px;
+      text-align: center;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      transition: var(--transition);
+    }
+
+    .upload-drag-area:hover {
+      border-color: var(--accent-gold);
+      background-color: #f1f5f9;
+    }
+
+    .upload-icon {
+      font-size: 24px;
+      color: var(--text-gray);
+    }
+
+    .upload-text {
+      font-size: 12px;
+      color: var(--text-gray);
+      line-height: 1.5;
+    }
+
+    .upload-text span {
+      font-weight: 600;
+      color: var(--header-dark);
+    }
+
+    .textarea-wrapper {
+      position: relative;
+    }
+
+    .char-counter {
+      position: absolute;
+      bottom: -18px;
+      right: 2px;
+      font-size: 10px;
+      color: var(--text-gray);
+    }
+
+    .form-action-footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      border-top: 1px solid var(--border-gray);
+      padding-top: 40px;
+    }
+
+    .form-submit-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background-color: var(--header-dark);
+      color: var(--white);
+      border: 1px solid var(--header-dark);
+      padding: 15px 36px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .form-submit-btn:hover {
+      background-color: #0b2240;
+    }
+
+    .form-privacy-note {
+      font-size: 11px;
+      color: var(--text-gray);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .form-privacy-note i {
+      color: var(--accent-gold);
+    }
+
+    /* ==========================================
+       6. "WHY CHOOSE CUSTOM DESIGN?"
+       ========================================== */
+    .why-custom-section {
+      background-color: var(--primary-navy);
+      color: var(--white);
+      padding: 80px 60px;
+    }
+
+    .why-custom-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .why-custom-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .why-custom-col:last-child {
+      border-right: none;
+    }
+
+    .why-custom-icon {
+      font-size: 32px;
+      color: var(--accent-gold);
+      margin-bottom: 20px;
+    }
+
+    .why-custom-title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .why-custom-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      max-width: 220px;
+    }
+
+    /* ==========================================
+       7. "HAVE QUESTIONS?" BANNER SECTION
+       ========================================== */
+    .questions-banner-section {
+      position: relative;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.95) 50%, rgba(255, 255, 255, 0.1) 100%), 
+                  url('https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=1200&q=80') center center / cover;
+      padding: 80px 60px;
+      border-top: 1px solid var(--border-gray);
+      border-bottom: 1px solid var(--border-gray);
+    }
+
+    .questions-banner-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+
+    .questions-title {
+      font-family: var(--font-serif);
+      font-size: 32px;
+      font-weight: 500;
+      color: var(--header-dark);
+    }
+
+    .questions-subtitle {
+      font-size: 14px;
+      color: var(--text-gray);
+      font-weight: 300;
+      margin-bottom: 15px;
+    }
+
+    .questions-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background-color: var(--header-dark);
+      color: var(--white);
+      border: 1px solid var(--header-dark);
+      padding: 14px 28px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: var(--transition);
+    }
+
+    .questions-btn:hover {
+      background-color: transparent;
+      color: var(--header-dark);
+    }
+
+    .questions-btn i {
+      font-size: 13px;
+    }
+
+    /* ==========================================
+       8. NEWSLETTER & FOOTER BANNER
+       ========================================== */
+    .rd-footer-wrapper {
+      background-color: #010a15;
+      color: var(--white);
+    }
+
+    .rd-newsletter-section {
+      position: relative;
+      background: linear-gradient(to right, rgba(1, 10, 21, 0.15) 0%, rgba(1, 10, 21, 0.85) 45%, #010a15 100%), 
+                  url('https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?q=80&w=1200') no-repeat left center / cover;
+      padding: 80px 60px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .rd-newsletter-content {
+      max-width: 520px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .rd-newsletter-title {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .rd-newsletter-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      margin-bottom: 12px;
+    }
+
+    .rd-newsletter-form {
+      position: relative;
+      width: 100%;
+    }
+
+    .rd-newsletter-input {
+      width: 100%;
+      background-color: var(--white);
+      border: none;
+      padding: 15px 50px 15px 20px;
+      border-radius: 4px;
+      font-size: 13px;
+      color: var(--primary-navy);
+      outline: none;
+      letter-spacing: 0.3px;
+    }
+
+    .rd-newsletter-input::placeholder {
+      color: #94a3b8;
+    }
+
+    .rd-newsletter-submit {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--primary-navy);
+      font-size: 16px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .rd-newsletter-submit:hover {
+      color: var(--accent-gold);
+      transform: translateY(-50%) translateX(3px);
+    }
+
+    .rd-main-footer {
+      padding: 80px 60px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr 1.2fr;
+      gap: 40px;
+    }
+
+    .rd-footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .rd-footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--white);
+    }
+
+    .rd-brand-logo {
+      color: var(--white);
+    }
+
+    .rd-brand-name {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .rd-brand-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      max-width: 260px;
+    }
+
+    .rd-social-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .rd-social-icon {
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .rd-social-icon:hover {
+      background-color: var(--white);
+      color: #010a15;
+      border-color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .rd-col-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--white);
+      border-left: 2px solid var(--accent-gold);
+      padding-left: 10px;
+      line-height: 1;
+    }
+
+    .rd-footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .rd-footer-links li a {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-weight: 300;
+      transition: var(--transition);
+      display: inline-block;
+    }
+
+    .rd-footer-links li a:hover {
+      color: var(--white);
+      transform: translateX(4px);
+    }
+
+    .rd-contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .rd-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      line-height: 1.4;
+    }
+
+    .rd-contact-item i {
+      color: var(--accent-gold);
+      font-size: 14px;
+      margin-top: 2px;
+    }
+
+    .rd-whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--white);
+      color: var(--primary-navy);
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 12px;
+      text-decoration: none;
+      margin-top: 10px;
+      width: fit-content;
+      transition: var(--transition);
+      border: 1px solid var(--white);
+    }
+
+    .rd-whatsapp-btn:hover {
+      background-color: transparent;
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .rd-whatsapp-btn i {
+      color: #25D366;
+      font-size: 16px;
+    }
+
+    .rd-bottom-bar {
+      border-top: 1px solid var(--border-light);
+      padding: 24px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .rd-copyright {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+
+    .rd-payment-icons {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .rd-payment-badge {
+      height: 22px;
+      opacity: 0.85;
+      transition: var(--transition);
+      display: block;
+    }
+
+    .rd-payment-badge:hover {
+      opacity: 1;
+    }
+
+    /* ==========================================
+       9. RESPONSIVE MEDIA CONSTRAINTS (FULL PAGE)
+       ========================================== */
+    @media (max-width: 1200px) {
+      .top-bar { padding: 10px 40px; }
+      .main-header { padding: 16px 40px; }
+      .hero-section { min-height: 420px; }
+      .hero-left { padding: 40px 60px; }
+      .hero-title { font-size: 38px; }
+      .how-works-section { padding: 60px 40px; }
+      .request-form-section { padding: 60px 40px; }
+      .form-container { padding: 40px 30px; }
+      .form-grid { gap: 25px; }
+      .why-custom-section { padding: 60px 40px; }
+      .why-custom-grid { gap: 15px; }
+      .questions-banner-section { padding: 60px 40px; }
+      .rd-newsletter-section { padding: 60px 40px; }
+      .rd-main-footer {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 35px;
+        padding: 60px 40px;
+      }
+      .rd-footer-col:first-child {
+        grid-column: span 3;
+        border-bottom: 1px solid var(--border-light);
+        padding-bottom: 30px;
+      }
+      .rd-bottom-bar { padding: 24px 40px; }
+    }
+
+    @media (max-width: 991px) {
+      .menu-toggle-btn { display: flex; }
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 300px;
+        height: 100vh;
+        background-color: var(--white);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 90px 40px;
+        gap: 25px;
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.08);
+        transition: right 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
+        z-index: 1005;
+      }
+      .nav-item {
+        font-size: 14px;
+        width: 100%;
+        border-bottom: 1px solid var(--light-blue-gray);
+        padding-bottom: 12px;
+      }
+      .nav-item.active::after { display: none; }
+      .menu-toggle-cb:checked ~ .nav-menu { right: 0; }
+      .menu-toggle-cb:checked ~ .menu-toggle-btn span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .menu-toggle-cb:checked ~ .menu-toggle-btn span:nth-child(2) { opacity: 0; }
+      .menu-toggle-cb:checked ~ .menu-toggle-btn span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+      .hero-section { flex-direction: column-reverse; height: auto; min-height: auto; max-height: none; }
+      .hero-left { width: 100%; padding: 60px 40px; }
+      .hero-right { width: 100%; height: 350px; }
+
+      .steps-wrapper { flex-direction: column; align-items: center; gap: 40px; }
+      .step-connector { display: none; }
+      .step-desc { max-width: 250px; }
+
+      .form-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+      .form-column:last-of-type { grid-column: span 2; }
+
+      .why-custom-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+      .why-custom-col { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 30px; }
+      .why-custom-col:nth-child(3), .why-custom-col:nth-child(4) { border-bottom: none; }
+
+      .rd-newsletter-section { background: #010a15; justify-content: center; padding: 50px 24px; text-align: center; }
+      .rd-newsletter-content { align-items: center; }
+      .rd-main-footer { grid-template-columns: repeat(2, 1fr); padding: 50px 24px; gap: 30px; }
+      .rd-footer-col:first-child { grid-column: span 2; }
+      .rd-bottom-bar { flex-direction: column; gap: 15px; text-align: center; padding: 24px; }
+    }
+
+    @media (max-width: 600px) {
+      .top-bar { display: none; }
+      .main-header { padding: 15px 24px; }
+      .hero-left { padding: 50px 24px; }
+      .hero-title { font-size: 30px; }
+      .how-works-section { padding: 50px 24px; }
+      .request-form-section { padding: 50px 24px; }
+      .form-container { padding: 30px 20px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-column:last-of-type { grid-column: span 1; }
+      .why-custom-section { padding: 50px 24px; }
+      .why-custom-grid { grid-template-columns: 1fr; }
+      .why-custom-col { border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 25px; }
+      .why-custom-col:last-child { border-bottom: none; }
+      .questions-banner-section { padding: 50px 24px; text-align: center; }
+      .questions-banner-container { align-items: center; }
+      .rd-main-footer { grid-template-columns: 1fr; }
+      .rd-footer-col:first-child { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       1. TOP UTILITY BAR
+       ========================================== -->
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <span><i class="fa-regular fa-gem"></i> 100% Certified Diamonds</span>
+      <span><i class="fa-solid fa-industry"></i> In-house Manufacturing</span>
+      <span><i class="fa-solid fa-ring"></i> Custom Made Jewellery</span>
+    </div>
+    <div class="top-bar-right">
+      <span><i class="fa-solid fa-phone"></i> +91 1234 567 890</span>
+      <a href="#">Track Order</a>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       2. MAIN NAVIGATION HEADER
+       ========================================== -->
+  <header class="main-header">
+    <a href="#" class="logo-container">
+      <svg class="logo-svg" width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="22" r="6" stroke="currentColor" stroke-width="4.5"/>
+        <path d="M48 22L50 20L52 22L50 24L48 22Z" fill="currentColor"/>
+        <path d="M30 42 C 38 32, 45 32, 50 42 C 55 32, 62 32, 70 42 C 78 52, 72 68, 50 82 C 28 68, 22 52, 30 42 Z" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+        <path d="M38 52 C 45 46, 55 46, 62 52" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <span class="logo-text">Rithika Diamonds</span>
+    </a>
+
+    <input type="checkbox" id="menu-toggle" class="menu-toggle-cb">
+    
+    <label for="menu-toggle" class="menu-toggle-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <nav class="nav-menu">
+      <a href="#" class="nav-item">HOME</a>
+      <div class="nav-item dropdown">
+        <a href="#">SHOP <i class="fa-solid fa-chevron-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Engagement Rings</a></li>
+          <li><a href="#">Diamond Necklaces</a></li>
+          <li><a href="#">Exclusive Bands</a></li>
+          <li><a href="#">Bespoke Earrings</a></li>
+        </ul>
+      </div>
+      <a href="#" class="nav-item active">CUSTOM DESIGN</a>
+      <div class="nav-item dropdown">
+        <a href="#">COLLECTIONS <i class="fa-solid fa-chevron-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">The Solitaire Legacy</a></li>
+          <li><a href="#">Eternal Grace</a></li>
+          <li><a href="#">Modern Brilliance</a></li>
+        </ul>
+      </div>
+      <a href="#" class="nav-item">ABOUT US</a>
+      <a href="#" class="nav-item">CONTACT US</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="action-btn" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <button class="action-btn" aria-label="Account"><i class="fa-regular fa-user"></i></button>
+      <button class="action-btn badge-btn" aria-label="Wishlist">
+        <i class="fa-regular fa-heart"></i>
+        <span class="badge">0</span>
+      </button>
+      <button class="action-btn badge-btn" aria-label="Shopping Cart">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="badge">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       3. CUSTOM DESIGN HERO BANNER
+       ========================================== -->
+  <section class="hero-section">
+    <div class="hero-left">
+      <div class="hero-content">
+        <span class="hero-tag">Custom Design</span>
+        <h1 class="hero-title">Design Your Dream Diamond Jewellery</h1>
+        <p class="hero-description">Your vision, our craftsmanship. Exclusively yours.</p>
+        <a href="#create-form" class="hero-btn">Start Your Custom Design <i class="fa-solid fa-arrow-right-long"></i></a>
+      </div>
+    </div>
+    <div class="hero-right"></div>
+  </section>
+
+  <!-- ==========================================
+       4. HOW IT WORKS SECTION
+       ========================================== -->
+  <section class="how-works-section">
+    <div class="section-header">
+      <h2>How It Works</h2>
+      <div class="separator">
+        <span class="separator-line"></span>
+        <span class="diamond-bullet"></span>
+        <span class="separator-line"></span>
+      </div>
+    </div>
+
+    <div class="steps-wrapper">
+      
+      <!-- Step 1 -->
+      <div class="step-item">
+        <div class="step-icon-wrap">
+          <i class="fa-regular fa-comments step-svg"></i>
+        </div>
+        <div class="step-number">1</div>
+        <h3 class="step-title">Share Your Idea</h3>
+        <p class="step-desc">Tell us your inspiration, requirements & budget.</p>
+      </div>
+
+      <div class="step-connector">
+        <div class="connector-line"></div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-item">
+        <div class="step-icon-wrap">
+          <!-- Stylized Sketch Icon -->
+          <svg class="step-svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="14" r="6" stroke="currentColor" stroke-width="1.2" />
+            <circle cx="12" cy="14" r="8.5" stroke="currentColor" stroke-width="0.8" stroke-dasharray="1.5 1.5" opacity="0.4" />
+            <path d="M12 8 L9 5 L15 5 Z" stroke="currentColor" stroke-width="1" stroke-linejoin="round" />
+            <path d="M9 5 L10 2 L14 2 L15 5 Z" stroke="currentColor" stroke-width="1" stroke-linejoin="round" />
+          </svg>
+        </div>
+        <div class="step-number">2</div>
+        <h3 class="step-title">Design & Preview</h3>
+        <p class="step-desc">Our experts create 3D designs for your approval.</p>
+      </div>
+
+      <div class="step-connector">
+        <div class="connector-line"></div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-item">
+        <div class="step-icon-wrap">
+          <i class="fa-solid fa-compass-drafting step-svg"></i>
+        </div>
+        <div class="step-number">3</div>
+        <h3 class="step-title">Crafting Process</h3>
+        <p class="step-desc">We handcraft your jewellery with precision & care.</p>
+      </div>
+
+      <div class="step-connector">
+        <div class="connector-line"></div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="step-item">
+        <div class="step-icon-wrap">
+          <i class="fa-solid fa-box-open step-svg"></i>
+        </div>
+        <div class="step-number">4</div>
+        <h3 class="step-title">Delivery</h3>
+        <p class="step-desc">Your masterpiece is delivered safely to your doorstep.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       5. REQUEST FORM CONTAINER SECTION
+       ========================================== -->
+  <section class="request-form-section" id="create-form">
+    <div class="section-header">
+      <h2>Let's Create Something Unique</h2>
+      <p class="questions-subtitle" style="text-align: center; margin-top: 5px;">Fill in your details and our design experts will get in touch with you.</p>
+    </div>
+
+    <div class="form-container">
+      <form onsubmit="event.preventDefault();">
+        <div class="form-grid">
+          
+          <!-- Column 1: Personal Details -->
+          <div class="form-column">
+            <h3 class="column-title">1. Your Details</h3>
+            
+            <div class="input-group">
+              <label class="input-label" for="full-name">Full Name</label>
+              <input type="text" id="full-name" class="form-input" placeholder="Enter your full name" required>
+            </div>
+
+            <div class="input-group">
+              <label class="input-label" for="phone-number">Phone Number</label>
+              <input type="tel" id="phone-number" class="form-input" placeholder="Enter your phone number" required>
+            </div>
+
+            <div class="input-group">
+              <label class="input-label" for="email-address">Email Address</label>
+              <input type="email" id="email-address" class="form-input" placeholder="Enter your email address" required>
+            </div>
+          </div>
+
+          <!-- Column 2: Design Specs -->
+          <div class="form-column">
+            <h3 class="column-title">2. Design Information</h3>
+            
+            <div class="input-group">
+              <label class="input-label" for="jewellery-type">Type of Jewellery</label>
+              <select id="jewellery-type" class="form-select" required>
+                <option value="" disabled selected>Select type</option>
+                <option value="ring">Engagement Ring</option>
+                <option value="necklace">Diamond Necklace</option>
+                <option value="earrings">Bespoke Earrings</option>
+                <option value="bracelet">Bracelet/Bangle</option>
+                <option value="other">Other Spec</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label class="input-label" for="metal-preference">Metal Preference</label>
+              <select id="metal-preference" class="form-select" required>
+                <option value="" disabled selected>Select metal</option>
+                <option value="white-gold">18K White Gold</option>
+                <option value="yellow-gold">18K Yellow Gold</option>
+                <option value="rose-gold">18K Rose Gold</option>
+                <option value="platinum">Platinum</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label class="input-label" for="budget-range">Budget Range</label>
+              <select id="budget-range" class="form-select" required>
+                <option value="" disabled selected>Select budget range</option>
+                <option value="low">₹ 50,000 - ₹ 1,00,000</option>
+                <option value="mid">₹ 1,00,000 - ₹ 3,00,000</option>
+                <option value="high">₹ 3,00,000 - ₹ 5,00,000</option>
+                <option value="premium">₹ 5,00,000+</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Column 3: Upload & Design Brief -->
+          <div class="form-column">
+            <h3 class="column-title">3. Share Your Inspiration</h3>
+            
+            <div class="input-group">
+              <label class="input-label">Upload Reference Images (Optional)</label>
+              <div class="upload-drag-area">
+                <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                <p class="upload-text">Click to upload or drag and drop<br><span>PNG, JPG up to 5MB</span></p>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label class="input-label" for="design-brief">Design Brief</label>
+              <div class="textarea-wrapper">
+                <textarea id="design-brief" class="form-textarea" rows="4" placeholder="Tell us more about your design..." maxlength="500"></textarea>
+                <span class="char-counter">0/500</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="form-action-footer">
+          <button type="submit" class="form-submit-btn">Submit Request <i class="fa-solid fa-arrow-right-long"></i></button>
+          <span class="form-privacy-note"><i class="fa-solid fa-shield-halved"></i> Your information is safe with us and will never be shared.</span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       6. "WHY CHOOSE CUSTOM DESIGN?"
+       ========================================== -->
+  <section class="why-custom-section">
+    <div class="section-header">
+      <h2 style="color: var(--white);">Why Choose Custom Design?</h2>
+      <div class="separator">
+        <span class="separator-line" style="background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);"></span>
+        <span class="diamond-bullet" style="color: var(--white);"></span>
+        <span class="separator-line" style="background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);"></span>
+      </div>
+    </div>
+
+    <div class="why-custom-grid">
+      
+      <!-- Feature 1 -->
+      <div class="why-custom-col">
+        <i class="fa-regular fa-gem why-custom-icon"></i>
+        <h3 class="why-custom-title">Exclusively Yours</h3>
+        <p class="why-custom-desc">Unique designs crafted only for you.</p>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="why-custom-col">
+        <i class="fa-solid fa-ring why-custom-icon"></i>
+        <h3 class="why-custom-title">Expert Craftsmanship</h3>
+        <p class="why-custom-desc">Skilled artisans with years of experience.</p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="why-custom-col">
+        <i class="fa-solid fa-award why-custom-icon"></i>
+        <h3 class="why-custom-title">Certified Diamonds</h3>
+        <p class="why-custom-desc">100% certified, ethically sourced diamonds.</p>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="why-custom-col">
+        <i class="fa-solid fa-shield-halved why-custom-icon"></i>
+        <h3 class="why-custom-title">Complete Transparency</h3>
+        <p class="why-custom-desc">Honest pricing & clear communication.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       7. "HAVE QUESTIONS?" BANNER SECTION
+       ========================================== -->
+  <section class="questions-banner-section">
+    <div class="questions-banner-container">
+      <h2 class="questions-title">Have questions?</h2>
+      <p class="questions-subtitle">Our design experts are here to help you bring your dream to life.</p>
+      <a href="#" class="questions-btn">Talk To Our Experts <i class="fa-solid fa-headset" style="margin-left: 5px;"></i></a>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       8. NEWSLETTER & FOOTER BANNER
+       ========================================== -->
+  <footer class="rd-footer-wrapper">
+    <div class="rd-newsletter-section">
+      <div class="rd-newsletter-content">
+        <h2 class="rd-newsletter-title">Stay Timeless. Stay Sparkling.</h2>
+        <p class="rd-newsletter-desc">Join our exclusive list and be the first to know about new collections, offers and more.</p>
+        <form class="rd-newsletter-form" onsubmit="event.preventDefault();">
+          <input type="email" class="rd-newsletter-input" placeholder="Enter your email address" required>
+          <button type="submit" class="rd-newsletter-submit" aria-label="Subscribe">
+            <i class="fa-solid fa-arrow-right-long"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="rd-main-footer">
+      <div class="rd-footer-col">
+        <a href="#" class="rd-footer-brand">
+          <svg class="rd-brand-logo" width="30" height="30" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="22" r="6" stroke="currentColor" stroke-width="4.5"/>
+            <path d="M48 22L50 20L52 22L50 24L48 22Z" fill="currentColor"/>
+            <path d="M30 42 C 38 32, 45 32, 50 42 C 55 32, 62 32, 70 42 C 78 52, 72 68, 50 82 C 28 68, 22 52, 30 42 Z" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+            <path d="M38 52 C 45 46, 55 46, 62 52" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <span class="rd-brand-name">Rithika Diamonds</span>
+        </a>
+        <p class="rd-brand-desc">
+          We are diamond manufacturers specializing in custom-made diamond jewellery with unmatched quality and craftsmanship.
+        </p>
+        <div class="rd-social-row">
+          <a href="#" class="rd-social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="rd-social-icon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="rd-social-icon" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" class="rd-social-icon" aria-label="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
+        </div>
+      </div>
+
+      <div class="rd-footer-col">
+        <h3 class="rd-col-title">Quick Links</h3>
+        <ul class="rd-footer-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">Custom Design</a></li>
+          <li><a href="#">Collections</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="rd-footer-col">
+        <h3 class="rd-col-title">Customer Service</h3>
+        <ul class="rd-footer-links">
+          <li><a href="#">Track Order</a></li>
+          <li><a href="#">Returns & Exchanges</a></li>
+          <li><a href="#">Shipping Policy</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="rd-footer-col">
+        <h3 class="rd-col-title">Information</h3>
+        <ul class="rd-footer-links">
+          <li><a href="#">About Our Manufacturing</a></li>
+          <li><a href="#">Diamond Guide</a></li>
+          <li><a href="#">Care & Maintenance</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+
+      <div class="rd-footer-col">
+        <h3 class="rd-col-title">Contact Us</h3>
+        <ul class="rd-contact-list">
+          <li class="rd-contact-item">
+            <i class="fa-solid fa-phone"></i>
+            <span>+91 1234 567 890</span>
+          </li>
+          <li class="rd-contact-item">
+            <i class="fa-solid fa-envelope"></i>
+            <span>hello@rithikadiamonds.com</span>
+          </li>
+          <li class="rd-contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Kozhikode, Kerala, India</span>
+          </li>
+        </ul>
+        <a href="#" class="rd-whatsapp-btn">
+          <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <div class="rd-bottom-bar">
+      <span class="rd-copyright">&copy; 2024 Rithika Diamonds. All Rights Reserved.</span>
+      <div class="rd-payment-icons">
+        <svg class="rd-payment-badge" viewBox="0 0 48 30" width="35" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="30" rx="3" fill="#1434CB"/>
+          <path d="M12 20.5l1.6-6.5h1.8l-1.6 6.5h-1.8zm6.5-6.5c-.3 0-.6.1-.8.4l-3 6.1h1.9l.4-.9h2.3l.2.9h1.7l-1.5-6.5h-1.2zm-.8 4.2l.9-2.5.5 2.5h-1.4zm9.3-4.2h-1.6c-.5 0-.9.3-1.1.7l-2.3 5.8h1.9l.4-1.1h2.3l.1.5c.1.4.4.6.9.6h1.5l-2.1-6.5zm-5.4.4l1.3 3.6h-1.8l.5-3.6z" fill="#fff"/>
+        </svg>
+        <svg class="rd-payment-badge" viewBox="0 0 48 30" width="35" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="30" rx="3" fill="#222"/>
+          <circle cx="20" cy="15" r="9" fill="#EB001B"/>
+          <circle cx="28" cy="15" r="9" fill="#FF5F00" fill-opacity="0.85"/>
+        </svg>
+        <svg class="rd-payment-badge" viewBox="0 0 48 30" width="35" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="30" rx="3" fill="#016FD0"/>
+          <path d="M10 20v-10h2.5l2.1 4.3 2.1-4.3H19.2v10h-2.1v-6.5l-2.4 4.8h-.8l-2.4-4.8v6.5h-1.5zm11.5 0v-10h5.2v2h-3.1v1.9h2.8v2h-2.8v2.1h3.1v2h-5.2zm7.4 0l2.3-5-2.3-5h2.1l1.2 2.7 1.2-2.7h2.1l-2.3 5 2.3 5h-2.1L32 17.3l-1.2 2.7h-2.1z" fill="#fff"/>
+        </svg>
+        <svg class="rd-payment-badge" viewBox="0 0 48 30" width="35" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="30" rx="3" fill="#fff" stroke="#cbd5e1" stroke-width="1"/>
+          <path d="M12 11l4 8M16 11l-4 8M19 11v8h2c1.5 0 2.5-.8 2.5-2.2v-3.6c0-1.4-1-2.2-2.5-2.2h-2zm12 0l-3 8h2l2.5-5h2l.5 5h2l-3-8h-3zm-10 2h1c.5 0 .8.2.8.7v2.6c0 .5-.3.7-.8.7h-1v-4z" fill="#097939" stroke="#097939" stroke-width="0.5"/>
+        </svg>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

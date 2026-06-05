@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders | Rithika Diamonds</title>
+  
+  <!-- Premium Font Imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome CDN for Luxury UI Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* Brand Design Tokens & System Variables */
+    :root {
+      --primary-navy: #020b16;      /* Main dark background */
+      --header-dark: #021024;       /* Primary text dark color */
+      --accent-gold: #dfb470;       /* Gold highlights */
+      --white: #ffffff;
+      --light-blue-gray: #f8fafc;
+      --border-gray: #e2e8f0;
+      --text-gray: #64748b;
+      --font-serif: 'Cormorant Garamond', serif;
+      --font-sans: 'Inter', sans-serif;
+      --transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* Global Base Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--white);
+      color: var(--header-dark);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ==========================================
+       1. TOP UTILITY BAR
+       ========================================== */
+    .top-bar {
+      background-color: var(--primary-navy);
+      color: rgba(255, 255, 255, 0.75);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 60px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .top-bar-left {
+      display: flex;
+      gap: 30px;
+    }
+
+    .top-bar-left span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .top-bar-left i {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .top-bar-right {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+
+    .top-bar-right span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .top-bar-right a {
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .top-bar-right a:hover {
+      color: var(--white);
+    }
+
+    /* ==========================================
+       2. MAIN NAVIGATION HEADER
+       ========================================== */
+    .main-header {
+      background-color: var(--white);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 60px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--header-dark);
+    }
+
+    .logo-svg {
+      color: var(--header-dark);
+      display: block;
+    }
+
+    .logo-text {
+      font-family: var(--font-serif);
+      font-size: 25px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-item {
+      color: var(--header-dark);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      position: relative;
+      padding: 8px 0;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .nav-item i {
+      font-size: 9px;
+      transition: var(--transition);
+    }
+
+    .nav-item:hover {
+      color: rgba(2, 16, 36, 0.7);
+    }
+
+    .nav-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background-color: var(--header-dark);
+      transition: var(--transition);
+    }
+
+    .nav-item:hover::after,
+    .nav-item.active::after {
+      width: 24px;
+    }
+
+    .nav-item.dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background-color: var(--white);
+      border: 1px solid #f1f5f9;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      list-style: none;
+      padding: 10px 0;
+      min-width: 180px;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      border-radius: 4px;
+    }
+
+    .nav-item.dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .dropdown-menu li a {
+      display: block;
+      padding: 10px 20px;
+      color: var(--header-dark);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      transition: var(--transition);
+    }
+
+    .dropdown-menu li a:hover {
+      background-color: var(--light-blue-gray);
+      color: var(--header-dark);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .action-btn {
+      background: none;
+      border: none;
+      color: var(--header-dark);
+      font-size: 17px;
+      cursor: pointer;
+      position: relative;
+      padding: 6px;
+      transition: var(--transition);
+    }
+
+    .action-btn:hover {
+      color: rgba(2, 16, 36, 0.7);
+    }
+
+    .badge-btn .badge {
+      position: absolute;
+      top: 0px;
+      right: -2px;
+      background-color: var(--header-dark);
+      color: var(--white);
+      font-size: 8px;
+      font-weight: 700;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu-toggle-cb {
+      display: none;
+    }
+
+    .menu-toggle-btn {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 22px;
+      height: 16px;
+      cursor: pointer;
+      z-index: 1010;
+    }
+
+    .menu-toggle-btn span {
+      display: block;
+      height: 2px;
+      width: 100%;
+      background-color: var(--header-dark);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* ==========================================
+       3. MY ACCOUNT / BREADCRUMBS BANNER
+       ========================================== */
+    .account-header-area {
+      padding: 40px 60px 20px 60px;
+      background-color: var(--white);
+    }
+
+    .account-header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .breadcrumbs {
+      font-size: 12px;
+      color: var(--text-gray);
+      margin-bottom: 15px;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+    }
+
+    .breadcrumbs span {
+      color: var(--header-dark);
+      font-weight: 500;
+    }
+
+    .account-title {
+      font-family: var(--font-serif);
+      font-size: 38px;
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--header-dark);
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .account-subtitle {
+      font-size: 13px;
+      color: var(--text-gray);
+      font-weight: 300;
+    }
+
+    /* ==========================================
+       4. MAIN SYSTEM CONTAINERS (DASHBOARD)
+       ========================================== */
+    .dashboard-section {
+      padding: 20px 60px 80px 60px;
+      background-color: var(--white);
+    }
+
+    .dashboard-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* Left Column: Account Navigation */
+    .account-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .account-nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .account-nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-gray);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .account-nav-link-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .account-nav-link-left i {
+      font-size: 14px;
+      width: 16px;
+      text-align: center;
+    }
+
+    .account-nav-link:hover {
+      background-color: var(--light-blue-gray);
+      color: var(--header-dark);
+    }
+
+    .account-nav-link.active {
+      background-color: #f1f5f9;
+      color: var(--header-dark);
+      font-weight: 600;
+    }
+
+    .account-nav-badge {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--header-dark);
+      background-color: #e2e8f0;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Sidebar Promo Help Box */
+    .sidebar-help-box {
+      background-color: var(--light-blue-gray);
+      border: 1px solid var(--border-gray);
+      border-radius: 8px;
+      padding: 24px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .help-box-icon {
+      font-size: 24px;
+      color: var(--header-dark);
+    }
+
+    .help-box-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--header-dark);
+    }
+
+    .help-box-desc {
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--text-gray);
+      font-weight: 300;
+    }
+
+    .help-box-btn {
+      width: 100%;
+      background-color: var(--white);
+      color: var(--header-dark);
+      border: 1px solid var(--border-gray);
+      padding: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-decoration: none;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .help-box-btn:hover {
+      background-color: var(--header-dark);
+      color: var(--white);
+      border-color: var(--header-dark);
+    }
+
+    /* Right Column: Dashboard Main Content */
+    .dashboard-main-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    /* Filter Tabs Navigation */
+    .order-filters-nav {
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid var(--border-gray);
+      padding-bottom: 15px;
+    }
+
+    .filter-tab-btn {
+      background: none;
+      border: none;
+      padding: 8px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-gray);
+      cursor: pointer;
+      border-radius: 30px;
+      transition: var(--transition);
+    }
+
+    .filter-tab-btn:hover {
+      color: var(--header-dark);
+    }
+
+    .filter-tab-btn.active {
+      background-color: var(--header-dark);
+      color: var(--white);
+    }
+
+    /* Card Order List Box */
+    .orders-flow-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .order-card {
+      background-color: var(--white);
+      border-radius: 8px;
+      border: 1px solid var(--border-gray);
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 80px 1.4fr 1.2fr 1fr;
+      gap: 30px;
+      align-items: center;
+      transition: var(--transition);
+    }
+
+    .order-card:hover {
+      box-shadow: 0 4px 20px rgba(2, 16, 36, 0.03);
+      border-color: #cbd5e1;
+    }
+
+    .order-card-media {
+      width: 80px;
+      height: 80px;
+      border-radius: 4px;
+      border: 1px solid var(--border-gray);
+      background-color: var(--light-blue-gray);
+      overflow: hidden;
+    }
+
+    .order-card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Column 2: Order Info */
+    .order-meta-info {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .meta-label {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-gray);
+    }
+
+    .meta-val-date {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--header-dark);
+    }
+
+    .meta-val-price {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--header-dark);
+    }
+
+    /* Column 3: Order Status */
+    .order-status-block {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      border-radius: 30px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: capitalize;
+    }
+
+    /* Dynamic colour badges matching strict system specs */
+    .status-badge.delivered {
+      background-color: #f0fdf4;
+      color: #166534;
+    }
+
+    .status-badge.processing {
+      background-color: #fef9c3;
+      color: #854d0e;
+    }
+
+    .status-badge.shipped {
+      background-color: #eff6ff;
+      color: #1e40af;
+    }
+
+    .status-badge.cancelled {
+      background-color: #f1f5f9;
+      color: #475569;
+    }
+
+    .status-date {
+      font-size: 12px;
+      color: var(--text-gray);
+      font-weight: 400;
+    }
+
+    /* Column 4: Card Actions */
+    .order-actions-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-end;
+    }
+
+    .view-details-btn {
+      background-color: var(--white);
+      color: var(--header-dark);
+      border: 1px solid var(--border-gray);
+      padding: 10px 20px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-decoration: none;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .view-details-btn:hover {
+      background-color: var(--header-dark);
+      color: var(--white);
+      border-color: var(--header-dark);
+    }
+
+    .buy-again-link {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-gray);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .buy-again-link:hover {
+      color: var(--header-dark);
+    }
+
+    .buy-again-link i {
+      font-size: 11px;
+    }
+
+    /* Pagination controls */
+    .pagination-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .pagination-box {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--border-gray);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-gray);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .pagination-box.active {
+      background-color: var(--header-dark);
+      color: var(--white);
+      border-color: var(--header-dark);
+    }
+
+    .pagination-box:hover:not(.active) {
+      border-color: var(--header-dark);
+      color: var(--header-dark);
+    }
+
+    /* ==========================================
+       5. TRUST BADGES BANNER (White Section)
+       ========================================== */
+    .trust-banner {
+      background-color: var(--light-blue-gray);
+      border-top: 1px solid var(--border-gray);
+      border-bottom: 1px solid var(--border-gray);
+      padding: 30px 60px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+    }
+
+    .trust-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-right: 20px;
+      border-right: 1px solid var(--border-gray);
+    }
+
+    .trust-card:last-child {
+      border-right: none;
+      padding-right: 0;
+    }
+
+    .trust-icon {
+      font-size: 24px;
+      color: var(--header-dark);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .trust-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .trust-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--header-dark);
+      letter-spacing: 0.3px;
+    }
+
+    .trust-subtitle {
+      font-size: 11px;
+      color: var(--text-gray);
+      font-weight: 400;
+    }
+
+    /* ==========================================
+       6. NEWSLETTER & FOOTER BANNER
+       ========================================== */
+    .rd-footer-wrapper {
+      background-color: #010a15;
+      color: var(--white);
+    }
+
+    .rd-newsletter-section {
+      position: relative;
+      background: linear-gradient(to right, rgba(1, 10, 21, 0.15) 0%, rgba(1, 10, 21, 0.85) 45%, #010a15 100%), 
+                  url('https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?q=80&w=1200') no-repeat left center / cover;
+      padding: 80px 60px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .rd-newsletter-content {
+      max-width: 520px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .rd-newsletter-title {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .rd-newsletter-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      margin-bottom: 12px;
+    }
+
+    .rd-newsletter-form {
+      position: relative;
+      width: 100%;
+    }
+
+    .rd-newsletter-input {
+      width: 100%;
+      background-color: var(--white);
+      border: none;
+      padding: 15px 50px 15px 20px;
+      border-radius: 4px;
+      font-size: 13px;
+      color: var(--primary-navy);
+      outline: none;
+      letter-spacing: 0.3px;
+    }
+
+    .rd-newsletter-input::placeholder {
+      color: #94a3b8;
+    }
+
+    .rd-newsletter-submit {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--primary-navy);
+      font-size: 16px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .rd-newsletter-submit:hover {
+      color: var(--accent-gold);
+      transform: translateY(-50%) translateX(3px);
+    }
+
+    .rd-main-footer {
+      padding: 80px 60px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr 1.2fr;
+      gap: 40px;
+    }
+
+    .rd-footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .rd-footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--white);
+    }
+
+    .rd-brand-logo {
+      color: var(--white);
+    }
+
+    .rd-brand-name {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .rd-brand-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      max-width: 260px;
+    }
+
+    .rd-social-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .rd-social-icon {
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .rd-social-icon:hover {
+      background-color: var(--white);
+      color: #010a15;
+      border-color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .rd-col-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--white);
+      border-left: 2px solid var(--accent-gold);
+      padding-left: 10px;
+      line-height: 1;
+    }
+
+    .rd-footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .rd-footer-links li a {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-weight: 300;
+      transition: var(--transition);
+      display: inline-block;
+    }
+
+    .rd-footer-links li a:hover {
+      color: var(--white);
+      transform: translateX(4px);
+    }
+
+    .rd-contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .rd-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      line-height: 1.4;
+    }
+
+    .rd-contact-item i {
+      color: var(--accent-gold);
+      font-size: 14px;
+      margin-top: 2px;
+    }
+
+    .rd-whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--white);
+      color: var(--primary-navy);
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 12px;
+      text-decoration: none;
+      margin-top: 10px;
+      width: fit-content;
+      transition: var(--transition);
+      border: 1px solid var(--white);
+    }
+
+    .rd-whatsapp-btn:hover {
+      background-color: transparent;
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .rd-whatsapp-btn i {
+      color: #25D366;
+      font-size: 16px;
+    }
+
+    .rd-bottom-bar {
+      border-top: 1px solid var(--border-light);
+      padding: 24px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .rd-copyright {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+
+    .rd-payment-icons {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .rd-payment-badge {
+      height: 22px;
+      opacity: 0.85;
+      transition: var(--transition);
+      display: block;
+    }
+
+    .rd-payment-badge:hover {
+      opacity: 1;
+    }
+
+    /* ==========================================
+       7. RESPONSIVE CONSTRAINTS (FULL PAGE)
+       ========================================== */
+    @media (max-width: 1200px) {
+      .top-bar { padding: 10px 40px; }
+      .main-header { padding: 16px 40px; }
+      .account-header-area { padding: 30px 40px 15px 40px; }
+      .dashboard-section { padding: 15px 40px 60px 40px; }
+      .dashboard-container { gap: 30px; }
+      .trust-banner { padding: 25px 40px; }
+      .rd-newsletter-section { padding: 60px 40px; }
+      .rd-main-footer {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 35px;
+        padding: 60px 40px;
+      }
+      .rd-footer-col:first-child {
+        grid-column: span 3;
+        border-bottom: 1px solid var(--border-light);
+        padding-bottom: 30px;
+      }
+      .rd-bottom-bar { padding: 24px 40px; }
+    }
+
+    @media (max-width: 991px) {
+      .menu-toggle-btn { display: flex; }
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 300px;
+        height: 100vh;
+        background-color: var(--white);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 90px 40px;
+        gap: 25px;
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.08);
+        transition: right 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
+        z-index: 1005;
+      }
+      .nav-item {
+        font-size: 14px;
+        width: 100%;
+        border-bottom: 1px solid var(--light-blue-gray);
+        padding-bottom: 12px;
+      }
+      .nav-item.active::after { display: none; }
+      .dropdown-menu {
+        position: static;
+        transform: none !important;
+        box-shadow: none;
+        border: none;
+        padding-left: 15px;
+        padding-top: 5px;
+        opacity: 1;
+        visibility: visible;
+        display: none;
+        width: 100%;
+      }
+      .nav-item.dropdown:hover .dropdown-menu { display: block; }
+      .menu-toggle-cb:checked ~ .nav-menu { right: 0; }
+      .menu-toggle-cb:checked ~ .menu-toggle-btn span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .menu-toggle-cb:checked ~ .menu-toggle-btn span:nth-child(2) { opacity: 0; }
+      .menu-toggle-cb:checked ~ .menu-toggle-btn span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+      /* Visual Stacking on Tablet Screens */
+      .dashboard-container { grid-template-columns: 1fr; gap: 40px; }
+      .account-sidebar { width: 100%; max-width: 480px; margin: 0 auto; }
+      .order-card { grid-template-columns: 80px 1fr 1fr; gap: 20px; }
+      .order-actions-col { grid-column: span 3; flex-direction: row; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-gray); padding-top: 15px; }
+
+      .trust-banner { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .trust-card:nth-child(2n) { border-right: none; }
+      
+      .rd-newsletter-section { background: #010a15; justify-content: center; padding: 50px 24px; text-align: center; }
+      .rd-newsletter-content { align-items: center; }
+      .rd-main-footer { grid-template-columns: repeat(2, 1fr); padding: 50px 24px; gap: 30px; }
+      .rd-footer-col:first-child { grid-column: span 2; }
+      .rd-bottom-bar { flex-direction: column; gap: 15px; text-align: center; padding: 24px; }
+    }
+
+    @media (max-width: 600px) {
+      .top-bar { display: none; }
+      .main-header { padding: 15px 24px; }
+      .account-header-area { padding: 20px 24px 10px 24px; }
+      .account-title { font-size: 30px; }
+      .dashboard-section { padding: 10px 24px 60px 24px; }
+      
+      .order-filters-nav { overflow-x: auto; white-space: nowrap; padding-bottom: 8px; }
+      .filter-tab-btn { padding: 6px 14px; font-size: 12px; }
+
+      .order-card { grid-template-columns: 1fr; text-align: center; justify-items: center; gap: 15px; }
+      .order-card-media { width: 120px; height: 120px; }
+      .order-status-block { align-items: center; }
+      .order-actions-col { grid-column: span 1; flex-direction: column; gap: 12px; }
+      .view-details-btn { width: 100%; }
+
+      .trust-banner { grid-template-columns: 1fr; padding: 20px 24px; }
+      .trust-card { border-right: none; border-bottom: 1px solid var(--border-gray); padding-bottom: 15px; }
+      .trust-card:last-child { border-bottom: none; }
+      .rd-main-footer { grid-template-columns: 1fr; }
+      .rd-footer-col:first-child { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       1. TOP UTILITY BAR
+       ========================================== -->
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <span><i class="fa-regular fa-gem"></i> 100% Certified Diamonds</span>
+      <span><i class="fa-solid fa-industry"></i> In-house Manufacturing</span>
+      <span><i class="fa-solid fa-ring"></i> Custom Made Jewellery</span>
+    </div>
+    <div class="top-bar-right">
+      <span><i class="fa-solid fa-phone"></i> +91 1234 567 890</span>
+      <a href="#">Track Order</a>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       2. MAIN NAVIGATION HEADER
+       ========================================== -->
+  <header class="main-header">
+    <a href="#" class="logo-container">
+      <svg class="logo-svg" width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="22" r="6" stroke="currentColor" stroke-width="4.5"/>
+        <path d="M48 22L50 20L52 22L50 24L48 22Z" fill="currentColor"/>
+        <path d="M30 42 C 38 32, 45 32, 50 42 C 55 32, 62 32, 70 42 C 78 52, 72 68, 50 82 C 28 68, 22 52, 30 42 Z" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+        <path d="M38 52 C 45 46, 55 46, 62 52" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <span class="logo-text">Rithika Diamonds</span>
+    </a>
+
+    <input type="checkbox" id="menu-toggle" class="menu-toggle-cb">
+    
+    <label for="menu-toggle" class="menu-toggle-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <nav class="nav-menu">
+      <a href="#" class="nav-item">HOME</a>
+      <div class="nav-item dropdown">
+        <a href="#">SHOP <i class="fa-solid fa-chevron-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Engagement Rings</a></li>
+          <li><a href="#">Diamond Necklaces</a></li>
+          <li><a href="#">Exclusive Bands</a></li>
+          <li><a href="#">Bespoke Earrings</a></li>
+        </ul>
+      </div>
+      <a href="#" class="nav-item">CUSTOM DESIGN</a>
+      <div class="nav-item dropdown">
+        <a href="#">COLLECTIONS <i class="fa-solid fa-chevron-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">The Solitaire Legacy</a></li>
+          <li><a href="#">Eternal Grace</a></li>
+          <li><a href="#">Modern Brilliance</a></li>
+        </ul>
+      </div>
+      <a href="#" class="nav-item">ABOUT US</a>
+      <a href="#" class="nav-item">CONTACT US</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="action-btn" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <button class="action-btn" aria-label="Account"><i class="fa-regular fa-user"></i></button>
+      <button class="action-btn badge-btn" aria-label="Wishlist">
+        <i class="fa-regular fa-heart"></i>
+        <span class="badge">2</span>
+      </button>
+      <button class="action-btn badge-btn" aria-label="Shopping Cart">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="badge">2</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       3. MY ACCOUNT / BREADCRUMBS BANNER
+       ========================================== -->
+  <section class="account-header-area">
+    <div class="account-header-container">
+      <div class="breadcrumbs">Home > My Account > <span>My Orders</span></div>
+      <h1 class="account-title">My Orders</h1>
+      <p class="account-subtitle">Track and manage all your orders in one place.</p>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       4. MAIN DASHBOARD SECTION
+       ========================================== -->
+  <section class="dashboard-section">
+    <div class="dashboard-container">
+      
+      <!-- Left Column: Navigation Sidebar -->
+      <aside class="account-sidebar">
+        <nav class="account-nav-list" aria-label="Account Directory">
+          <a href="#" class="account-nav-link">
+            <div class="account-nav-link-left">
+              <i class="fa-regular fa-user"></i>
+              <span>My Profile</span>
+            </div>
+          </a>
+          <a href="#" class="account-nav-link active">
+            <div class="account-nav-link-left">
+              <i class="fa-solid fa-box-open"></i>
+              <span>My Orders</span>
+            </div>
+          </a>
+          <a href="#" class="account-nav-link">
+            <div class="account-nav-link-left">
+              <i class="fa-regular fa-heart"></i>
+              <span>Wishlist</span>
+            </div>
+          </a>
+          <a href="#" class="account-nav-link">
+            <div class="account-nav-link-left">
+              <i class="fa-solid fa-location-dot"></i>
+              <span>Address Book</span>
+            </div>
+          </a>
+          <a href="#" class="account-nav-link">
+            <div class="account-nav-link-left">
+              <i class="fa-regular fa-credit-card"></i>
+              <span>Payment Methods</span>
+            </div>
+          </a>
+          <a href="#" class="account-nav-link">
+            <div class="account-nav-link-left">
+              <i class="fa-solid fa-compass-drafting"></i>
+              <span>Custom Design Requests</span>
+            </div>
+          </a>
+          <a href="#" class="account-nav-link">
+            <div class="account-nav-link-left">
+              <i class="fa-regular fa-bell"></i>
+              <span>Notifications</span>
+            </div>
+            <span class="account-nav-badge">2</span>
+          </a>
+          <a href="#" class="account-nav-link">
+            <div class="account-nav-link-left">
+              <i class="fa-regular fa-star"></i>
+              <span>Rewards & Points</span>
+            </div>
+          </a>
+          <a href="#" class="account-nav-link">
+            <div class="account-nav-link-left">
+              <i class="fa-solid fa-sliders"></i>
+              <span>Account Settings</span>
+            </div>
+          </a>
+          <a href="#" class="account-nav-link" style="border-top: 1px solid var(--border-gray); margin-top: 5px; padding-top: 15px;">
+            <div class="account-nav-link-left">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              <span>Logout</span>
+            </div>
+          </a>
+        </nav>
+
+        <!-- Need Help Sidebar Promo Box -->
+        <div class="sidebar-help-box">
+          <i class="fa-solid fa-headset help-box-icon"></i>
+          <span class="help-box-title">Need Help?</span>
+          <p class="help-box-desc">Our support team is here to assist you.</p>
+          <a href="#" class="help-box-btn">Contact Support <i class="fa-solid fa-arrow-right-long"></i></a>
+        </div>
+      </aside>
+
+      <!-- Right Column: Orders Flow -->
+      <main class="dashboard-main-panel">
+        
+        <!-- Filter Tabs Row -->
+        <nav class="order-filters-nav" aria-label="Order status filters">
+          <button class="filter-tab-btn active">All Orders</button>
+          <button class="filter-tab-btn">Delivered</button>
+          <button class="filter-tab-btn">Processing</button>
+          <button class="filter-tab-btn">Shipped</button>
+          <button class="filter-tab-btn">Cancelled</button>
+        </nav>
+
+        <!-- Orders Cards Flow -->
+        <div class="orders-flow-wrapper">
+          
+          <!-- Card 1: Delivered -->
+          <article class="order-card">
+            <div class="order-card-media">
+              <img src="https://images.unsplash.com/photo-1543294001-f7cbfe92237e?q=80&w=150" alt="Floral Cluster Ring">
+            </div>
+            <div class="order-meta-info">
+              <span class="meta-label">Order Placed on</span>
+              <span class="meta-val-date">12 May 2024</span>
+              <span class="meta-label" style="margin-top: 4px;">2 Items</span>
+              <span class="meta-val-price">₹ 78,500</span>
+            </div>
+            <div class="order-status-block">
+              <span class="meta-label">Status</span>
+              <span class="status-badge delivered">Delivered</span>
+              <span class="status-date">Delivered on 16 May 2024</span>
+            </div>
+            <div class="order-actions-col">
+              <a href="#" class="view-details-btn">View Order Details</a>
+              <a href="#" class="buy-again-link"><i class="fa-solid fa-rotate-left"></i> Buy Again</a>
+            </div>
+          </article>
+
+          <!-- Card 2: Processing -->
+          <article class="order-card">
+            <div class="order-card-media">
+              <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=150" alt="Pear Drop Pendant">
+            </div>
+            <div class="order-meta-info">
+              <span class="meta-label">Order Placed on</span>
+              <span class="meta-val-date">02 May 2024</span>
+              <span class="meta-label" style="margin-top: 4px;">1 Item</span>
+              <span class="meta-val-price">₹ 45,200</span>
+            </div>
+            <div class="order-status-block">
+              <span class="meta-label">Status</span>
+              <span class="status-badge processing">Processing</span>
+              <span class="status-date">Estimated Delivery 10 May 2024</span>
+            </div>
+            <div class="order-actions-col">
+              <a href="#" class="view-details-btn">View Order Details</a>
+              <a href="#" class="buy-again-link"><i class="fa-solid fa-rotate-left"></i> Buy Again</a>
+            </div>
+          </article>
+
+          <!-- Card 3: Shipped -->
+          <article class="order-card">
+            <div class="order-card-media">
+              <img src="https://images.unsplash.com/photo-1635767798638-3e25273a8236?q=80&w=150" alt="Diamond Stud Earrings">
+            </div>
+            <div class="order-meta-info">
+              <span class="meta-label">Order Placed on</span>
+              <span class="meta-val-date">18 Apr 2024</span>
+              <span class="meta-label" style="margin-top: 4px;">1 Item</span>
+              <span class="meta-val-price">₹ 92,300</span>
+            </div>
+            <div class="order-status-block">
+              <span class="meta-label">Status</span>
+              <span class="status-badge shipped">Shipped</span>
+              <span class="status-date">Expected Delivery 22 Apr 2024</span>
+            </div>
+            <div class="order-actions-col">
+              <a href="#" class="view-details-btn">View Order Details</a>
+              <a href="#" class="buy-again-link"><i class="fa-solid fa-rotate-left"></i> Buy Again</a>
+            </div>
+          </article>
+
+          <!-- Card 4: Delivered -->
+          <article class="order-card">
+            <div class="order-card-media">
+              <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=150" alt="Classic Tennis Bracelet">
+            </div>
+            <div class="order-meta-info">
+              <span class="meta-label">Order Placed on</span>
+              <span class="meta-val-date">10 Apr 2024</span>
+              <span class="meta-label" style="margin-top: 4px;">1 Item</span>
+              <span class="meta-val-price">₹ 96,800</span>
+            </div>
+            <div class="order-status-block">
+              <span class="meta-label">Status</span>
+              <span class="status-badge delivered">Delivered</span>
+              <span class="status-date">Delivered on 13 Apr 2024</span>
+            </div>
+            <div class="order-actions-col">
+              <a href="#" class="view-details-btn">View Order Details</a>
+              <a href="#" class="buy-again-link"><i class="fa-solid fa-rotate-left"></i> Buy Again</a>
+            </div>
+          </article>
+
+          <!-- Card 5: Cancelled (Has NO "Buy Again" option) -->
+          <article class="order-card">
+            <div class="order-card-media">
+              <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=150" alt="Cushion Cut Ring">
+            </div>
+            <div class="order-meta-info">
+              <span class="meta-label">Order Placed on</span>
+              <span class="meta-val-date">28 Mar 2024</span>
+              <span class="meta-label" style="margin-top: 4px;">1 Item</span>
+              <span class="meta-val-price">₹ 22,100</span>
+            </div>
+            <div class="order-status-block">
+              <span class="meta-label">Status</span>
+              <span class="status-badge cancelled">Cancelled</span>
+              <span class="status-date">Cancelled on 29 Mar 2024</span>
+            </div>
+            <div class="order-actions-col">
+              <a href="#" class="view-details-btn">View Order Details</a>
+            </div>
+          </article>
+
+          <!-- Card 6: Shipped -->
+          <article class="order-card">
+            <div class="order-card-media">
+              <img src="https://images.unsplash.com/photo-1611085583191-a3b1a3a35541?q=80&w=150" alt="Halo Diamond Pendant">
+            </div>
+            <div class="order-meta-info">
+              <span class="meta-label">Order Placed on</span>
+              <span class="meta-val-date">02 Mar 2024</span>
+              <span class="meta-label" style="margin-top: 4px;">1 Item</span>
+              <span class="meta-val-price">₹ 54,700</span>
+            </div>
+            <div class="order-status-block">
+              <span class="meta-label">Status</span>
+              <span class="status-badge shipped">Shipped</span>
+              <span class="status-date">Expected Delivery 06 Mar 2024</span>
+            </div>
+            <div class="order-actions-col">
+              <a href="#" class="view-details-btn">View Order Details</a>
+              <a href="#" class="buy-again-link"><i class="fa-solid fa-rotate-left"></i> Buy Again</a>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Pagination Bar -->
+        <nav class="pagination-wrapper" aria-label="Order history pages">
+          <a href="#" class="pagination-box" aria-label="Previous Page"><i class="fa-solid fa-chevron-left"></i></a>
+          <a href="#" class="pagination-box active">1</a>
+          <a href="#" class="pagination-box">2</a>
+          <a href="#" class="pagination-box" aria-label="Next Page"><i class="fa-solid fa-chevron-right"></i></a>
+        </nav>
+
+      </main>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       5. TRUST BADGES BANNER
+       ========================================== -->
+  <section class="trust-banner">
+    <div class="trust-card">
+      <div class="trust-icon">
+        <i class="fa-solid fa-truck"></i>
+      </div>
+      <div class="trust-info">
+        <span class="trust-title">Free Shipping</span>
+        <span class="trust-subtitle">Across India</span>
+      </div>
+    </div>
+    
+    <div class="trust-card">
+      <div class="trust-icon">
+        <i class="fa-solid fa-shield-halved"></i>
+      </div>
+      <div class="trust-info">
+        <span class="trust-title">Secure Payments</span>
+        <span class="trust-subtitle">100% Safe & Secure</span>
+      </div>
+    </div>
+
+    <div class="trust-card">
+      <div class="trust-icon">
+        <i class="fa-solid fa-rotate-left"></i>
+      </div>
+      <div class="trust-info">
+        <span class="trust-title">Easy Returns</span>
+        <span class="trust-subtitle">Hassle Free Returns</span>
+      </div>
+    </div>
+
+    <div class="trust-card">
+      <div class="trust-icon">
+        <i class="fa-regular fa-gem"></i>
+      </div>
+      <div class="trust-info">
+        <span class="trust-title">Certified Diamonds</span>
+        <span class="trust-subtitle">IGI Certified</span>
+      </div>
+    </div>
+
+    <div class="trust-card">
+      <div class="trust-icon">
+        <i class="fa-solid fa-award"></i>
+      </div>
+      <div class="trust-info">
+        <span class="trust-title">Lifetime Care</span>
+        <span class="trust-subtitle">Warranty on Every Purchase</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       6. NEWSLETTER & FOOTER BANNER
+       ========================================== -->
+  <footer class="rd-footer-wrapper">
+    <div class="rd-newsletter-section">
+      <div class="rd-newsletter-content">
+        <h2 class="rd-newsletter-title">Stay Timeless. Stay Sparkling.</h2>
+        <p class="rd-newsletter-desc">Join our exclusive list and be the first to know about new collections, offers and more.</p>
+        <form class="rd-newsletter-form" onsubmit="event.preventDefault();">
+          <input type="email" class="rd-newsletter-input" placeholder="Enter your email address" required>
+          <button type="submit" class="rd-newsletter-submit" aria-label="Subscribe">
+            <i class="fa-solid fa-arrow-right-long"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="rd-main-footer">
+      <div class="rd-footer-col">
+        <a href="#" class="rd-footer-brand">
+          <svg class="rd-brand-logo" width="30" height="30" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="22" r="6" stroke="currentColor" stroke-width="4.5"/>
+            <path d="M48 22L50 20L52 22L50 24L48 22Z" fill="currentColor"/>
+            <path d="M30 42 C 38 32, 45 32, 50 42 C 55 32, 62 32, 70 42 C 78 52, 72 68, 50 82 C 28 68, 22 52, 30 42 Z" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+            <path d="M38 52 C 45 46, 55 46, 62 52" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <span class="rd-brand-name">Rithika Diamonds</span>
+        </a>
+        <p class="rd-brand-desc">
+          We are diamond manufacturers specializing in custom-made diamond jewellery with unmatched quality and craftsmanship.
+        </p>
+        <div class="rd-social-row">
+          <a href="#" class="rd-social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="rd-social-icon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="rd-social-icon" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" class="rd-social-icon" aria-label="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
+        </div>
+      </div>
+
+      <div class="rd-footer-col">
+        <h3 class="rd-col-title">Quick Links</h3>
+        <ul class="rd-footer-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">Custom Design</a></li>
+          <li><a href="#">Collections</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="rd-footer-col">
+        <h3 class="rd-col-title">Customer Service</h3>
+        <ul class="rd-footer-links">
+          <li><a href="#">Track Order</a></li>
+          <li><a href="#">Returns & Exchanges</a></li>
+          <li><a href="#">Shipping Policy</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="rd-footer-col">
+        <h3 class="rd-col-title">Information</h3>
+        <ul class="rd-footer-links">
+          <li><a href="#">About Our Manufacturing</a></li>
+          <li><a href="#">Diamond Guide</a></li>
+          <li><a href="#">Care & Maintenance</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+
+      <div class="rd-footer-col">
+        <h3 class="rd-col-title">Contact Us</h3>
+        <ul class="rd-contact-list">
+          <li class="rd-contact-item">
+            <i class="fa-solid fa-phone"></i>
+            <span>+91 1234 567 890</span>
+          </li>
+          <li class="rd-contact-item">
+            <i class="fa-solid fa-envelope"></i>
+            <span>hello@rithikadiamonds.com</span>
+          </li>
+          <li class="rd-contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Kozhikode, Kerala, India</span>
+          </li>
+        </ul>
+        <a href="#" class="rd-whatsapp-btn">
+          <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <div class="rd-bottom-bar">
+      <span class="rd-copyright">&copy; 2024 Rithika Diamonds. All Rights Reserved.</span>
+      <div class="rd-payment-icons">
+        <svg class="rd-payment-badge" viewBox="0 0 48 30" width="35" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="30" rx="3" fill="#1434CB"/>
+          <path d="M12 20.5l1.6-6.5h1.8l-1.6 6.5h-1.8zm6.5-6.5c-.3 0-.6.1-.8.4l-3 6.1h1.9l.4-.9h2.3l.2.9h1.7l-1.5-6.5h-1.2zm-.8 4.2l.9-2.5.5 2.5h-1.4zm9.3-4.2h-1.6c-.5 0-.9.3-1.1.7l-2.3 5.8h1.9l.4-1.1h2.3l.1.5c.1.4.4.6.9.6h1.5l-2.1-6.5zm-5.4.4l1.3 3.6h-1.8l.5-3.6z" fill="#fff"/>
+        </svg>
+        <svg class="rd-payment-badge" viewBox="0 0 48 30" width="35" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="30" rx="3" fill="#222"/>
+          <circle cx="20" cy="15" r="9" fill="#EB001B"/>
+          <circle cx="28" cy="15" r="9" fill="#FF5F00" fill-opacity="0.85"/>
+        </svg>
+        <svg class="rd-payment-badge" viewBox="0 0 48 30" width="35" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="30" rx="3" fill="#016FD0"/>
+          <path d="M10 20v-10h2.5l2.1 4.3 2.1-4.3H19.2v10h-2.1v-6.5l-2.4 4.8h-.8l-2.4-4.8v6.5h-1.5zm11.5 0v-10h5.2v2h-3.1v1.9h2.8v2h-2.8v2.1h3.1v2h-5.2zm7.4 0l2.3-5-2.3-5h2.1l1.2 2.7 1.2-2.7h2.1l-2.3 5 2.3 5h-2.1L32 17.3l-1.2 2.7h-2.1z" fill="#fff"/>
+        </svg>
+        <svg class="rd-payment-badge" viewBox="0 0 48 30" width="35" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="30" rx="3" fill="#fff" stroke="#cbd5e1" stroke-width="1"/>
+          <path d="M12 11l4 8M16 11l-4 8M19 11v8h2c1.5 0 2.5-.8 2.5-2.2v-3.6c0-1.4-1-2.2-2.5-2.2h-2zm12 0l-3 8h2l2.5-5h2l.5 5h2l-3-8h-3zm-10 2h1c.5 0 .8.2.8.7v2.6c0 .5-.3.7-.8.7h-1v-4z" fill="#097939" stroke="#097939" stroke-width="0.5"/>
+        </svg>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

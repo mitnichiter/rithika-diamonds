@@ -1,0 +1,2266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rithika Diamonds | Crafting Exclusive Diamond Masterpieces</title>
+  
+  <!-- Premium Font Imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome CDN for Luxury UI Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* Global Variables & Brand Palette */
+    :root {
+      --primary-navy: #020b16;      /* Main dark background */
+      --header-dark: #021024;       /* Text dark color */
+      --accent-gold: #dfb470;       /* Gold highlights */
+      --white: #ffffff;
+      --light-blue-gray: #f8fafc;
+      --border-light: rgba(255, 255, 255, 0.15);
+      --border-gray: #e2e8f0;
+      --text-gray: #64748b;
+      --font-serif: 'Cormorant Garamond', serif;
+      --font-sans: 'Inter', sans-serif;
+      --transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* Global Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--white);
+      color: var(--header-dark);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ==========================================
+       1. TOP UTILITY BAR
+       ========================================== */
+    .top-bar {
+      background-color: var(--primary-navy);
+      color: rgba(255, 255, 255, 0.75);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 60px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .top-bar-left {
+      display: flex;
+      gap: 30px;
+    }
+
+    .top-bar-left span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .top-bar-left i {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .top-bar-right {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+
+    .top-bar-right span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .top-bar-right a {
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .top-bar-right a:hover {
+      color: var(--white);
+    }
+
+    /* ==========================================
+       2. MAIN NAVIGATION HEADER
+       ========================================== */
+    .main-header {
+      background-color: var(--white);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 60px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--header-dark);
+    }
+
+    .logo-svg {
+      color: var(--header-dark);
+      display: block;
+    }
+
+    .logo-text {
+      font-family: var(--font-serif);
+      font-size: 25px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-item {
+      color: var(--header-dark);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      position: relative;
+      padding: 8px 0;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .nav-item i {
+      font-size: 9px;
+      transition: var(--transition);
+    }
+
+    .nav-item:hover {
+      color: rgba(2, 16, 36, 0.7);
+    }
+
+    .nav-item:hover i {
+      transform: translateY(1.5px);
+    }
+
+    .nav-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background-color: var(--header-dark);
+      transition: var(--transition);
+    }
+
+    .nav-item:hover::after,
+    .nav-item.active::after {
+      width: 24px;
+    }
+
+    .nav-item.dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background-color: var(--white);
+      border: 1px solid #f1f5f9;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      list-style: none;
+      padding: 10px 0;
+      min-width: 180px;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      border-radius: 4px;
+    }
+
+    .nav-item.dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .dropdown-menu li a {
+      display: block;
+      padding: 10px 20px;
+      color: var(--header-dark);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      transition: var(--transition);
+    }
+
+    .dropdown-menu li a:hover {
+      background-color: var(--light-blue-gray);
+      color: var(--header-dark);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .action-btn {
+      background: none;
+      border: none;
+      color: var(--header-dark);
+      font-size: 17px;
+      cursor: pointer;
+      position: relative;
+      padding: 6px;
+      transition: var(--transition);
+    }
+
+    .action-btn:hover {
+      color: rgba(2, 16, 36, 0.7);
+      transform: translateY(-1px);
+    }
+
+    .badge-btn .badge {
+      position: absolute;
+      top: 0px;
+      right: -2px;
+      background-color: var(--header-dark);
+      color: var(--white);
+      font-size: 8px;
+      font-weight: 700;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu-toggle-cb {
+      display: none;
+    }
+
+    .menu-toggle-btn {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 22px;
+      height: 16px;
+      cursor: pointer;
+      z-index: 1010;
+    }
+
+    .menu-toggle-btn span {
+      display: block;
+      height: 2px;
+      width: 100%;
+      background-color: var(--header-dark);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* ==========================================
+       3. HERO SECTION
+       ========================================== */
+    .hero-section {
+      position: relative;
+      background-color: var(--primary-navy);
+      display: flex;
+      min-height: 600px;
+      height: calc(100vh - 120px);
+      max-height: 780px;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 80px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-content {
+      max-width: 540px;
+      width: 100%;
+      text-align: center;
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-logo-mark {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .hero-logo-svg {
+      color: var(--white);
+      filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.15));
+    }
+
+    .hero-brand-name {
+      font-family: var(--font-serif);
+      font-size: 15px;
+      font-weight: 400;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: 44px;
+      font-weight: 300;
+      line-height: 1.25;
+      letter-spacing: 0.5px;
+      margin-bottom: 22px;
+    }
+
+    .hero-title span {
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .hero-separator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      width: 100%;
+      margin-bottom: 28px;
+    }
+
+    .hero-separator .line {
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.35), transparent);
+      width: 100px;
+    }
+
+    .hero-separator .diamond-icon {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.65);
+      transform: rotate(45deg);
+      display: inline-block;
+    }
+
+    .hero-description {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 440px;
+      margin-bottom: 45px;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 18px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 15px 30px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: var(--transition);
+    }
+
+    .btn i {
+      font-size: 11px;
+      transition: transform 0.25s ease;
+    }
+
+    .btn:hover i {
+      transform: translateX(4px);
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      color: var(--white);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      background-color: var(--white);
+      color: var(--primary-navy);
+      border-color: var(--white);
+    }
+
+    .btn-filled {
+      background-color: var(--white);
+      color: var(--primary-navy);
+      border: 1px solid var(--white);
+    }
+
+    .btn-filled:hover {
+      background-color: transparent;
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.55);
+    }
+
+    .hero-right {
+      flex: 1.1;
+      background: linear-gradient(to right, var(--primary-navy) 0%, rgba(2, 11, 22, 0.45) 30%, transparent 100%),
+                  url('https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1200&q=80') no-repeat center center / cover;
+      position: relative;
+      z-index: 1;
+    }
+
+    .slider-dots {
+      position: absolute;
+      bottom: 30px;
+      left: 25%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 5;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.35);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .dot.active {
+      background-color: var(--white);
+      transform: scale(1.35);
+    }
+
+    /* ==========================================
+       4. TRUST BADGES BANNER
+       ========================================== */
+    .trust-banner {
+      background-color: var(--light-blue-gray);
+      border-top: 1px solid var(--border-gray);
+      border-bottom: 1px solid var(--border-gray);
+      padding: 30px 60px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+    }
+
+    .trust-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-right: 20px;
+      border-right: 1px solid var(--border-gray);
+    }
+
+    .trust-card:last-child {
+      border-right: none;
+      padding-right: 0;
+    }
+
+    .trust-icon {
+      font-size: 28px;
+      color: var(--header-dark);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .trust-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .trust-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--header-dark);
+      letter-spacing: 0.3px;
+    }
+
+    .trust-subtitle {
+      font-size: 11px;
+      color: var(--text-gray);
+      font-weight: 400;
+    }
+
+    /* ==========================================
+       5. SHOP BY CATEGORY
+       ========================================== */
+    .category-section {
+      padding: 80px 60px;
+      background-color: var(--white);
+    }
+
+    .category-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .category-header h2 {
+      font-family: var(--font-serif);
+      font-size: 30px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      color: var(--header-dark);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .category-header .separator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .category-header .separator-line {
+      height: 1px;
+      width: 60px;
+      background: linear-gradient(to right, transparent, var(--text-gray), transparent);
+    }
+
+    .category-header .diamond-bullet {
+      font-size: 8px;
+      color: var(--header-dark);
+      transform: rotate(45deg);
+    }
+
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .category-card {
+      background-color: var(--white);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border-gray);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .category-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 30px rgba(2, 16, 36, 0.08);
+      border-color: #cbd5e1;
+    }
+
+    .card-media-wrapper {
+      position: relative;
+      height: 250px;
+      overflow: visible;
+    }
+
+    .category-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .category-card:hover .category-img {
+      transform: scale(1.05);
+    }
+
+    .category-icon-circle {
+      position: absolute;
+      bottom: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: var(--header-dark);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(2, 16, 36, 0.25);
+      z-index: 10;
+      transition: var(--transition);
+    }
+
+    .category-card:hover .category-icon-circle {
+      background-color: #0d2142;
+      transform: translateX(-50%) scale(1.1);
+    }
+
+    .category-icon-circle svg, .category-icon-circle i {
+      color: var(--white);
+      display: block;
+    }
+
+    .category-info {
+      padding: 35px 15px 25px 15px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      background-color: var(--white);
+    }
+
+    .category-name {
+      font-family: var(--font-serif);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: var(--header-dark);
+      text-transform: uppercase;
+    }
+
+    .category-link {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-gray);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .category-link:hover {
+      color: var(--header-dark);
+    }
+
+    .category-link i {
+      font-size: 10px;
+      transition: transform 0.2s ease;
+    }
+
+    .category-link:hover i {
+      transform: translateX(3px);
+    }
+
+    /* ==========================================
+       6. FEATURED DIAMONDS GRID
+       ========================================== */
+    .featured-diamonds-section {
+      background-color: #fcfcfd;
+      padding: 80px 60px;
+      border-top: 1px solid var(--border-gray);
+      border-bottom: 1px solid var(--border-gray);
+    }
+
+    .fd-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .fd-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .fd-title {
+      font-family: var(--font-serif);
+      font-size: 30px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .fd-subtitle {
+      font-size: 13px;
+      color: var(--text-gray);
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+
+    .fd-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .fd-card {
+      background-color: var(--white);
+      border-radius: 8px;
+      border: 1px solid var(--border-gray);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .fd-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(2, 16, 36, 0.06);
+      border-color: #cbd5e1;
+    }
+
+    .fd-image-container {
+      position: relative;
+      height: 250px;
+      width: 100%;
+      overflow: hidden;
+      background-color: #f8fafc;
+    }
+
+    .fd-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .fd-card:hover .fd-image {
+      transform: scale(1.04);
+    }
+
+    .fd-wishlist-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: var(--header-dark);
+      font-size: 18px;
+      cursor: pointer;
+      z-index: 5;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+
+    .fd-wishlist-btn:hover {
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #ef4444;
+      transform: scale(1.1);
+    }
+
+    .fd-details {
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .fd-product-info {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .fd-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--header-dark);
+      letter-spacing: 0.2px;
+    }
+
+    .fd-price {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--header-dark);
+    }
+
+    .fd-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .fd-add-cart-btn {
+      flex-grow: 1;
+      background-color: var(--header-dark);
+      color: var(--white);
+      border: 1px solid var(--header-dark);
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 11px 16px;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: center;
+    }
+
+    .fd-add-cart-btn:hover {
+      background-color: #0b2240;
+      border-color: #0b2240;
+    }
+
+    .fd-bag-btn {
+      background: none;
+      border: 1px solid var(--border-gray);
+      color: var(--header-dark);
+      border-radius: 4px;
+      width: 38px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 14px;
+    }
+
+    .fd-bag-btn:hover {
+      border-color: var(--header-dark);
+      background-color: var(--light-blue-gray);
+    }
+
+    .fd-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .fd-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #cbd5e1;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .fd-dot.active {
+      background-color: var(--header-dark);
+      transform: scale(1.3);
+    }
+
+    /* ==========================================
+       7. CUSTOM DESIGN / STEP PROCESS
+       ========================================== */
+    .custom-design-section {
+      background-color: var(--primary-navy);
+      color: var(--white);
+      padding: 100px 60px;
+    }
+
+    .custom-design-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 60px;
+    }
+
+    .custom-design-intro {
+      flex: 1;
+      max-width: 420px;
+    }
+
+    .intro-tag {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-gold);
+      display: block;
+      margin-bottom: 15px;
+    }
+
+    .intro-title {
+      font-family: var(--font-serif);
+      font-size: 40px;
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 18px;
+      letter-spacing: 0.5px;
+    }
+
+    .intro-underline {
+      height: 1px;
+      width: 100%;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0.25) 50%, transparent 100%);
+      margin-bottom: 22px;
+    }
+
+    .intro-description {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: rgba(255, 255, 255, 0.75);
+      margin-bottom: 35px;
+      letter-spacing: 0.3px;
+    }
+
+    .intro-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background-color: var(--white);
+      color: var(--primary-navy);
+      padding: 15px 32px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: var(--transition);
+      border: 1px solid var(--white);
+    }
+
+    .intro-btn:hover {
+      background-color: transparent;
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .btn-arrow {
+      transition: transform 0.25s ease;
+    }
+
+    .intro-btn:hover .btn-arrow {
+      transform: translateX(4px);
+    }
+
+    .custom-design-steps-wrapper {
+      flex: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .step-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 180px;
+    }
+
+    .step-icon-wrap {
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+      transition: var(--transition);
+    }
+
+    .step-item:hover .step-icon-wrap {
+      transform: scale(1.08);
+    }
+
+    .step-svg {
+      filter: drop-shadow(0 2px 8px rgba(223, 180, 112, 0.1));
+    }
+
+    .step-number {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 18px;
+      transition: var(--transition);
+    }
+
+    .step-item:hover .step-number {
+      background-color: var(--accent-gold);
+      border-color: var(--accent-gold);
+      color: var(--primary-navy);
+    }
+
+    .step-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    .step-desc {
+      font-size: 12px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 300;
+    }
+
+    .step-connector {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 80px;
+    }
+
+    .connector-line {
+      width: 100%;
+      border-top: 1.5px dotted rgba(255, 255, 255, 0.25);
+      position: relative;
+    }
+
+    .connector-line::after {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--accent-gold);
+    }
+
+    /* ==========================================
+       8. NEWSLETTER & FOOTER BANNER
+       ========================================== */
+    .rd-footer-wrapper {
+      background-color: #010a15;
+      color: var(--white);
+    }
+
+    .rd-newsletter-section {
+      position: relative;
+      background: linear-gradient(to right, rgba(1, 10, 21, 0.15) 0%, rgba(1, 10, 21, 0.85) 45%, #010a15 100%), 
+                  url('https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?q=80&w=1200') no-repeat left center / cover;
+      padding: 80px 60px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .rd-newsletter-content {
+      max-width: 520px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .rd-newsletter-title {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .rd-newsletter-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      margin-bottom: 12px;
+    }
+
+    .rd-newsletter-form {
+      position: relative;
+      width: 100%;
+    }
+
+    .rd-newsletter-input {
+      width: 100%;
+      background-color: var(--white);
+      border: none;
+      padding: 15px 50px 15px 20px;
+      border-radius: 4px;
+      font-size: 13px;
+      color: var(--primary-navy);
+      outline: none;
+      letter-spacing: 0.3px;
+    }
+
+    .rd-newsletter-input::placeholder {
+      color: #94a3b8;
+    }
+
+    .rd-newsletter-submit {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--primary-navy);
+      font-size: 16px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .rd-newsletter-submit:hover {
+      color: var(--accent-gold);
+      transform: translateY(-50%) translateX(3px);
+    }
+
+    .rd-main-footer {
+      padding: 80px 60px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr 1.2fr;
+      gap: 40px;
+    }
+
+    .rd-footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .rd-footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--white);
+    }
+
+    .rd-brand-logo {
+      color: var(--white);
+    }
+
+    .rd-brand-name {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .rd-brand-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      max-width: 260px;
+    }
+
+    .rd-social-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .rd-social-icon {
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .rd-social-icon:hover {
+      background-color: var(--white);
+      color: #010a15;
+      border-color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .rd-col-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--white);
+      border-left: 2px solid var(--accent-gold);
+      padding-left: 10px;
+      line-height: 1;
+    }
+
+    .rd-footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .rd-footer-links li a {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-weight: 300;
+      transition: var(--transition);
+      display: inline-block;
+    }
+
+    .rd-footer-links li a:hover {
+      color: var(--white);
+      transform: translateX(4px);
+    }
+
+    .rd-contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .rd-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      line-height: 1.4;
+    }
+
+    .rd-contact-item i {
+      color: var(--accent-gold);
+      font-size: 14px;
+      margin-top: 2px;
+    }
+
+    .rd-whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--white);
+      color: var(--primary-navy);
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 12px;
+      text-decoration: none;
+      margin-top: 10px;
+      width: fit-content;
+      transition: var(--transition);
+      border: 1px solid var(--white);
+    }
+
+    .rd-whatsapp-btn:hover {
+      background-color: transparent;
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .rd-whatsapp-btn i {
+      color: #25D366;
+      font-size: 16px;
+    }
+
+    .rd-bottom-bar {
+      border-top: 1px solid var(--border-light);
+      padding: 24px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .rd-copyright {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+
+    .rd-payment-icons {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .rd-payment-badge {
+      height: 22px;
+      opacity: 0.85;
+      transition: var(--transition);
+      display: block;
+    }
+
+    .rd-payment-badge:hover {
+      opacity: 1;
+    }
+
+    /* ==========================================
+       9. CONSOLIDATED RESPONSIVE STYLES
+       ========================================== */
+    @media (max-width: 1200px) {
+      .top-bar {
+        padding: 10px 40px;
+      }
+      .main-header {
+        padding: 16px 40px;
+      }
+      .trust-banner {
+        padding: 25px 40px;
+      }
+      .category-section {
+        padding: 60px 40px;
+      }
+      .categories-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      .featured-diamonds-section {
+        padding: 60px 40px;
+      }
+      .fd-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      .custom-design-section {
+        padding: 70px 40px;
+      }
+      .custom-design-container {
+        gap: 40px;
+      }
+      .intro-title {
+        font-size: 34px;
+      }
+      .rd-newsletter-section {
+        padding: 60px 40px;
+      }
+      .rd-main-footer {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 35px;
+        padding: 60px 40px;
+      }
+      .rd-footer-col:first-child {
+        grid-column: span 3;
+        border-bottom: 1px solid var(--border-light);
+        padding-bottom: 30px;
+      }
+      .rd-bottom-bar {
+        padding: 24px 40px;
+      }
+      .hero-left {
+        padding: 40px 60px;
+      }
+      .hero-title {
+        font-size: 38px;
+      }
+    }
+
+    @media (max-width: 991px) {
+      .top-bar-left span:nth-child(3) {
+        display: none;
+      }
+      
+      .menu-toggle-btn {
+        display: flex;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 300px;
+        height: 100vh;
+        background-color: var(--white);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 90px 40px;
+        gap: 25px;
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.08);
+        transition: right 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
+        z-index: 1005;
+      }
+
+      .nav-item {
+        font-size: 14px;
+        width: 100%;
+        border-bottom: 1px solid var(--light-blue-gray);
+        padding-bottom: 12px;
+      }
+
+      .nav-item.active::after {
+        display: none;
+      }
+
+      .dropdown-menu {
+        position: static;
+        transform: none !important;
+        box-shadow: none;
+        border: none;
+        padding-left: 15px;
+        padding-top: 5px;
+        opacity: 1;
+        visibility: visible;
+        display: none;
+        width: 100%;
+      }
+
+      .nav-item.dropdown:hover .dropdown-menu {
+        display: block;
+      }
+
+      .menu-toggle-cb:checked ~ .nav-menu {
+        right: 0;
+      }
+
+      .menu-toggle-cb:checked ~ .menu-toggle-btn span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+
+      .menu-toggle-cb:checked ~ .menu-toggle-btn span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-toggle-cb:checked ~ .menu-toggle-btn span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
+      .hero-section {
+        flex-direction: column-reverse;
+        height: auto;
+        min-height: auto;
+        max-height: none;
+      }
+
+      .hero-left {
+        width: 100%;
+        padding: 60px 40px;
+      }
+
+      .hero-right {
+        width: 100%;
+        height: 400px;
+        background: linear-gradient(to top, var(--primary-navy) 0%, transparent 35%),
+                    url('https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1200&q=80') no-repeat center center / cover;
+      }
+
+      .slider-dots {
+        left: 50%;
+        bottom: 25px;
+      }
+
+      .trust-banner {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .trust-card:nth-child(2n) {
+        border-right: none;
+      }
+
+      .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .fd-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+
+      .custom-design-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .custom-design-intro {
+        max-width: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 40px;
+      }
+
+      .intro-underline {
+        background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.25) 50%, transparent);
+        max-width: 320px;
+      }
+
+      .custom-design-steps-wrapper {
+        width: 100%;
+      }
+
+      .rd-newsletter-section {
+        background: #010a15;
+        justify-content: center;
+        padding: 50px 24px;
+        text-align: center;
+      }
+
+      .rd-newsletter-content {
+        align-items: center;
+      }
+
+      .rd-main-footer {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 50px 24px;
+        gap: 30px;
+      }
+
+      .rd-footer-col:first-child {
+        grid-column: span 2;
+      }
+
+      .rd-bottom-bar {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .fd-title {
+        font-size: 26px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .top-bar {
+        display: none;
+      }
+
+      .main-header {
+        padding: 15px 24px;
+      }
+
+      .hero-left {
+        padding: 50px 20px;
+      }
+
+      .hero-title {
+        font-size: 30px;
+      }
+
+      .hero-description {
+        font-size: 13px;
+        margin-bottom: 35px;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-right {
+        height: 300px;
+      }
+
+      .trust-banner {
+        grid-template-columns: 1fr;
+        padding: 20px 24px;
+      }
+
+      .trust-card {
+        border-right: none;
+        border-bottom: 1px solid var(--border-gray);
+        padding-bottom: 15px;
+      }
+
+      .trust-card:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .category-section {
+        padding: 50px 20px;
+      }
+
+      .categories-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .card-media-wrapper {
+        height: 280px;
+      }
+
+      .custom-design-section {
+        padding: 60px 24px;
+      }
+
+      .intro-title {
+        font-size: 30px;
+      }
+
+      .custom-design-steps-wrapper {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+      }
+
+      .step-item {
+        max-width: 100%;
+      }
+
+      .step-connector {
+        display: none;
+      }
+
+      .step-desc {
+        max-width: 250px;
+      }
+
+      .rd-main-footer {
+        grid-template-columns: 1fr;
+      }
+
+      .rd-footer-col:first-child {
+        grid-column: span 1;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .fd-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .fd-image-container {
+        height: 260px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       1. TOP UTILITY BAR
+       ========================================== -->
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <span><i class="fa-regular fa-gem"></i> 100% Certified Diamonds</span>
+      <span><i class="fa-solid fa-industry"></i> In-house Manufacturing</span>
+      <span><i class="fa-solid fa-ring"></i> Custom Made Jewellery</span>
+    </div>
+    <div class="top-bar-right">
+      <span><i class="fa-solid fa-phone"></i> +91 1234 567 890</span>
+      <a href="#">Track Order</a>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       2. MAIN STICKY NAVIGATION HEADER
+       ========================================== -->
+  <header class="main-header">
+    <a href="#" class="logo-container">
+      <svg class="logo-svg" width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="22" r="6" stroke="currentColor" stroke-width="4.5"/>
+        <path d="M48 22L50 20L52 22L50 24L48 22Z" fill="currentColor"/>
+        <path d="M30 42 C 38 32, 45 32, 50 42 C 55 32, 62 32, 70 42 C 78 52, 72 68, 50 82 C 28 68, 22 52, 30 42 Z" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+        <path d="M38 52 C 45 46, 55 46, 62 52" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <span class="logo-text">Rithika Diamonds</span>
+    </a>
+
+    <input type="checkbox" id="menu-toggle" class="menu-toggle-cb">
+    
+    <label for="menu-toggle" class="menu-toggle-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <nav class="nav-menu">
+      <a href="#" class="nav-item active">HOME</a>
+      <div class="nav-item dropdown">
+        <a href="#">SHOP <i class="fa-solid fa-chevron-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Engagement Rings</a></li>
+          <li><a href="#">Diamond Necklaces</a></li>
+          <li><a href="#">Exclusive Bands</a></li>
+          <li><a href="#">Bespoke Earrings</a></li>
+        </ul>
+      </div>
+      <a href="#" class="nav-item">CUSTOM DESIGN</a>
+      <div class="nav-item dropdown">
+        <a href="#">COLLECTIONS <i class="fa-solid fa-chevron-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">The Solitaire Legacy</a></li>
+          <li><a href="#">Eternal Grace</a></li>
+          <li><a href="#">Modern Brilliance</a></li>
+        </ul>
+      </div>
+      <a href="#" class="nav-item">ABOUT US</a>
+      <a href="#" class="nav-item">CONTACT US</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="action-btn" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <button class="action-btn" aria-label="Account"><i class="fa-regular fa-user"></i></button>
+      <button class="action-btn badge-btn" aria-label="Wishlist">
+        <i class="fa-regular fa-heart"></i>
+        <span class="badge">0</span>
+      </button>
+      <button class="action-btn badge-btn" aria-label="Shopping Cart">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="badge">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       3. HERO SECTION
+       ========================================== -->
+  <section class="hero-section">
+    <div class="hero-left">
+      <div class="hero-content">
+        <div class="hero-logo-mark">
+          <svg class="hero-logo-svg" width="46" height="46" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="22" r="6" stroke="currentColor" stroke-width="4.5"/>
+            <path d="M48 22L50 20L52 22L50 24L48 22Z" fill="currentColor"/>
+            <path d="M30 42 C 38 32, 45 32, 50 42 C 55 32, 62 32, 70 42 C 78 52, 72 68, 50 82 C 28 68, 22 52, 30 42 Z" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+            <path d="M38 52 C 45 46, 55 46, 62 52" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <div class="hero-brand-name">Rithika Diamonds</div>
+        </div>
+
+        <h1 class="hero-title">Crafting Exclusive<br><span>Diamond Masterpieces</span></h1>
+
+        <div class="hero-separator">
+          <span class="line"></span>
+          <span class="diamond-icon">◆</span>
+          <span class="line"></span>
+        </div>
+
+        <p class="hero-description">
+          Custom-made diamond jewellery crafted with precision, passion and perfection.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#" class="btn btn-outline">SHOP DIAMONDS <i class="fa-solid fa-arrow-right-long"></i></a>
+          <a href="#" class="btn btn-filled">CUSTOMIZE YOUR DESIGN <i class="fa-solid fa-arrow-right-long"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right"></div>
+
+    <div class="slider-dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       4. TRUST BADGES BANNER
+       ========================================== -->
+  <section class="trust-banner">
+    <div class="trust-card">
+      <div class="trust-icon">
+        <i class="fa-regular fa-gem"></i>
+      </div>
+      <div class="trust-info">
+        <span class="trust-title">100% Certified Diamonds</span>
+        <span class="trust-subtitle">Authenticity Guaranteed</span>
+      </div>
+    </div>
+    
+    <div class="trust-card">
+      <div class="trust-icon">
+        <i class="fa-solid fa-industry"></i>
+      </div>
+      <div class="trust-info">
+        <span class="trust-title">In-house Manufacturing</span>
+        <span class="trust-subtitle">Precision & Quality</span>
+      </div>
+    </div>
+
+    <div class="trust-card">
+      <div class="trust-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+      </div>
+      <div class="trust-info">
+        <span class="trust-title">Custom Made Jewellery</span>
+        <span class="trust-subtitle">Made Just For You</span>
+      </div>
+    </div>
+
+    <div class="trust-card">
+      <div class="trust-icon">
+        <i class="fa-solid fa-shield-halved"></i>
+      </div>
+      <div class="trust-info">
+        <span class="trust-title">Secure Payments</span>
+        <span class="trust-subtitle">Safe & Encrypted</span>
+      </div>
+    </div>
+
+    <div class="trust-card">
+      <div class="trust-icon">
+        <i class="fa-solid fa-rotate-left"></i>
+      </div>
+      <div class="trust-info">
+        <span class="trust-title">Easy Returns</span>
+        <span class="trust-subtitle">Hassle Free Returns</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       5. SHOP BY CATEGORY SECTION
+       ========================================== -->
+  <section class="category-section">
+    <div class="category-header">
+      <h2>Shop By Category</h2>
+      <div class="separator">
+        <span class="separator-line"></span>
+        <span class="diamond-bullet"></span>
+        <span class="separator-line"></span>
+      </div>
+    </div>
+
+    <div class="categories-grid">
+      <article class="category-card">
+        <div class="card-media-wrapper">
+          <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=500&q=80" alt="Diamond Rings" class="category-img">
+          <div class="category-icon-circle">
+            <i class="fa-solid fa-ring"></i>
+          </div>
+        </div>
+        <div class="category-info">
+          <h3 class="category-name">Diamond Rings</h3>
+          <a href="#" class="category-link">Shop Now <i class="fa-solid fa-arrow-right-long"></i></a>
+        </div>
+      </article>
+
+      <article class="category-card">
+        <div class="card-media-wrapper">
+          <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=500&q=80" alt="Diamond Necklaces" class="category-img">
+          <div class="category-icon-circle">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4,4 Q12,18 20,4" />
+              <circle cx="12" cy="13" r="3" fill="currentColor"/>
+            </svg>
+          </div>
+        </div>
+        <div class="category-info">
+          <h3 class="category-name">Diamond Necklaces</h3>
+          <a href="#" class="category-link">Shop Now <i class="fa-solid fa-arrow-right-long"></i></a>
+        </div>
+      </article>
+
+      <article class="category-card">
+        <div class="card-media-wrapper">
+          <img src="https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=500&q=80" alt="Diamond Earrings" class="category-img">
+          <div class="category-icon-circle">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="8" cy="8" r="2" fill="currentColor"/>
+              <path d="M8,10 L8,16 L6,18 M8,16 L10,18" />
+              <circle cx="16" cy="8" r="2" fill="currentColor"/>
+              <path d="M16,10 L16,16 L14,18 M16,16 L18,18" />
+            </svg>
+          </div>
+        </div>
+        <div class="category-info">
+          <h3 class="category-name">Diamond Earrings</h3>
+          <a href="#" class="category-link">Shop Now <i class="fa-solid fa-arrow-right-long"></i></a>
+        </div>
+      </article>
+
+      <article class="category-card">
+        <div class="card-media-wrapper">
+          <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=500&q=80" alt="Bridal Collection" class="category-img">
+          <div class="category-icon-circle">
+            <i class="fa-solid fa-crown"></i>
+          </div>
+        </div>
+        <div class="category-info">
+          <h3 class="category-name">Bridal Collection</h3>
+          <a href="#" class="category-link">Shop Now <i class="fa-solid fa-arrow-right-long"></i></a>
+        </div>
+      </article>
+
+      <article class="category-card">
+        <div class="card-media-wrapper">
+          <img src="https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=500&q=80" alt="Custom Jewellery" class="category-img">
+          <div class="category-icon-circle">
+            <i class="fa-solid fa-pen-fancy"></i>
+          </div>
+        </div>
+        <div class="category-info">
+          <h3 class="category-name">Custom Jewellery</h3>
+          <a href="#" class="category-link">Shop Now <i class="fa-solid fa-arrow-right-long"></i></a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       6. FEATURED DIAMONDS GRID SECTION
+       ========================================== -->
+  <section class="featured-diamonds-section">
+    <div class="fd-container">
+      <div class="fd-header">
+        <h2 class="fd-title">Featured Diamonds</h2>
+        <p class="fd-subtitle">Handpicked brilliance, crafted for you.</p>
+      </div>
+
+      <div class="fd-grid">
+        <article class="fd-card">
+          <div class="fd-image-container">
+            <button class="fd-wishlist-btn" aria-label="Add to Wishlist">
+              <i class="fa-regular fa-heart"></i>
+            </button>
+            <img src="https://images.unsplash.com/photo-1543294001-f7cbfe92237e?q=80&w=500" alt="Floral Cluster Ring" class="fd-image">
+          </div>
+          <div class="fd-details">
+            <div class="fd-product-info">
+              <h3 class="fd-name">Floral Cluster Ring</h3>
+              <span class="fd-price">₹ 78,500</span>
+            </div>
+            <div class="fd-actions">
+              <button class="fd-add-cart-btn">Add to Cart</button>
+              <button class="fd-bag-btn" aria-label="Quick Add"><i class="fa-solid fa-bag-shopping"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <article class="fd-card">
+          <div class="fd-image-container">
+            <button class="fd-wishlist-btn" aria-label="Add to Wishlist">
+              <i class="fa-regular fa-heart"></i>
+            </button>
+            <img src="https://images.unsplash.com/photo-1611085583191-a3b1a3a35541?q=80&w=500" alt="Pear Drop Pendant" class="fd-image">
+          </div>
+          <div class="fd-details">
+            <div class="fd-product-info">
+              <h3 class="fd-name">Pear Drop Pendant</h3>
+              <span class="fd-price">₹ 64,900</span>
+            </div>
+            <div class="fd-actions">
+              <button class="fd-add-cart-btn">Add to Cart</button>
+              <button class="fd-bag-btn" aria-label="Quick Add"><i class="fa-solid fa-bag-shopping"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <article class="fd-card">
+          <div class="fd-image-container">
+            <button class="fd-wishlist-btn" aria-label="Add to Wishlist">
+              <i class="fa-regular fa-heart"></i>
+            </button>
+            <img src="https://images.unsplash.com/photo-1630019852942-f89202989a59?q=80&w=500" alt="Diamond Hoop Earrings" class="fd-image">
+          </div>
+          <div class="fd-details">
+            <div class="fd-product-info">
+              <h3 class="fd-name">Diamond Hoop Earrings</h3>
+              <span class="fd-price">₹ 59,800</span>
+            </div>
+            <div class="fd-actions">
+              <button class="fd-add-cart-btn">Add to Cart</button>
+              <button class="fd-bag-btn" aria-label="Quick Add"><i class="fa-solid fa-bag-shopping"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <article class="fd-card">
+          <div class="fd-image-container">
+            <button class="fd-wishlist-btn" aria-label="Add to Wishlist">
+              <i class="fa-regular fa-heart"></i>
+            </button>
+            <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=500" alt="Classic Tennis Bracelet" class="fd-image">
+          </div>
+          <div class="fd-details">
+            <div class="fd-product-info">
+              <h3 class="fd-name">Classic Tennis Bracelet</h3>
+              <span class="fd-price">₹ 1,28,900</span>
+            </div>
+            <div class="fd-actions">
+              <button class="fd-add-cart-btn">Add to Cart</button>
+              <button class="fd-bag-btn" aria-label="Quick Add"><i class="fa-solid fa-bag-shopping"></i></button>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="fd-dots">
+        <span class="fd-dot active"></span>
+        <span class="fd-dot"></span>
+        <span class="fd-dot"></span>
+        <span class="fd-dot"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       7. CUSTOM MADE STEP PROCESS SECTION
+       ========================================== -->
+  <section class="custom-design-section">
+    <div class="custom-design-container">
+      <div class="custom-design-intro">
+        <span class="intro-tag">Custom Made, Just For You</span>
+        <h2 class="intro-title">Design Your Own<br>Diamond Jewellery</h2>
+        <div class="intro-underline"></div>
+        <p class="intro-description">
+          From your imagination to a masterpiece.<br>We make your dream jewellery come to life.
+        </p>
+        <a href="#" class="intro-btn">
+          Start Custom Design 
+          <svg class="btn-arrow" width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 1L15 6L10 11M15 6H1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="custom-design-steps-wrapper">
+        <div class="step-item">
+          <div class="step-icon-wrap">
+            <svg class="step-svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#dfb470" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+              <path d="M16 8a6 6 0 0 1 0 12h-3l-3 3V20a6 6 0 0 1 0-12z" stroke-dasharray="1 1" opacity="0.4"/>
+              <circle cx="9" cy="12" r="1" fill="#dfb470"/>
+              <circle cx="13" cy="12" r="1" fill="#dfb470"/>
+              <circle cx="17" cy="12" r="1" fill="#dfb470"/>
+            </svg>
+          </div>
+          <div class="step-number">1</div>
+          <h3 class="step-title">Share Your Idea</h3>
+          <p class="step-desc">Tell us what you have in mind.</p>
+        </div>
+
+        <div class="step-connector">
+          <div class="connector-line"></div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-icon-wrap">
+            <svg class="step-svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#dfb470" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="2" y1="12" x2="22" y2="12" stroke="rgba(223, 180, 112, 0.2)" stroke-dasharray="2 2" />
+              <line x1="12" y1="2" x2="12" y2="22" stroke="rgba(223, 180, 112, 0.2)" stroke-dasharray="2 2" />
+              <circle cx="12" cy="14" r="6" stroke="#dfb470" stroke-width="1.2" />
+              <circle cx="12" cy="14" r="8.5" stroke="rgba(223, 180, 112, 0.3)" stroke-width="0.8" stroke-dasharray="1.5 1.5" />
+              <path d="M12 8 L9 5 L15 5 Z" stroke="#dfb470" stroke-width="1" stroke-linejoin="round" />
+              <path d="M9 5 L10 2 L14 2 L15 5 Z" stroke="#dfb470" stroke-width="1" stroke-linejoin="round" />
+              <line x1="10" y1="2" x2="12" y2="5" stroke="#dfb470" stroke-width="0.8" />
+              <line x1="14" y1="2" x2="12" y2="5" stroke="#dfb470" stroke-width="0.8" />
+            </svg>
+          </div>
+          <div class="step-number">2</div>
+          <h3 class="step-title">Design & Approve</h3>
+          <p class="step-desc">Our experts create & finalize the design.</p>
+        </div>
+
+        <div class="step-connector">
+          <div class="connector-line"></div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-icon-wrap">
+            <svg class="step-svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#dfb470" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 9 L6 3 L18 3 L22 9 Z" />
+              <path d="M2 9 L12 21 L22 9 Z" />
+              <line x1="6" y1="3" x2="12" y2="9" />
+              <line x1="18" y1="3" x2="12" y2="9" />
+              <line x1="12" y1="3" x2="12" y2="21" />
+              <line x1="6" y1="3" x2="2" y2="9" />
+              <line x1="18" y1="3" x2="22" y2="9" />
+              <line x1="2" y1="9" x2="12" y2="9" />
+              <line x1="22" y1="9" x2="12" y2="9" />
+              <line x1="6" y1="9" x2="12" y2="21" />
+              <line x1="18" y1="9" x2="12" y2="21" />
+            </svg>
+          </div>
+          <div class="step-number">3</div>
+          <h3 class="step-title">Expert Crafting</h3>
+          <p class="step-desc">Precision manufacturing by our artisans.</p>
+        </div>
+
+        <div class="step-connector">
+          <div class="connector-line"></div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-icon-wrap">
+            <svg class="step-svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#dfb470" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="10" width="16" height="11" rx="1" />
+              <rect x="3" y="7" width="18" height="3" rx="0.5" />
+              <line x1="12" y1="7" x2="12" y2="21" />
+              <path d="M12 7 C 9 4, 8 1, 12 4 Z" fill="none" />
+              <path d="M12 7 C 15 4, 16 1, 12 4 Z" fill="none" />
+            </svg>
+          </div>
+          <div class="step-number">4</div>
+          <h3 class="step-title">Delivery</h3>
+          <p class="step-desc">Your masterpiece, delivered to you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       8. NEWSLETTER & FOOTER BANNER SECTION
+       ========================================== -->
+  <section class="rd-footer-wrapper">
+    <div class="rd-newsletter-section">
+      <div class="rd-newsletter-content">
+        <h2 class="rd-newsletter-title">Stay Timeless. Stay Sparkling.</h2>
+        <p class="rd-newsletter-desc">Join our exclusive list and be the first to know about new collections, offers and more.</p>
+        <form class="rd-newsletter-form" onsubmit="event.preventDefault();">
+          <input type="email" class="rd-newsletter-input" placeholder="Enter your email address" required>
+          <button type="submit" class="rd-newsletter-submit" aria-label="Subscribe">
+            <i class="fa-solid fa-arrow-right-long"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="rd-main-footer">
+      <div class="rd-footer-col">
+        <a href="#" class="rd-footer-brand">
+          <svg class="rd-brand-logo" width="30" height="30" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="22" r="6" stroke="currentColor" stroke-width="4.5"/>
+            <path d="M48 22L50 20L52 22L50 24L48 22Z" fill="currentColor"/>
+            <path d="M30 42 C 38 32, 45 32, 50 42 C 55 32, 62 32, 70 42 C 78 52, 72 68, 50 82 C 28 68, 22 52, 30 42 Z" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+            <path d="M38 52 C 45 46, 55 46, 62 52" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <span class="rd-brand-name">Rithika Diamonds</span>
+        </a>
+        <p class="rd-brand-desc">
+          We are diamond manufacturers specializing in custom-made diamond jewellery with unmatched quality and craftsmanship.
+        </p>
+        <div class="rd-social-row">
+          <a href="#" class="rd-social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="rd-social-icon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="rd-social-icon" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" class="rd-social-icon" aria-label="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
+        </div>
+      </div>
+
+      <div class="rd-footer-col">
+        <h3 class="rd-col-title">Quick Links</h3>
+        <ul class="rd-footer-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">Custom Design</a></li>
+          <li><a href="#">Collections</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="rd-footer-col">
+        <h3 class="rd-col-title">Customer Service</h3>
+        <ul class="rd-footer-links">
+          <li><a href="#">Track Order</a></li>
+          <li><a href="#">Returns & Exchanges</a></li>
+          <li><a href="#">Shipping Policy</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="rd-footer-col">
+        <h3 class="rd-col-title">Information</h3>
+        <ul class="rd-footer-links">
+          <li><a href="#">About Our Manufacturing</a></li>
+          <li><a href="#">Diamond Guide</a></li>
+          <li><a href="#">Care & Maintenance</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+
+      <div class="rd-footer-col">
+        <h3 class="rd-col-title">Contact Us</h3>
+        <ul class="rd-contact-list">
+          <li class="rd-contact-item">
+            <i class="fa-solid fa-phone"></i>
+            <span>+91 1234 567 890</span>
+          </li>
+          <li class="rd-contact-item">
+            <i class="fa-solid fa-envelope"></i>
+            <span>hello@rithikadiamonds.com</span>
+          </li>
+          <li class="rd-contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Kozhikode, Kerala, India</span>
+          </li>
+        </ul>
+        <a href="#" class="rd-whatsapp-btn">
+          <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <div class="rd-bottom-bar">
+      <span class="rd-copyright">&copy; 2024 Rithika Diamonds. All Rights Reserved.</span>
+      <div class="rd-payment-icons">
+        <svg class="rd-payment-badge" viewBox="0 0 48 30" width="35" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="30" rx="3" fill="#1434CB"/>
+          <path d="M12 20.5l1.6-6.5h1.8l-1.6 6.5h-1.8zm6.5-6.5c-.3 0-.6.1-.8.4l-3 6.1h1.9l.4-.9h2.3l.2.9h1.7l-1.5-6.5h-1.2zm-.8 4.2l.9-2.5.5 2.5h-1.4zm9.3-4.2h-1.6c-.5 0-.9.3-1.1.7l-2.3 5.8h1.9l.4-1.1h2.3l.1.5c.1.4.4.6.9.6h1.5l-2.1-6.5zm-5.4.4l1.3 3.6h-1.8l.5-3.6z" fill="#fff"/>
+        </svg>
+        <svg class="rd-payment-badge" viewBox="0 0 48 30" width="35" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="30" rx="3" fill="#222"/>
+          <circle cx="20" cy="15" r="9" fill="#EB001B"/>
+          <circle cx="28" cy="15" r="9" fill="#FF5F00" fill-opacity="0.85"/>
+        </svg>
+        <svg class="rd-payment-badge" viewBox="0 0 48 30" width="35" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="30" rx="3" fill="#016FD0"/>
+          <path d="M10 20v-10h2.5l2.1 4.3 2.1-4.3H19.2v10h-2.1v-6.5l-2.4 4.8h-.8l-2.4-4.8v6.5h-1.5zm11.5 0v-10h5.2v2h-3.1v1.9h2.8v2h-2.8v2.1h3.1v2h-5.2zm7.4 0l2.3-5-2.3-5h2.1l1.2 2.7 1.2-2.7h2.1l-2.3 5 2.3 5h-2.1L32 17.3l-1.2 2.7h-2.1z" fill="#fff"/>
+        </svg>
+        <svg class="rd-payment-badge" viewBox="0 0 48 30" width="35" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="30" rx="3" fill="#fff" stroke="#cbd5e1" stroke-width="1"/>
+          <path d="M12 11l4 8M16 11l-4 8M19 11v8h2c1.5 0 2.5-.8 2.5-2.2v-3.6c0-1.4-1-2.2-2.5-2.2h-2zm12 0l-3 8h2l2.5-5h2l.5 5h2l-3-8h-3zm-10 2h1c.5 0 .8.2.8.7v2.6c0 .5-.3.7-.8.7h-1v-4z" fill="#097939" stroke="#097939" stroke-width="0.5"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

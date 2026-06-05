@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Exquisite Diamond Collections | Rithika Diamonds</title>
+  
+  <!-- Premium Font Imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome CDN for Luxury UI Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* Global Variables & Brand Design Tokens */
+    :root {
+      --primary-navy: #020b16;      /* Main dark background */
+      --header-dark: #021024;       /* Text dark color */
+      --accent-gold: #dfb470;       /* Gold branding highlights */
+      --white: #ffffff;
+      --light-blue-gray: #f8fafc;
+      --border-light: rgba(255, 255, 255, 0.12);
+      --border-gray: #e2e8f0;
+      --text-gray: #64748b;
+      --font-serif: 'Cormorant Garamond', serif;
+      --font-sans: 'Inter', sans-serif;
+      --transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* Global Base Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--white);
+      color: var(--header-dark);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ==========================================
+       1. TOP UTILITY BAR
+       ========================================== */
+    .top-bar {
+      background-color: var(--primary-navy);
+      color: rgba(255, 255, 255, 0.75);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 60px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .top-bar-left {
+      display: flex;
+      gap: 30px;
+    }
+
+    .top-bar-left span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .top-bar-left i {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .top-bar-right {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+
+    .top-bar-right span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .top-bar-right a {
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .top-bar-right a:hover {
+      color: var(--white);
+    }
+
+    /* ==========================================
+       2. MAIN NAVIGATION HEADER
+       ========================================== */
+    .main-header {
+      background-color: var(--white);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 60px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--header-dark);
+    }
+
+    .logo-svg {
+      color: var(--header-dark);
+      display: block;
+    }
+
+    .logo-text {
+      font-family: var(--font-serif);
+      font-size: 25px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-item {
+      color: var(--header-dark);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      position: relative;
+      padding: 8px 0;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .nav-item i {
+      font-size: 9px;
+      transition: var(--transition);
+    }
+
+    .nav-item:hover {
+      color: rgba(2, 16, 36, 0.7);
+    }
+
+    .nav-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background-color: var(--header-dark);
+      transition: var(--transition);
+    }
+
+    .nav-item:hover::after,
+    .nav-item.active::after {
+      width: 24px;
+    }
+
+    .nav-item.dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background-color: var(--white);
+      border: 1px solid #f1f5f9;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      list-style: none;
+      padding: 10px 0;
+      min-width: 180px;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      border-radius: 4px;
+    }
+
+    .nav-item.dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .dropdown-menu li a {
+      display: block;
+      padding: 10px 20px;
+      color: var(--header-dark);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      transition: var(--transition);
+    }
+
+    .dropdown-menu li a:hover {
+      background-color: var(--light-blue-gray);
+      color: var(--header-dark);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .action-btn {
+      background: none;
+      border: none;
+      color: var(--header-dark);
+      font-size: 17px;
+      cursor: pointer;
+      position: relative;
+      padding: 6px;
+      transition: var(--transition);
+    }
+
+    .action-btn:hover {
+      color: rgba(2, 16, 36, 0.7);
+    }
+
+    .badge-btn .badge {
+      position: absolute;
+      top: 0px;
+      right: -2px;
+      background-color: var(--header-dark);
+      color: var(--white);
+      font-size: 8px;
+      font-weight: 700;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu-toggle-cb {
+      display: none;
+    }
+
+    .menu-toggle-btn {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 22px;
+      height: 16px;
+      cursor: pointer;
+      z-index: 1010;
+    }
+
+    .menu-toggle-btn span {
+      display: block;
+      height: 2px;
+      width: 100%;
+      background-color: var(--header-dark);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* ==========================================
+       3. COLLECTIONS HEADER BANNER
+       ========================================== */
+    .collections-header-banner {
+      position: relative;
+      background-color: var(--primary-navy);
+      display: flex;
+      height: 260px;
+      overflow: hidden;
+    }
+
+    .banner-left-area {
+      flex: 1.2;
+      display: flex;
+      align-items: center;
+      padding: 40px 60px;
+      z-index: 2;
+    }
+
+    .banner-text-content {
+      max-width: 540px;
+      width: 100%;
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .banner-breadcrumbs {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .banner-breadcrumbs span {
+      color: var(--accent-gold);
+    }
+
+    .banner-headline-title {
+      font-family: var(--font-serif);
+      font-size: 38px;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: 0.5px;
+    }
+
+    .banner-subtitle-desc {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.8);
+      letter-spacing: 0.3px;
+    }
+
+    .banner-right-area {
+      flex: 1;
+      background: linear-gradient(to right, var(--primary-navy) 0%, rgba(2, 11, 22, 0.5) 30%, transparent 100%),
+                  url('https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1200&q=80') no-repeat center center / cover;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ==========================================
+       4. COLLECTIONS LAYOUT (SIDEBAR & CARDS)
+       ========================================== */
+    .collections-body-section {
+      padding: 50px 60px 80px 60px;
+      background-color: var(--white);
+    }
+
+    .collections-body-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      gap: 40px;
+    }
+
+    /* Mobile Filter Bar Toggle */
+    .mobile-filter-bar {
+      display: none;
+      width: 100%;
+      background-color: var(--light-blue-gray);
+      border: 1px solid var(--border-gray);
+      padding: 12px 20px;
+      border-radius: 4px;
+      margin-bottom: 25px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mobile-filter-btn {
+      background: none;
+      border: none;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--header-dark);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .filter-drawer-cb {
+      display: none;
+    }
+
+    /* Left Sidebar Columns */
+    .collections-sidebar {
+      width: 270px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 35px;
+    }
+
+    .filter-group {
+      border-bottom: 1px solid var(--border-gray);
+      padding-bottom: 25px;
+    }
+
+    .filter-group:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .filter-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--header-dark);
+      margin-bottom: 18px;
+    }
+
+    .category-filter-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .category-filter-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-gray);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .category-filter-list li i {
+      margin-right: 8px;
+      width: 16px;
+      text-align: center;
+      color: var(--text-gray);
+      transition: var(--transition);
+    }
+
+    .category-filter-list li:hover,
+    .category-filter-list li.active {
+      color: var(--header-dark);
+      font-weight: 600;
+    }
+
+    .category-filter-list li:hover i,
+    .category-filter-list li.active i {
+      color: var(--accent-gold);
+    }
+
+    .category-filter-list li .count {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-gray);
+    }
+
+    /* Price Range slider visual representation */
+    .price-slider-wrap {
+      padding: 10px 5px 0 5px;
+    }
+
+    .slider-track-mock {
+      height: 4px;
+      background-color: var(--border-gray);
+      border-radius: 2px;
+      position: relative;
+      margin-bottom: 18px;
+    }
+
+    .slider-highlight-mock {
+      position: absolute;
+      left: 10%;
+      right: 15%;
+      height: 100%;
+      background-color: var(--accent-gold);
+    }
+
+    .slider-handle-mock {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background-color: var(--white);
+      border: 2.5px solid var(--accent-gold);
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+
+    .slider-handle-mock.left { left: 8%; }
+    .slider-handle-mock.right { right: 13%; }
+
+    .price-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--header-dark);
+    }
+
+    /* Custom Form Checkboxes */
+    .checkbox-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--text-gray);
+      cursor: pointer;
+    }
+
+    .checkbox-item-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .checkbox-item-left input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border: 1.5px solid var(--border-gray);
+      border-radius: 3px;
+      outline: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .checkbox-item-left input[type="checkbox"]:checked {
+      background-color: var(--header-dark);
+      border-color: var(--header-dark);
+    }
+
+    .checkbox-item-left input[type="checkbox"]:checked::before {
+      content: "\f00c";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      color: var(--white);
+      font-size: 10px;
+    }
+
+    .checkbox-item:hover {
+      color: var(--header-dark);
+    }
+
+    .checkbox-item .count {
+      font-size: 11px;
+    }
+
+    /* Clear Button */
+    .clear-filters-btn {
+      width: 100%;
+      border: 1px solid var(--border-gray);
+      background-color: var(--white);
+      color: var(--header-dark);
+      padding: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .clear-filters-btn:hover {
+      background-color: var(--header-dark);
+      border-color: var(--header-dark);
+      color: var(--white);
+    }
+
+    /* Right Column: Catalog Grid */
+    .collections-catalog-main {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Sorting and view results details */
+    .catalog-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-gray);
+      padding-bottom: 18px;
+      margin-bottom: 25px;
+    }
+
+    .results-count {
+      font-size: 13px;
+      color: var(--text-gray);
+      font-weight: 400;
+    }
+
+    .toolbar-actions {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .select-dropdown-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-gray);
+    }
+
+    .select-dropdown-wrap select {
+      border: 1px solid var(--border-gray);
+      background-color: var(--white);
+      color: var(--header-dark);
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 500;
+      outline: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .select-dropdown-wrap select:hover {
+      border-color: var(--header-dark);
+    }
+
+    /* Collection Grid with Variable Column Spans */
+    .collections-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 24px;
+    }
+
+    /* Category Cards styling */
+    .collection-card {
+      background-color: var(--white);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border-gray);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      grid-column: span 2; /* 3 Columns row on desktop */
+    }
+
+    .collection-card.wide-card {
+      grid-column: span 3; /* 2 Columns row on desktop */
+    }
+
+    .collection-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 30px rgba(2, 16, 36, 0.08);
+      border-color: #cbd5e1;
+    }
+
+    .card-media-wrapper {
+      position: relative;
+      height: 250px;
+      overflow: hidden;
+    }
+
+    .collection-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .collection-card:hover .collection-img {
+      transform: scale(1.05);
+    }
+
+    /* Content details block under image */
+    .collection-info {
+      padding: 25px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background-color: var(--white);
+      flex-grow: 1;
+    }
+
+    .collection-name {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--header-dark);
+    }
+
+    .collection-card-desc {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--text-gray);
+      font-weight: 300;
+      margin-bottom: 5px;
+    }
+
+    .collection-link {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--header-dark);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+      margin-top: auto;
+    }
+
+    .collection-link i {
+      font-size: 10px;
+      transition: transform 0.2s ease;
+    }
+
+    .collection-link:hover i {
+      transform: translateX(3px);
+    }
+
+    .collection-link:hover {
+      color: var(--accent-gold);
+    }
+
+    /* ==========================================
+       5. TRUST BADGES BANNER
+       ========================================== */
+    .trust-banner {
+      background-color: var(--light-blue-gray);
+      border-top: 1px solid var(--border-gray);
+      border-bottom: 1px solid var(--border-gray);
+      padding: 30px 60px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+    }
+
+    .trust-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-right: 20px;
+      border-right: 1px solid var(--border-gray);
+    }
+
+    .trust-card:last-child {
+      border-right: none;
+      padding-right: 0;
+    }
+
+    .trust-icon {
+      font-size: 28px;
+      color: var(--header-dark);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .trust-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .trust-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--header-dark);
+      letter-spacing: 0.3px;
+    }
+
+    .trust-subtitle {
+      font-size: 11px;
+      color: var(--text-gray);
+      font-weight: 400;
+    }
+
+    /* ==========================================
+       6. NEWSLETTER & FOOTER BANNER
+       ========================================== */
+    .rd-footer-wrapper {
+      background-color: #010a15;
+      color: var(--white);
+    }
+
+    .rd-newsletter-section {
+      position: relative;
+      background: linear-gradient(to right, rgba(1, 10, 21, 0.15) 0%, rgba(1, 10, 21, 0.85) 45%, #010a15 100%), 
+                  url('https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?q=80&w=1200') no-repeat left center / cover;
+      padding: 80px 60px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .rd-newsletter-content {
+      max-width: 520px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .rd-newsletter-title {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .rd-newsletter-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      margin-bottom: 12px;
+    }
+
+    .rd-newsletter-form {
+      position: relative;
+      width: 100%;
+    }
+
+    .rd-newsletter-input {
+      width: 100%;
+      background-color: var(--white);
+      border: none;
+      padding: 15px 50px 15px 20px;
+      border-radius: 4px;
+      font-size: 13px;
+      color: var(--primary-navy);
+      outline: none;
+      letter-spacing: 0.3px;
+    }
+
+    .rd-newsletter-input::placeholder {
+      color: #94a3b8;
+    }
+
+    .rd-newsletter-submit {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--primary-navy);
+      font-size: 16px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .rd-newsletter-submit:hover {
+      color: var(--accent-gold);
+      transform: translateY(-50%) translateX(3px);
+    }
+
+    .rd-main-footer {
+      padding: 80px 60px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr 1.2fr;
+      gap: 40px;
+    }
+
+    .rd-footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .rd-footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--white);
+    }
+
+    .rd-brand-logo {
+      color: var(--white);
+    }
+
+    .rd-brand-name {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .rd-brand-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      max-width: 260px;
+    }
+
+    .rd-social-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .rd-social-icon {
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .rd-social-icon:hover {
+      background-color: var(--white);
+      color: #010a15;
+      border-color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .rd-col-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--white);
+      border-left: 2px solid var(--accent-gold);
+      padding-left: 10px;
+      line-height: 1;
+    }
+
+    .rd-footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .rd-footer-links li a {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-weight: 300;
+      transition: var(--transition);
+      display: inline-block;
+    }
+
+    .rd-footer-links li a:hover {
+      color: var(--white);
+      transform: translateX(4px);
+    }
+
+    .rd-contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .rd-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      line-height: 1.4;
+    }
+
+    .rd-contact-item i {
+      color: var(--accent-gold);
+      font-size: 14px;
+      margin-top: 2px;
+    }
+
+    .rd-whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--white);
+      color: var(--primary-navy);
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 12px;
+      text-decoration: none;
+      margin-top: 10px;
+      width: fit-content;
+      transition: var(--transition);
+      border: 1px solid var(--white);
+    }
+
+    .rd-whatsapp-btn:hover {
+      background-color: transparent;
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .rd-whatsapp-btn i {
+      color: #25D366;
+      font-size: 16px;
+    }
+
+    .rd-bottom-bar {
+      border-top: 1px solid var(--border-light);
+      padding: 24px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .rd-copyright {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+
+    .rd-payment-icons {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .rd-payment-badge {
+      height: 22px;
+      opacity: 0.85;
+      transition: var(--transition);
+      display: block;
+    }
+
+    .rd-payment-badge:hover {
+      opacity: 1;
+    }
+
+    /* ==========================================
+       7. RESPONSIVE MEDIA QUERIES (FULL PAGE)
+       ========================================== */
+    @media (max-width: 1200px) {
+      .top-bar { padding: 10px 40px; }
+      .main-header { padding: 16px 40px; }
+      .collections-header-banner { height: 220px; }
+      .banner-left-area { padding: 30px 40px; }
+      .banner-headline-title { font-size: 30px; }
+      .collections-body-section { padding: 40px; }
+      
+      /* Grid spans 4 columns for tablets */
+      .collections-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+      .collection-card { grid-column: span 2; }
+      .collection-card.wide-card { grid-column: span 2; }
+
+      .trust-banner { padding: 25px 40px; }
+      .rd-newsletter-section { padding: 60px 40px; }
+      .rd-main-footer {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 35px;
+        padding: 60px 40px;
+      }
+      .rd-footer-col:first-child {
+        grid-column: span 3;
+        border-bottom: 1px solid var(--border-light);
+        padding-bottom: 30px;
+      }
+      .rd-bottom-bar { padding: 24px 40px; }
+    }
+
+    @media (max-width: 991px) {
+      .menu-toggle-btn { display: flex; }
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 300px;
+        height: 100vh;
+        background-color: var(--white);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 90px 40px;
+        gap: 25px;
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.08);
+        transition: right 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
+        z-index: 1005;
+      }
+      .nav-item {
+        font-size: 14px;
+        width: 100%;
+        border-bottom: 1px solid var(--light-blue-gray);
+        padding-bottom: 12px;
+      }
+      .nav-item.active::after { display: none; }
+      .dropdown-menu {
+        position: static;
+        transform: none !important;
+        box-shadow: none;
+        border: none;
+        padding-left: 15px;
+        padding-top: 5px;
+        opacity: 1;
+        visibility: visible;
+        display: none;
+        width: 100%;
+      }
+      .nav-item.dropdown:hover .dropdown-menu { display: block; }
+      .menu-toggle-cb:checked ~ .nav-menu { right: 0; }
+      .menu-toggle-cb:checked ~ .menu-toggle-btn span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .menu-toggle-cb:checked ~ .menu-toggle-btn span:nth-child(2) { opacity: 0; }
+      .menu-toggle-cb:checked ~ .menu-toggle-btn span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+      /* Mobile Drawer Configuration for Sidebar */
+      .mobile-filter-bar { display: flex; }
+      .collections-sidebar {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 290px;
+        height: 100vh;
+        background-color: var(--white);
+        z-index: 2000;
+        padding: 40px 30px;
+        overflow-y: auto;
+        box-shadow: 10px 0 40px rgba(0, 0, 0, 0.1);
+        transition: left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+      .filter-drawer-cb:checked ~ .collections-sidebar { left: 0; }
+
+      .drawer-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(2, 11, 22, 0.4);
+        z-index: 1999;
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--transition);
+      }
+      .filter-drawer-cb:checked ~ .drawer-overlay {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .collections-body-container { flex-direction: column; gap: 0; }
+      
+      /* Grid spans 2 columns on tablets */
+      .collections-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .collection-card { grid-column: span 1; }
+      .collection-card.wide-card { grid-column: span 1; }
+
+      .trust-banner { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .trust-card:nth-child(2n) { border-right: none; }
+      .rd-newsletter-section { background: #010a15; justify-content: center; padding: 50px 24px; text-align: center; }
+      .rd-newsletter-content { align-items: center; }
+      .rd-main-footer { grid-template-columns: repeat(2, 1fr); padding: 50px 24px; gap: 30px; }
+      .rd-footer-col:first-child { grid-column: span 2; }
+      .rd-bottom-bar { flex-direction: column; gap: 15px; text-align: center; padding: 24px; }
+    }
+
+    @media (max-width: 768px) {
+      .collections-header-banner { flex-direction: column-reverse; height: auto; }
+      .banner-left-area { width: 100%; padding: 40px 24px; text-align: center; }
+      .banner-text-content { align-items: center; }
+      .banner-right-area { width: 100%; height: 200px; }
+      .collections-body-section { padding: 30px 24px; }
+    }
+
+    @media (max-width: 600px) {
+      .top-bar { display: none; }
+      .main-header { padding: 15px 24px; }
+      
+      /* Grid spans 1 column on mobile */
+      .collections-grid { grid-template-columns: 1fr; gap: 25px; }
+      .collection-card, .collection-card.wide-card { grid-column: span 1; }
+      
+      .trust-banner { grid-template-columns: 1fr; padding: 20px 24px; }
+      .trust-card { border-right: none; border-bottom: 1px solid var(--border-gray); padding-bottom: 15px; }
+      .trust-card:last-child { border-bottom: none; padding-bottom: 0; }
+      .rd-main-footer { grid-template-columns: 1fr; }
+      .rd-footer-col:first-child { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       1. TOP UTILITY BAR
+       ========================================== -->
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <span><i class="fa-regular fa-gem"></i> 100% Certified Diamonds</span>
+      <span><i class="fa-solid fa-industry"></i> In-house Manufacturing</span>
+      <span><i class="fa-solid fa-ring"></i> Custom Made Jewellery</span>
+    </div>
+    <div class="top-bar-right">
+      <span><i class="fa-solid fa-phone"></i> +91 1234 567 890</span>
+      <a href="#">Track Order</a>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       2. MAIN NAVIGATION HEADER
+       ========================================== -->
+  <header class="main-header">
+    <a href="#" class="logo-container">
+      <svg class="logo-svg" width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="22" r="6" stroke="currentColor" stroke-width="4.5"/>
+        <path d="M48 22L50 20L52 22L50 24L48 22Z" fill="currentColor"/>
+        <path d="M30 42 C 38 32, 45 32, 50 42 C 55 32, 62 32, 70 42 C 78 52, 72 68, 50 82 C 28 68, 22 52, 30 42 Z" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+        <path d="M38 52 C 45 46, 55 46, 62 52" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <span class="logo-text">Rithika Diamonds</span>
+    </a>
+
+    <input type="checkbox" id="menu-toggle" class="menu-toggle-cb">
+    
+    <label for="menu-toggle" class="menu-toggle-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <nav class="nav-menu">
+      <a href="#" class="nav-item">HOME</a>
+      <div class="nav-item dropdown">
+        <a href="#">SHOP <i class="fa-solid fa-chevron-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Engagement Rings</a></li>
+          <li><a href="#">Diamond Necklaces</a></li>
+          <li><a href="#">Exclusive Bands</a></li>
+          <li><a href="#">Bespoke Earrings</a></li>
+        </ul>
+      </div>
+      <a href="#" class="nav-item">CUSTOM DESIGN</a>
+      <div class="nav-item dropdown active">
+        <a href="#">COLLECTIONS <i class="fa-solid fa-chevron-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">The Solitaire Legacy</a></li>
+          <li><a href="#">Eternal Grace</a></li>
+          <li><a href="#">Modern Brilliance</a></li>
+        </ul>
+      </div>
+      <a href="#" class="nav-item">ABOUT US</a>
+      <a href="#" class="nav-item">CONTACT US</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="action-btn" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <button class="action-btn" aria-label="Account"><i class="fa-regular fa-user"></i></button>
+      <button class="action-btn badge-btn" aria-label="Wishlist">
+        <i class="fa-regular fa-heart"></i>
+        <span class="badge">0</span>
+      </button>
+      <button class="action-btn badge-btn" aria-label="Shopping Cart">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="badge">3</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       3. COLLECTIONS HEADER BANNER
+       ========================================== -->
+  <section class="collections-header-banner">
+    <div class="banner-left-area">
+      <div class="banner-text-content">
+        <div class="banner-breadcrumbs">Home > <span>Collections</span></div>
+        <h1 class="banner-headline-title">Explore Our Exquisite Collections</h1>
+        <p class="banner-subtitle-desc">Handcrafted diamond jewellery for every moment worth celebrating.</p>
+      </div>
+    </div>
+    <div class="banner-right-area"></div>
+  </section>
+
+  <!-- ==========================================
+       4. COLLECTIONS LAYOUT ENGINE
+       ========================================== -->
+  <section class="collections-body-section">
+    
+    <!-- Mobile Filter Controls -->
+    <div class="mobile-filter-bar">
+      <label for="filter-drawer-toggle" class="mobile-filter-btn">
+        <i class="fa-solid fa-sliders"></i> Filters & Categories
+      </label>
+      <span class="results-count">Showing 1-12 of 24 collections</span>
+    </div>
+
+    <div class="collections-body-container">
+      
+      <input type="checkbox" id="filter-drawer-toggle" class="filter-drawer-cb">
+      <label for="filter-drawer-toggle" class="drawer-overlay"></label>
+
+      <!-- Sidebar Column -->
+      <aside class="collections-sidebar">
+        
+        <!-- Categories Block -->
+        <div class="filter-group">
+          <h3 class="filter-title">Categories</h3>
+          <ul class="category-filter-list">
+            <li class="active">
+              <span><i class="fa-solid fa-border-all"></i> All Collections</span>
+              <span class="count">(24)</span>
+            </li>
+            <li>
+              <span><i class="fa-solid fa-crown"></i> Bridal Collection</span>
+              <span class="count">(6)</span>
+            </li>
+            <li>
+              <span><i class="fa-solid fa-ring"></i> Diamond Rings</span>
+              <span class="count">(5)</span>
+            </li>
+            <li>
+              <span><i class="fa-solid fa-gem"></i> Necklaces</span>
+              <span class="count">(4)</span>
+            </li>
+            <li>
+              <span><i class="fa-solid fa-certificate"></i> Earrings</span>
+              <span class="count">(4)</span>
+            </li>
+            <li>
+              <span><i class="fa-solid fa-infinity"></i> Bracelets</span>
+              <span class="count">(2)</span>
+            </li>
+            <li>
+              <span><i class="fa-solid fa-medal"></i> Pendants</span>
+              <span class="count">(2)</span>
+            </li>
+            <li>
+              <span><i class="fa-solid fa-user-tie"></i> Men's Collection</span>
+              <span class="count">(1)</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Filter Options -->
+        <div class="filter-group">
+          <h3 class="filter-title">Filter By</h3>
+          
+          <!-- Price Range Slider -->
+          <div style="margin-bottom: 25px;">
+            <span class="filter-title" style="font-size: 11px; color: var(--text-gray); margin-bottom: 10px; display: block;">Price Range</span>
+            <div class="price-slider-wrap">
+              <div class="slider-track-mock">
+                <div class="slider-highlight-mock"></div>
+                <div class="slider-handle-mock left"></div>
+                <div class="slider-handle-mock right"></div>
+              </div>
+              <div class="price-labels">
+                <span>₹ 10,000</span>
+                <span>₹ 5,00,000+</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Metal Preferences -->
+          <div style="margin-bottom: 25px;">
+            <span class="filter-title" style="font-size: 11px; color: var(--text-gray); margin-bottom: 10px; display: block;">Metal</span>
+            <ul class="checkbox-list">
+              <li class="checkbox-item">
+                <div class="checkbox-item-left">
+                  <input type="checkbox" id="metal-white-gold">
+                  <label for="metal-white-gold">White Gold</label>
+                </div>
+                <span class="count">(12)</span>
+              </li>
+              <li class="checkbox-item">
+                <div class="checkbox-item-left">
+                  <input type="checkbox" id="metal-yellow-gold">
+                  <label for="metal-yellow-gold">Yellow Gold</label>
+                </div>
+                <span class="count">(8)</span>
+              </li>
+              <li class="checkbox-item">
+                <div class="checkbox-item-left">
+                  <input type="checkbox" id="metal-rose-gold">
+                  <label for="metal-rose-gold">Rose Gold</label>
+                </div>
+                <span class="count">(7)</span>
+              </li>
+              <li class="checkbox-item">
+                <div class="checkbox-item-left">
+                  <input type="checkbox" id="metal-platinum">
+                  <label for="metal-platinum">Platinum</label>
+                </div>
+                <span class="count">(4)</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Occasion Selection -->
+          <div style="margin-bottom: 25px;">
+            <span class="filter-title" style="font-size: 11px; color: var(--text-gray); margin-bottom: 10px; display: block;">Occasion</span>
+            <ul class="checkbox-list">
+              <li class="checkbox-item">
+                <div class="checkbox-item-left">
+                  <input type="checkbox" id="occ-bridal">
+                  <label for="occ-bridal">Bridal</label>
+                </div>
+                <span class="count">(6)</span>
+              </li>
+              <li class="checkbox-item">
+                <div class="checkbox-item-left">
+                  <input type="checkbox" id="occ-anniversary">
+                  <label for="occ-anniversary">Anniversary</label>
+                </div>
+                <span class="count">(5)</span>
+              </li>
+              <li class="checkbox-item">
+                <div class="checkbox-item-left">
+                  <input type="checkbox" id="occ-engagement">
+                  <label for="occ-engagement">Engagement</label>
+                </div>
+                <span class="count">(6)</span>
+              </li>
+              <li class="checkbox-item">
+                <div class="checkbox-item-left">
+                  <input type="checkbox" id="occ-everyday">
+                  <label for="occ-everyday">Everyday</label>
+                </div>
+                <span class="count">(7)</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Reset Filter -->
+          <button class="clear-filters-btn"><i class="fa-solid fa-rotate-left"></i> Clear All Filters</button>
+
+        </div>
+      </aside>
+
+      <!-- Right Column: Catalog -->
+      <main class="collections-catalog-main">
+        
+        <!-- Toolbar Header -->
+        <div class="catalog-toolbar">
+          <span class="results-count" style="display: block;">Showing 1-12 of 24 collections</span>
+          <div class="toolbar-actions">
+            <div class="select-dropdown-wrap">
+              <span>Sort by:</span>
+              <select aria-label="Sort Collections">
+                <option value="featured">Featured</option>
+                <option value="name-asc">Alphabetical: A-Z</option>
+                <option value="popularity">Popularity</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Collections Grid System (With variable spans) -->
+        <div class="collections-grid">
+          
+          <!-- Card 1 (Bridal Set on dark background) -->
+          <article class="collection-card">
+            <div class="card-media-wrapper">
+              <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=500&q=80" alt="Bridal Collection" class="collection-img">
+            </div>
+            <div class="collection-info">
+              <h3 class="collection-name">Bridal Collection</h3>
+              <p class="collection-card-desc">Timeless designs for your most precious day.</p>
+              <a href="#" class="collection-link">Explore Collection <i class="fa-solid fa-arrow-right-long"></i></a>
+            </div>
+          </article>
+
+          <!-- Card 2 (Solitaire ring on blue background) -->
+          <article class="collection-card">
+            <div class="card-media-wrapper">
+              <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=500&q=80" alt="Diamond Rings" class="collection-img">
+            </div>
+            <div class="collection-info">
+              <h3 class="collection-name">Diamond Rings</h3>
+              <p class="collection-card-desc">Elegant rings that celebrate love and commitment.</p>
+              <a href="#" class="collection-link">Explore Collection <i class="fa-solid fa-arrow-right-long"></i></a>
+            </div>
+          </article>
+
+          <!-- Card 3 (Pendant on light background) -->
+          <article class="collection-card">
+            <div class="card-media-wrapper">
+              <img src="https://images.unsplash.com/photo-1611085583191-a3b1a3a35541?auto=format&fit=crop&w=500&q=80" alt="Necklaces" class="collection-img">
+            </div>
+            <div class="collection-info">
+              <h3 class="collection-name">Necklaces</h3>
+              <p class="collection-card-desc">Stunning diamond necklaces for every occasion.</p>
+              <a href="#" class="collection-link">Explore Collection <i class="fa-solid fa-arrow-right-long"></i></a>
+            </div>
+          </article>
+
+          <!-- Card 4 (Earrings on dark background) -->
+          <article class="collection-card">
+            <div class="card-media-wrapper">
+              <img src="https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=500&q=80" alt="Earrings" class="collection-img">
+            </div>
+            <div class="collection-info">
+              <h3 class="collection-name">Earrings</h3>
+              <p class="collection-card-desc">Sparkling earrings to elevate your style.</p>
+              <a href="#" class="collection-link">Explore Collection <i class="fa-solid fa-arrow-right-long"></i></a>
+            </div>
+          </article>
+
+          <!-- Card 5 (Bracelet on dark background) -->
+          <article class="collection-card">
+            <div class="card-media-wrapper">
+              <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=500&q=80" alt="Bracelets" class="collection-img">
+            </div>
+            <div class="collection-info">
+              <h3 class="collection-name">Bracelets</h3>
+              <p class="collection-card-desc">Graceful bracelets that shine with elegance.</p>
+              <a href="#" class="collection-link">Explore Collection <i class="fa-solid fa-arrow-right-long"></i></a>
+            </div>
+          </article>
+
+          <!-- Card 6 (Delicate pendant on light background) -->
+          <article class="collection-card">
+            <div class="card-media-wrapper">
+              <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=500&q=80" alt="Pendants" class="collection-img">
+            </div>
+            <div class="collection-info">
+              <h3 class="collection-name">Pendants</h3>
+              <p class="collection-card-desc">Charming pendants that speak your style.</p>
+              <a href="#" class="collection-link">Explore Collection <i class="fa-solid fa-arrow-right-long"></i></a>
+            </div>
+          </article>
+
+          <!-- Card 7 (Wide Card: Men's Signet Ring) -->
+          <article class="collection-card wide-card">
+            <div class="card-media-wrapper">
+              <img src="https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=800&q=80" alt="Men's Collection" class="collection-img">
+            </div>
+            <div class="collection-info">
+              <h3 class="collection-name">Men's Collection</h3>
+              <p class="collection-card-desc">Bold and refined designs crafted for him.</p>
+              <a href="#" class="collection-link">Explore Collection <i class="fa-solid fa-arrow-right-long"></i></a>
+            </div>
+          </article>
+
+          <!-- Card 8 (Wide Card: Loose Diamonds) -->
+          <article class="collection-card wide-card">
+            <div class="card-media-wrapper">
+              <img src="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=800&q=80" alt="Loose Diamonds" class="collection-img">
+            </div>
+            <div class="collection-info">
+              <h3 class="collection-name">Loose Diamonds</h3>
+              <p class="collection-card-desc">Certified loose diamonds of exceptional quality.</p>
+              <a href="#" class="collection-link">Explore Collection <i class="fa-solid fa-arrow-right-long"></i></a>
+            </div>
+          </article>
+
+        </div>
+
+      </main>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       5. TRUST BADGES BANNER
+       ========================================== -->
+  <section class="trust-banner">
+    <div class="trust-card">
+      <div class="trust-icon">
+        <i class="fa-regular fa-gem"></i>
+      </div>
+      <div class="trust-info">
+        <span class="trust-title">100% Certified Diamonds</span>
+        <span class="trust-subtitle">Authenticity Guaranteed</span>
+      </div>
+    </div>
+    
+    <div class="trust-card">
+      <div class="trust-icon">
+        <i class="fa-solid fa-industry"></i>
+      </div>
+      <div class="trust-info">
+        <span class="trust-title">In-house Manufacturing</span>
+        <span class="trust-subtitle">Precision & Quality</span>
+      </div>
+    </div>
+
+    <div class="trust-card">
+      <div class="trust-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+      </div>
+      <div class="trust-info">
+        <span class="trust-title">Custom Made Jewellery</span>
+        <span class="trust-subtitle">Made Just For You</span>
+      </div>
+    </div>
+
+    <div class="trust-card">
+      <div class="trust-icon">
+        <i class="fa-solid fa-shield-halved"></i>
+      </div>
+      <div class="trust-info">
+        <span class="trust-title">Secure Payments</span>
+        <span class="trust-subtitle">Safe & Encrypted</span>
+      </div>
+    </div>
+
+    <div class="trust-card">
+      <div class="trust-icon">
+        <i class="fa-solid fa-rotate-left"></i>
+      </div>
+      <div class="trust-info">
+        <span class="trust-title">Easy Returns</span>
+        <span class="trust-subtitle">Hassle Free Returns</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       6. NEWSLETTER & FOOTER BANNER
+       ========================================== -->
+  <footer class="rd-footer-wrapper">
+    <div class="rd-newsletter-section">
+      <div class="rd-newsletter-content">
+        <h2 class="rd-newsletter-title">Stay Timeless. Stay Sparkling.</h2>
+        <p class="rd-newsletter-desc">Join our exclusive list and be the first to know about new collections, offers and more.</p>
+        <form class="rd-newsletter-form" onsubmit="event.preventDefault();">
+          <input type="email" class="rd-newsletter-input" placeholder="Enter your email address" required>
+          <button type="submit" class="rd-newsletter-submit" aria-label="Subscribe">
+            <i class="fa-solid fa-arrow-right-long"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="rd-main-footer">
+      <div class="rd-footer-col">
+        <a href="#" class="rd-footer-brand">
+          <svg class="rd-brand-logo" width="30" height="30" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="22" r="6" stroke="currentColor" stroke-width="4.5"/>
+            <path d="M48 22L50 20L52 22L50 24L48 22Z" fill="currentColor"/>
+            <path d="M30 42 C 38 32, 45 32, 50 42 C 55 32, 62 32, 70 42 C 78 52, 72 68, 50 82 C 28 68, 22 52, 30 42 Z" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+            <path d="M38 52 C 45 46, 55 46, 62 52" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <span class="rd-brand-name">Rithika Diamonds</span>
+        </a>
+        <p class="rd-brand-desc">
+          We are diamond manufacturers specializing in custom-made diamond jewellery with unmatched quality and craftsmanship.
+        </p>
+        <div class="rd-social-row">
+          <a href="#" class="rd-social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="rd-social-icon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="rd-social-icon" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" class="rd-social-icon" aria-label="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
+        </div>
+      </div>
+
+      <div class="rd-footer-col">
+        <h3 class="rd-col-title">Quick Links</h3>
+        <ul class="rd-footer-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">Custom Design</a></li>
+          <li><a href="#">Collections</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="rd-footer-col">
+        <h3 class="rd-col-title">Customer Service</h3>
+        <ul class="rd-footer-links">
+          <li><a href="#">Track Order</a></li>
+          <li><a href="#">Returns & Exchanges</a></li>
+          <li><a href="#">Shipping Policy</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="rd-footer-col">
+        <h3 class="rd-col-title">Information</h3>
+        <ul class="rd-footer-links">
+          <li><a href="#">About Our Manufacturing</a></li>
+          <li><a href="#">Diamond Guide</a></li>
+          <li><a href="#">Care & Maintenance</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+
+      <div class="rd-footer-col">
+        <h3 class="rd-col-title">Contact Us</h3>
+        <ul class="rd-contact-list">
+          <li class="rd-contact-item">
+            <i class="fa-solid fa-phone"></i>
+            <span>+91 1234 567 890</span>
+          </li>
+          <li class="rd-contact-item">
+            <i class="fa-solid fa-envelope"></i>
+            <span>hello@rithikadiamonds.com</span>
+          </li>
+          <li class="rd-contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Kozhikode, Kerala, India</span>
+          </li>
+        </ul>
+        <a href="#" class="rd-whatsapp-btn">
+          <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <div class="rd-bottom-bar">
+      <span class="rd-copyright">&copy; 2024 Rithika Diamonds. All Rights Reserved.</span>
+      <div class="rd-payment-icons">
+        <svg class="rd-payment-badge" viewBox="0 0 48 30" width="35" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="30" rx="3" fill="#1434CB"/>
+          <path d="M12 20.5l1.6-6.5h1.8l-1.6 6.5h-1.8zm6.5-6.5c-.3 0-.6.1-.8.4l-3 6.1h1.9l.4-.9h2.3l.2.9h1.7l-1.5-6.5h-1.2zm-.8 4.2l.9-2.5.5 2.5h-1.4zm9.3-4.2h-1.6c-.5 0-.9.3-1.1.7l-2.3 5.8h1.9l.4-1.1h2.3l.1.5c.1.4.4.6.9.6h1.5l-2.1-6.5zm-5.4.4l1.3 3.6h-1.8l.5-3.6z" fill="#fff"/>
+        </svg>
+        <svg class="rd-payment-badge" viewBox="0 0 48 30" width="35" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="30" rx="3" fill="#222"/>
+          <circle cx="20" cy="15" r="9" fill="#EB001B"/>
+          <circle cx="28" cy="15" r="9" fill="#FF5F00" fill-opacity="0.85"/>
+        </svg>
+        <svg class="rd-payment-badge" viewBox="0 0 48 30" width="35" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="30" rx="3" fill="#016FD0"/>
+          <path d="M10 20v-10h2.5l2.1 4.3 2.1-4.3H19.2v10h-2.1v-6.5l-2.4 4.8h-.8l-2.4-4.8v6.5h-1.5zm11.5 0v-10h5.2v2h-3.1v1.9h2.8v2h-2.8v2.1h3.1v2h-5.2zm7.4 0l2.3-5-2.3-5h2.1l1.2 2.7 1.2-2.7h2.1l-2.3 5 2.3 5h-2.1L32 17.3l-1.2 2.7h-2.1z" fill="#fff"/>
+        </svg>
+        <svg class="rd-payment-badge" viewBox="0 0 48 30" width="35" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="30" rx="3" fill="#fff" stroke="#cbd5e1" stroke-width="1"/>
+          <path d="M12 11l4 8M16 11l-4 8M19 11v8h2c1.5 0 2.5-.8 2.5-2.2v-3.6c0-1.4-1-2.2-2.5-2.2h-2zm12 0l-3 8h2l2.5-5h2l.5 5h2l-3-8h-3zm-10 2h1c.5 0 .8.2.8.7v2.6c0 .5-.3.7-.8.7h-1v-4z" fill="#097939" stroke="#097939" stroke-width="0.5"/>
+        </svg>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

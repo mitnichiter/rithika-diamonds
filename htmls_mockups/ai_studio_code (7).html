@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Rithika Diamonds</title>
+  
+  <!-- Premium Font Imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome CDN for Luxury UI Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* Strict Monochromatic Luxury Palette & Typography */
+    :root {
+      --primary-navy: #020b16;      /* Main dark background */
+      --header-dark: #021024;       /* Text dark color */
+      --white: #ffffff;
+      --light-blue-gray: #f8fafc;
+      --border-light: rgba(255, 255, 255, 0.12);
+      --border-gray: #e2e8f0;
+      --text-gray: #64748b;
+      --font-serif: 'Cormorant Garamond', serif;
+      --font-sans: 'Inter', sans-serif;
+      --transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* Global Base Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--white);
+      color: var(--header-dark);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ==========================================
+       1. TOP UTILITY BAR
+       ========================================== */
+    .top-bar {
+      background-color: var(--primary-navy);
+      color: rgba(255, 255, 255, 0.75);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 60px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .top-bar-left {
+      display: flex;
+      gap: 30px;
+    }
+
+    .top-bar-left span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .top-bar-left i {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .top-bar-right {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+
+    .top-bar-right span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .top-bar-right a {
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .top-bar-right a:hover {
+      color: var(--white);
+    }
+
+    /* ==========================================
+       2. MAIN NAVIGATION HEADER
+       ========================================== */
+    .main-header {
+      background-color: var(--white);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 60px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--header-dark);
+    }
+
+    .logo-svg {
+      color: var(--header-dark);
+      display: block;
+    }
+
+    .logo-text {
+      font-family: var(--font-serif);
+      font-size: 25px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-item {
+      color: var(--header-dark);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      position: relative;
+      padding: 8px 0;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .nav-item i {
+      font-size: 9px;
+      transition: var(--transition);
+    }
+
+    .nav-item:hover {
+      color: rgba(2, 16, 36, 0.7);
+    }
+
+    .nav-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background-color: var(--header-dark);
+      transition: var(--transition);
+    }
+
+    .nav-item:hover::after,
+    .nav-item.active::after {
+      width: 24px;
+    }
+
+    .nav-item.dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background-color: var(--white);
+      border: 1px solid #f1f5f9;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      list-style: none;
+      padding: 10px 0;
+      min-width: 180px;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      border-radius: 4px;
+    }
+
+    .nav-item.dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .dropdown-menu li a {
+      display: block;
+      padding: 10px 20px;
+      color: var(--header-dark);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      transition: var(--transition);
+    }
+
+    .dropdown-menu li a:hover {
+      background-color: var(--light-blue-gray);
+      color: var(--header-dark);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .action-btn {
+      background: none;
+      border: none;
+      color: var(--header-dark);
+      font-size: 17px;
+      cursor: pointer;
+      position: relative;
+      padding: 6px;
+      transition: var(--transition);
+    }
+
+    .action-btn:hover {
+      color: rgba(2, 16, 36, 0.7);
+    }
+
+    .badge-btn .badge {
+      position: absolute;
+      top: 0px;
+      right: -2px;
+      background-color: var(--header-dark);
+      color: var(--white);
+      font-size: 8px;
+      font-weight: 700;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu-toggle-cb {
+      display: none;
+    }
+
+    .menu-toggle-btn {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 22px;
+      height: 16px;
+      cursor: pointer;
+      z-index: 1010;
+    }
+
+    .menu-toggle-btn span {
+      display: block;
+      height: 2px;
+      width: 100%;
+      background-color: var(--header-dark);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* ==========================================
+       3. CONTACT HERO SECTION
+       ========================================== */
+    .hero-section {
+      position: relative;
+      background: linear-gradient(135deg, rgba(2, 11, 22, 0.95) 30%, rgba(2, 11, 22, 0.75) 60%, rgba(2, 11, 22, 0.45) 100%), 
+                  url('https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1200&q=80') no-repeat center center / cover;
+      display: flex;
+      min-height: 420px;
+      height: calc(100vh - 120px);
+      max-height: 520px;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      flex: 1.2;
+      display: flex;
+      align-items: center;
+      padding: 40px 80px;
+      z-index: 2;
+    }
+
+    .hero-content {
+      max-width: 580px;
+      width: 100%;
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+
+    .hero-tag {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--white);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-separator {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .hero-separator .line {
+      height: 1px;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0.35), transparent);
+      width: 80px;
+    }
+
+    .hero-separator .diamond {
+      font-size: 8px;
+      color: rgba(255, 255, 255, 0.4);
+      transform: rotate(45deg);
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: 46px;
+      font-weight: 300;
+      line-height: 1.2;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-description {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: rgba(255, 255, 255, 0.8);
+      letter-spacing: 0.3px;
+    }
+
+    .hero-right {
+      flex: 1;
+      background: linear-gradient(to right, rgba(2, 11, 22, 0.3) 0%, rgba(2, 11, 22, 0.45) 100%),
+                  url('https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1200&q=80') no-repeat center center / cover;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ==========================================
+       4. CONTACT METHODS BANNER (White Section)
+       ========================================== */
+    .contact-banner-section {
+      background-color: var(--white);
+      border-top: 1px solid var(--border-gray);
+      border-bottom: 1px solid var(--border-gray);
+      padding: 60px 40px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .contact-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+      position: relative;
+    }
+
+    /* Centered vertical divider line between contacts */
+    .contact-card:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 15%;
+      height: 70%;
+      width: 1px;
+      background-color: var(--border-gray);
+    }
+
+    .contact-circle-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: var(--primary-navy);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-bottom: 18px;
+    }
+
+    .contact-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--header-dark);
+      margin-bottom: 10px;
+    }
+
+    .contact-card-detail {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--header-dark);
+      margin-bottom: 8px;
+      text-decoration: none;
+      line-height: 1.4;
+    }
+
+    .contact-card-desc {
+      font-size: 11px;
+      color: var(--text-gray);
+      line-height: 1.5;
+      max-width: 210px;
+      font-weight: 400;
+    }
+
+    .contact-card-link {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--header-dark);
+      text-decoration: none;
+      margin-top: 5px;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .contact-card-link:hover {
+      color: var(--text-gray);
+    }
+
+    /* ==========================================
+       5. FORMS & MAP SPLIT SECTION
+       ========================================== */
+    .split-body-section {
+      padding: 80px 60px;
+      background-color: var(--white);
+    }
+
+    .split-body-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
+    }
+
+    .split-left, .split-right {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .column-main-title {
+      font-family: var(--font-serif);
+      font-size: 30px;
+      font-weight: 500;
+      color: var(--header-dark);
+      text-transform: none;
+      letter-spacing: 0.5px;
+    }
+
+    /* Form Fields Grid Styling */
+    .contact-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-grid-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      width: 100%;
+    }
+
+    .form-field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-field-group.full-width {
+      grid-column: span 2;
+    }
+
+    .form-field-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-gray);
+    }
+
+    .form-input-field, .form-select-field, .form-textarea-field {
+      width: 100%;
+      border: 1px solid var(--border-gray);
+      background-color: var(--white);
+      padding: 12px 16px;
+      border-radius: 4px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--header-dark);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .form-input-field::placeholder, .form-textarea-field::placeholder {
+      color: #94a3b8;
+    }
+
+    .form-input-field:focus, .form-select-field:focus, .form-textarea-field:focus {
+      border-color: var(--header-dark);
+    }
+
+    .form-select-field {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      background-size: 16px;
+      padding-right: 40px;
+    }
+
+    .form-action-row {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+      width: 100%;
+      margin-top: 5px;
+    }
+
+    .form-submit-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background-color: var(--header-dark);
+      color: var(--white);
+      border: 1px solid var(--header-dark);
+      padding: 15px 36px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .form-submit-btn:hover {
+      background-color: #0b2240;
+    }
+
+    .form-privacy-disclaimer {
+      font-size: 11px;
+      color: var(--text-gray);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .form-privacy-disclaimer i {
+      color: var(--accent-gold);
+    }
+
+    /* Right Column: Maps & Appointment Promo */
+    .map-frame-wrapper {
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border-gray);
+    }
+
+    .map-iframe {
+      display: block;
+      width: 100%;
+    }
+
+    /* Showroom Appointment Card */
+    .appointment-promo-card {
+      width: 100%;
+      background-color: var(--light-blue-gray);
+      border: 1px solid var(--border-gray);
+      border-radius: 8px;
+      padding: 24px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .appointment-card-left {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .appointment-card-icon {
+      font-size: 24px;
+      color: var(--header-dark);
+      margin-top: 3px;
+    }
+
+    .appointment-card-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .appointment-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--header-dark);
+    }
+
+    .appointment-card-desc {
+      font-size: 12px;
+      color: var(--text-gray);
+      line-height: 1.5;
+    }
+
+    .appointment-book-btn {
+      background-color: var(--white);
+      color: var(--header-dark);
+      border: 1px solid var(--border-gray);
+      padding: 12px 24px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .appointment-book-btn:hover {
+      background-color: var(--header-dark);
+      color: var(--white);
+      border-color: var(--header-dark);
+    }
+
+    /* ==========================================
+       6. "NEED HELP CHOOSING?" BANNER SECTION
+       ========================================== */
+    .help-banner-section {
+      position: relative;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.95) 50%, rgba(255, 255, 255, 0.1) 100%), 
+                  url('https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=1200&q=80') center center / cover;
+      padding: 80px 60px;
+      border-top: 1px solid var(--border-gray);
+      border-bottom: 1px solid var(--border-gray);
+    }
+
+    .help-banner-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+
+    .help-banner-title {
+      font-family: var(--font-serif);
+      font-size: 32px;
+      font-weight: 500;
+      color: var(--header-dark);
+    }
+
+    .help-banner-subtitle {
+      font-size: 14px;
+      color: var(--text-gray);
+      font-weight: 300;
+      margin-bottom: 15px;
+    }
+
+    .help-banner-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background-color: var(--header-dark);
+      color: var(--white);
+      border: 1px solid var(--header-dark);
+      padding: 14px 28px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: var(--transition);
+    }
+
+    .help-banner-btn:hover {
+      background-color: transparent;
+      color: var(--header-dark);
+    }
+
+    .help-banner-btn i {
+      font-size: 13px;
+    }
+
+    /* ==========================================
+       7. NEWSLETTER & FOOTER BANNER
+       ========================================== */
+    .rd-footer-wrapper {
+      background-color: #010a15;
+      color: var(--white);
+    }
+
+    .rd-newsletter-section {
+      position: relative;
+      background: linear-gradient(to right, rgba(1, 10, 21, 0.15) 0%, rgba(1, 10, 21, 0.85) 45%, #010a15 100%), 
+                  url('https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?q=80&w=1200') no-repeat left center / cover;
+      padding: 80px 60px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .rd-newsletter-content {
+      max-width: 520px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .rd-newsletter-title {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .rd-newsletter-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      margin-bottom: 12px;
+    }
+
+    .rd-newsletter-form {
+      position: relative;
+      width: 100%;
+    }
+
+    .rd-newsletter-input {
+      width: 100%;
+      background-color: var(--white);
+      border: none;
+      padding: 15px 50px 15px 20px;
+      border-radius: 4px;
+      font-size: 13px;
+      color: var(--primary-navy);
+      outline: none;
+      letter-spacing: 0.3px;
+    }
+
+    .rd-newsletter-input::placeholder {
+      color: #94a3b8;
+    }
+
+    .rd-newsletter-submit {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--primary-navy);
+      font-size: 16px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .rd-newsletter-submit:hover {
+      color: var(--accent-gold);
+      transform: translateY(-50%) translateX(3px);
+    }
+
+    .rd-main-footer {
+      padding: 80px 60px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr 1.2fr;
+      gap: 40px;
+    }
+
+    .rd-footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .rd-footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--white);
+    }
+
+    .rd-brand-logo {
+      color: var(--white);
+    }
+
+    .rd-brand-name {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .rd-brand-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      max-width: 260px;
+    }
+
+    .rd-social-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .rd-social-icon {
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .rd-social-icon:hover {
+      background-color: var(--white);
+      color: #010a15;
+      border-color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .rd-col-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--white);
+      border-left: 2px solid var(--accent-gold);
+      padding-left: 10px;
+      line-height: 1;
+    }
+
+    .rd-footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .rd-footer-links li a {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-weight: 300;
+      transition: var(--transition);
+      display: inline-block;
+    }
+
+    .rd-footer-links li a:hover {
+      color: var(--white);
+      transform: translateX(4px);
+    }
+
+    .rd-contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .rd-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      line-height: 1.4;
+    }
+
+    .rd-contact-item i {
+      color: var(--accent-gold);
+      font-size: 14px;
+      margin-top: 2px;
+    }
+
+    .rd-whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--white);
+      color: var(--primary-navy);
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 12px;
+      text-decoration: none;
+      margin-top: 10px;
+      width: fit-content;
+      transition: var(--transition);
+      border: 1px solid var(--white);
+    }
+
+    .rd-whatsapp-btn:hover {
+      background-color: transparent;
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .rd-whatsapp-btn i {
+      color: #25D366;
+      font-size: 16px;
+    }
+
+    .rd-bottom-bar {
+      border-top: 1px solid var(--border-light);
+      padding: 24px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .rd-copyright {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+
+    .rd-payment-icons {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .rd-payment-badge {
+      height: 22px;
+      opacity: 0.85;
+      transition: var(--transition);
+      display: block;
+    }
+
+    .rd-payment-badge:hover {
+      opacity: 1;
+    }
+
+    /* ==========================================
+       9. RESPONSIVE CONSTRAINTS (FULL PAGE)
+       ========================================== */
+    @media (max-width: 1200px) {
+      .top-bar { padding: 10px 40px; }
+      .main-header { padding: 16px 40px; }
+      .hero-section { min-height: 400px; }
+      .hero-left { padding: 40px 60px; }
+      .hero-title { font-size: 38px; }
+      .contact-banner-section { padding: 40px; }
+      .contact-grid { grid-template-columns: repeat(2, 1fr); gap: 30px 0; }
+      .contact-card:nth-child(2n)::after { display: none; }
+      .split-body-section { padding: 60px 40px; }
+      .split-body-container { gap: 40px; }
+      .column-main-title { font-size: 26px; }
+      .help-banner-section { padding: 60px 40px; }
+      .rd-newsletter-section { padding: 60px 40px; }
+      .rd-main-footer {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 35px;
+        padding: 60px 40px;
+      }
+      .rd-footer-col:first-child {
+        grid-column: span 3;
+        border-bottom: 1px solid var(--border-light);
+        padding-bottom: 30px;
+      }
+      .rd-bottom-bar { padding: 24px 40px; }
+    }
+
+    @media (max-width: 991px) {
+      .menu-toggle-btn { display: flex; }
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 300px;
+        height: 100vh;
+        background-color: var(--white);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 90px 40px;
+        gap: 25px;
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.08);
+        transition: right 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
+        z-index: 1005;
+      }
+      .nav-item {
+        font-size: 14px;
+        width: 100%;
+        border-bottom: 1px solid var(--light-blue-gray);
+        padding-bottom: 12px;
+      }
+      .nav-item.active::after { display: none; }
+      .dropdown-menu {
+        position: static;
+        transform: none !important;
+        box-shadow: none;
+        border: none;
+        padding-left: 15px;
+        padding-top: 5px;
+        opacity: 1;
+        visibility: visible;
+        display: none;
+        width: 100%;
+      }
+      .nav-item.dropdown:hover .dropdown-menu { display: block; }
+      .menu-toggle-cb:checked ~ .nav-menu { right: 0; }
+      .menu-toggle-cb:checked ~ .menu-toggle-btn span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .menu-toggle-cb:checked ~ .menu-toggle-btn span:nth-child(2) { opacity: 0; }
+      .menu-toggle-cb:checked ~ .menu-toggle-btn span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+      .hero-section { flex-direction: column-reverse; height: auto; min-height: auto; max-height: none; }
+      .hero-left { width: 100%; padding: 60px 40px; }
+      .hero-right { width: 100%; height: 350px; }
+
+      .split-body-container { grid-template-columns: 1fr; gap: 50px; }
+      .appointment-promo-card { flex-direction: column; align-items: flex-start; }
+      .appointment-book-btn { width: 100%; justify-content: center; }
+
+      .rd-newsletter-section { background: #010a15; justify-content: center; padding: 50px 24px; text-align: center; }
+      .rd-newsletter-content { align-items: center; }
+      .rd-main-footer { grid-template-columns: repeat(2, 1fr); padding: 50px 24px; gap: 30px; }
+      .rd-footer-col:first-child { grid-column: span 2; }
+      .rd-bottom-bar { flex-direction: column; gap: 15px; text-align: center; padding: 24px; }
+    }
+
+    @media (max-width: 600px) {
+      .top-bar { display: none; }
+      .main-header { padding: 15px 24px; }
+      .hero-left { padding: 50px 24px; }
+      .hero-title { font-size: 30px; }
+      .contact-banner-section { padding: 40px 24px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 30px 0; }
+      .contact-card::after { display: none !important; }
+      .contact-card { border-bottom: 1px solid var(--border-gray); padding-bottom: 20px; }
+      .contact-card:last-child { border-bottom: none; }
+      .split-body-section { padding: 50px 24px; }
+      .form-grid-fields { grid-template-columns: 1fr; }
+      .form-field-group.full-width { grid-column: span 1; }
+      .form-submit-btn { width: 100%; justify-content: center; }
+      .help-banner-section { padding: 50px 24px; text-align: center; }
+      .help-banner-container { align-items: center; }
+      .rd-main-footer { grid-template-columns: 1fr; }
+      .rd-footer-col:first-child { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       1. TOP UTILITY BAR
+       ========================================== -->
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <span><i class="fa-regular fa-gem"></i> 100% Certified Diamonds</span>
+      <span><i class="fa-solid fa-industry"></i> In-house Manufacturing</span>
+      <span><i class="fa-solid fa-ring"></i> Custom Made Jewellery</span>
+    </div>
+    <div class="top-bar-right">
+      <span><i class="fa-solid fa-phone"></i> +91 1234 567 890</span>
+      <a href="#">Track Order</a>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       2. MAIN NAVIGATION HEADER
+       ========================================== -->
+  <header class="main-header">
+    <a href="#" class="logo-container">
+      <svg class="logo-svg" width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="22" r="6" stroke="currentColor" stroke-width="4.5"/>
+        <path d="M48 22L50 20L52 22L50 24L48 22Z" fill="currentColor"/>
+        <path d="M30 42 C 38 32, 45 32, 50 42 C 55 32, 62 32, 70 42 C 78 52, 72 68, 50 82 C 28 68, 22 52, 30 42 Z" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+        <path d="M38 52 C 45 46, 55 46, 62 52" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <span class="logo-text">Rithika Diamonds</span>
+    </a>
+
+    <input type="checkbox" id="menu-toggle" class="menu-toggle-cb">
+    
+    <label for="menu-toggle" class="menu-toggle-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <nav class="nav-menu">
+      <a href="#" class="nav-item">HOME</a>
+      <div class="nav-item dropdown">
+        <a href="#">SHOP <i class="fa-solid fa-chevron-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Engagement Rings</a></li>
+          <li><a href="#">Diamond Necklaces</a></li>
+          <li><a href="#">Exclusive Bands</a></li>
+          <li><a href="#">Bespoke Earrings</a></li>
+        </ul>
+      </div>
+      <a href="#" class="nav-item">CUSTOM DESIGN</a>
+      <div class="nav-item dropdown">
+        <a href="#">COLLECTIONS <i class="fa-solid fa-chevron-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">The Solitaire Legacy</a></li>
+          <li><a href="#">Eternal Grace</a></li>
+          <li><a href="#">Modern Brilliance</a></li>
+        </ul>
+      </div>
+      <a href="#" class="nav-item">ABOUT US</a>
+      <a href="#" class="nav-item active">CONTACT US</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="action-btn" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <button class="action-btn" aria-label="Account"><i class="fa-regular fa-user"></i></button>
+      <button class="action-btn badge-btn" aria-label="Wishlist">
+        <i class="fa-regular fa-heart"></i>
+        <span class="badge">2</span>
+      </button>
+      <button class="action-btn badge-btn" aria-label="Shopping Cart">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="badge">3</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       3. ABOUT US HERO SECTION
+       ========================================== -->
+  <section class="hero-section">
+    <div class="hero-left">
+      <div class="hero-content">
+        <span class="hero-tag">Contact Us</span>
+        <div class="hero-separator">
+          <span class="line"></span>
+          <span class="diamond"></span>
+          <span class="line"></span>
+        </div>
+        <h1 class="hero-title">We'd Love to Hear from You</h1>
+        <p class="hero-description">Have a question, need assistance, or want to create something extraordinary? Our team is here to help you every step of the way.</p>
+      </div>
+    </div>
+    <div class="hero-right"></div>
+  </section>
+
+  <!-- ==========================================
+       4. CONTACT METHODS BANNER (White Section)
+       ========================================== -->
+  <section class="contact-banner-section">
+    <div class="contact-grid">
+      <!-- Card 1: Call Us -->
+      <div class="contact-card">
+        <div class="contact-circle-icon"><i class="fa-solid fa-phone"></i></div>
+        <h3 class="contact-card-title">Call Us</h3>
+        <a href="tel:+911234567890" class="contact-card-detail">+91 1234 567 890</a>
+        <p class="contact-card-desc">Mon - Sat: 10:00 AM - 7:00 PM (IST)</p>
+      </div>
+      <!-- Card 2: Email Us -->
+      <div class="contact-card">
+        <div class="contact-circle-icon"><i class="fa-regular fa-envelope"></i></div>
+        <h3 class="contact-card-title">Email Us</h3>
+        <a href="mailto:hello@rithikadiamonds.com" class="contact-card-detail">hello@rithikadiamonds.com</a>
+        <p class="contact-card-desc">We reply within 24 hours</p>
+      </div>
+      <!-- Card 3: Visit Us -->
+      <div class="contact-card">
+        <div class="contact-circle-icon"><i class="fa-solid fa-location-dot"></i></div>
+        <h3 class="contact-card-title">Visit Us</h3>
+        <span class="contact-card-detail" style="font-weight: 500;">Kozhikode, Kerala, India<br>673001</span>
+        <a href="https://maps.google.com" target="_blank" class="contact-card-link">Get Directions <i class="fa-solid fa-arrow-right-long"></i></a>
+      </div>
+      <!-- Card 4: WhatsApp -->
+      <div class="contact-card">
+        <div class="contact-circle-icon"><i class="fa-brands fa-whatsapp"></i></div>
+        <h3 class="contact-card-title">Chat on WhatsApp</h3>
+        <a href="https://wa.me/911234567890" target="_blank" class="contact-card-detail">+91 1234 567 890</a>
+        <p class="contact-card-desc">Chat with our experts instantly</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       5. FORMS & MAP SPLIT SECTION
+       ========================================== -->
+  <section class="split-body-section">
+    <div class="split-body-container">
+      
+      <!-- Left Column: Form -->
+      <div class="split-left">
+        <h2 class="column-main-title">Send Us a Message</h2>
+        <div class="hero-separator">
+          <span class="line" style="background: linear-gradient(to right, var(--text-gray), transparent);"></span>
+          <span class="diamond" style="color: var(--text-gray);"></span>
+          <span class="line" style="background: linear-gradient(to right, var(--text-gray), transparent);"></span>
+        </div>
+        <p class="questions-subtitle">Fill out the form below and our team will get back to you shortly.</p>
+        
+        <form class="contact-form" onsubmit="event.preventDefault();">
+          <div class="form-grid-fields">
+            <div class="form-field-group">
+              <label class="form-field-label" for="fullname">Full Name *</label>
+              <input type="text" id="fullname" class="form-input-field" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-field-group">
+              <label class="form-field-label" for="phonenumber">Phone Number *</label>
+              <input type="tel" id="phonenumber" class="form-input-field" placeholder="Enter your phone number" required>
+            </div>
+            <div class="form-field-group">
+              <label class="form-field-label" for="email">Email Address *</label>
+              <input type="email" id="email" class="form-input-field" placeholder="Enter your email address" required>
+            </div>
+            <div class="form-field-group">
+              <label class="form-field-label" for="subject">Subject *</label>
+              <select id="subject" class="form-select-field" required>
+                <option value="" disabled selected>Select a subject</option>
+                <option value="general">General Inquiry</option>
+                <option value="custom">Custom Jewelry Consultation</option>
+                <option value="order">Order Tracking / Support</option>
+              </select>
+            </div>
+            <div class="form-field-group full-width">
+              <label class="form-field-label" for="message">Message *</label>
+              <textarea id="message" class="form-textarea-field" rows="5" placeholder="Type your message here..." required></textarea>
+            </div>
+          </div>
+          <div class="form-action-row">
+            <button type="submit" class="form-submit-btn">Send Message <i class="fa-solid fa-arrow-right-long" style="margin-left: 8px;"></i></button>
+            <span class="form-privacy-disclaimer"><i class="fa-solid fa-shield-halved"></i> Your information is safe with us and will never be shared.</span>
+          </div>
+        </form>
+      </div>
+
+      <!-- Right Column: Maps & Showroom Promo -->
+      <div class="split-right">
+        <h2 class="column-main-title">Our Location</h2>
+        <div class="hero-separator">
+          <span class="line" style="background: linear-gradient(to right, var(--text-gray), transparent);"></span>
+          <span class="diamond" style="color: var(--text-gray);"></span>
+          <span class="line" style="background: linear-gradient(to right, var(--text-gray), transparent);"></span>
+        </div>
+        
+        <!-- Interactive Google Map Frame -->
+        <div class="map-frame-wrapper">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125218.42371900133!2d75.7139121!3d11.258752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba6593856703f27%3A0x3c3d25273a82363e!2sKozhikode%2C%20Kerala!5e0!3m2!1sen!2sin!4v1680000000000!5m2!1sen!2sin" width="100%" height="320" style="border:0;" class="map-iframe" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <!-- Walk-ins Promo Block -->
+        <div class="appointment-promo-card">
+          <div class="appointment-card-left">
+            <i class="fa-solid fa-store appointment-card-icon"></i>
+            <div class="appointment-card-info">
+              <span class="appointment-card-title">Visit Our Showroom</span>
+              <p class="appointment-card-desc">Experience our exquisite collections in person. Walk-ins are welcome!</p>
+            </div>
+          </div>
+          <a href="#" class="appointment-book-btn">Book Appointment <i class="fa-solid fa-calendar-check" style="margin-left: 8px;"></i></a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       6. "NEED HELP CHOOSING?" BANNER SECTION
+       ========================================== -->
+  <section class="help-banner-section">
+    <div class="help-banner-container">
+      <h2 class="help-banner-title">Need Help Choosing?</h2>
+      <p class="help-banner-subtitle">Our diamond experts are here to guide you in finding the perfect piece for your special moments.</p>
+      <a href="#" class="help-banner-btn">Talk To Our Experts <i class="fa-solid fa-headset" style="margin-left: 5px;"></i></a>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       7. NEWSLETTER & FOOTER BANNER
+       ========================================== -->
+  <footer class="rd-footer-wrapper">
+    <div class="rd-newsletter-section">
+      <div class="rd-newsletter-content">
+        <h2 class="rd-newsletter-title">Stay Timeless. Stay Sparkling.</h2>
+        <p class="rd-newsletter-desc">Join our exclusive list and be the first to know about new collections, offers and more.</p>
+        <form class="rd-newsletter-form" onsubmit="event.preventDefault();">
+          <input type="email" class="rd-newsletter-input" placeholder="Enter your email address" required>
+          <button type="submit" class="rd-newsletter-submit" aria-label="Subscribe">
+            <i class="fa-solid fa-arrow-right-long"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="rd-main-footer">
+      <div class="rd-footer-col">
+        <a href="#" class="rd-footer-brand">
+          <svg class="rd-brand-logo" width="30" height="30" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="22" r="6" stroke="currentColor" stroke-width="4.5"/>
+            <path d="M48 22L50 20L52 22L50 24L48 22Z" fill="currentColor"/>
+            <path d="M30 42 C 38 32, 45 32, 50 42 C 55 32, 62 32, 70 42 C 78 52, 72 68, 50 82 C 28 68, 22 52, 30 42 Z" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+            <path d="M38 52 C 45 46, 55 46, 62 52" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <span class="rd-brand-name">Rithika Diamonds</span>
+        </a>
+        <p class="rd-brand-desc">
+          We are diamond manufacturers specializing in custom-made diamond jewellery with unmatched quality and craftsmanship.
+        </p>
+        <div class="rd-social-row">
+          <a href="#" class="rd-social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="rd-social-icon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="rd-social-icon" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" class="rd-social-icon" aria-label="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
+        </div>
+      </div>
+
+      <div class="rd-footer-col">
+        <h3 class="rd-col-title">Quick Links</h3>
+        <ul class="rd-footer-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">Custom Design</a></li>
+          <li><a href="#">Collections</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="rd-footer-col">
+        <h3 class="rd-col-title">Customer Service</h3>
+        <ul class="rd-footer-links">
+          <li><a href="#">Track Order</a></li>
+          <li><a href="#">Returns & Exchanges</a></li>
+          <li><a href="#">Shipping Policy</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="rd-footer-col">
+        <h3 class="rd-col-title">Information</h3>
+        <ul class="rd-footer-links">
+          <li><a href="#">About Our Manufacturing</a></li>
+          <li><a href="#">Diamond Guide</a></li>
+          <li><a href="#">Care & Maintenance</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+
+      <div class="rd-footer-col">
+        <h3 class="rd-col-title">Contact Us</h3>
+        <ul class="rd-contact-list">
+          <li class="rd-contact-item">
+            <i class="fa-solid fa-phone"></i>
+            <span>+91 1234 567 890</span>
+          </li>
+          <li class="rd-contact-item">
+            <i class="fa-solid fa-envelope"></i>
+            <span>hello@rithikadiamonds.com</span>
+          </li>
+          <li class="rd-contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Kozhikode, Kerala, India</span>
+          </li>
+        </ul>
+        <a href="#" class="rd-whatsapp-btn">
+          <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <div class="rd-bottom-bar">
+      <span class="rd-copyright">&copy; 2024 Rithika Diamonds. All Rights Reserved.</span>
+      <div class="rd-payment-icons">
+        <svg class="rd-payment-badge" viewBox="0 0 48 30" width="35" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="30" rx="3" fill="#1434CB"/>
+          <path d="M12 20.5l1.6-6.5h1.8l-1.6 6.5h-1.8zm6.5-6.5c-.3 0-.6.1-.8.4l-3 6.1h1.9l.4-.9h2.3l.2.9h1.7l-1.5-6.5h-1.2zm-.8 4.2l.9-2.5.5 2.5h-1.4zm9.3-4.2h-1.6c-.5 0-.9.3-1.1.7l-2.3 5.8h1.9l.4-1.1h2.3l.1.5c.1.4.4.6.9.6h1.5l-2.1-6.5zm-5.4.4l1.3 3.6h-1.8l.5-3.6z" fill="#fff"/>
+        </svg>
+        <svg class="rd-payment-badge" viewBox="0 0 48 30" width="35" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="30" rx="3" fill="#222"/>
+          <circle cx="20" cy="15" r="9" fill="#EB001B"/>
+          <circle cx="28" cy="15" r="9" fill="#FF5F00" fill-opacity="0.85"/>
+        </svg>
+        <svg class="rd-payment-badge" viewBox="0 0 48 30" width="35" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="30" rx="3" fill="#016FD0"/>
+          <path d="M10 20v-10h2.5l2.1 4.3 2.1-4.3H19.2v10h-2.1v-6.5l-2.4 4.8h-.8l-2.4-4.8v6.5h-1.5zm11.5 0v-10h5.2v2h-3.1v1.9h2.8v2h-2.8v2.1h3.1v2h-5.2zm7.4 0l2.3-5-2.3-5h2.1l1.2 2.7 1.2-2.7h2.1l-2.3 5 2.3 5h-2.1L32 17.3l-1.2 2.7h-2.1z" fill="#fff"/>
+        </svg>
+        <svg class="rd-payment-badge" viewBox="0 0 48 30" width="35" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="30" rx="3" fill="#fff" stroke="#cbd5e1" stroke-width="1"/>
+          <path d="M12 11l4 8M16 11l-4 8M19 11v8h2c1.5 0 2.5-.8 2.5-2.2v-3.6c0-1.4-1-2.2-2.5-2.2h-2zm12 0l-3 8h2l2.5-5h2l.5 5h2l-3-8h-3zm-10 2h1c.5 0 .8.2.8.7v2.6c0 .5-.3.7-.8.7h-1v-4z" fill="#097939" stroke="#097939" stroke-width="0.5"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,1965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | Rithika Diamonds</title>
+  
+  <!-- Premium Font Imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome CDN for Luxury UI Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* Brand Design Tokens & System Variables */
+    :root {
+      --primary-navy: #020b16;      /* Main dark background */
+      --header-dark: #021024;       /* Primary text dark color */
+      --accent-gold: #dfb470;       /* Gold highlights */
+      --white: #ffffff;
+      --light-blue-gray: #f8fafc;
+      --border-gray: #e2e8f0;
+      --text-gray: #64748b;
+      --font-serif: 'Cormorant Garamond', serif;
+      --font-sans: 'Inter', sans-serif;
+      --transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* Global Base Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--white);
+      color: var(--header-dark);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ==========================================
+       1. TOP UTILITY BAR
+       ========================================== */
+    .top-bar {
+      background-color: var(--primary-navy);
+      color: rgba(255, 255, 255, 0.75);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 60px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .top-bar-left {
+      display: flex;
+      gap: 30px;
+    }
+
+    .top-bar-left span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .top-bar-left i {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .top-bar-right {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+
+    .top-bar-right span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .top-bar-right a {
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .top-bar-right a:hover {
+      color: var(--white);
+    }
+
+    /* ==========================================
+       2. MAIN NAVIGATION HEADER
+       ========================================== */
+    .main-header {
+      background-color: var(--white);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 60px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--header-dark);
+    }
+
+    .logo-svg {
+      color: var(--header-dark);
+      display: block;
+    }
+
+    .logo-text {
+      font-family: var(--font-serif);
+      font-size: 25px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-item {
+      color: var(--header-dark);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      position: relative;
+      padding: 8px 0;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .nav-item i {
+      font-size: 9px;
+      transition: var(--transition);
+    }
+
+    .nav-item:hover {
+      color: rgba(2, 16, 36, 0.7);
+    }
+
+    .nav-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background-color: var(--header-dark);
+      transition: var(--transition);
+    }
+
+    .nav-item:hover::after,
+    .nav-item.active::after {
+      width: 24px;
+    }
+
+    .nav-item.dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background-color: var(--white);
+      border: 1px solid #f1f5f9;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      list-style: none;
+      padding: 10px 0;
+      min-width: 180px;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      border-radius: 4px;
+    }
+
+    .nav-item.dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .dropdown-menu li a {
+      display: block;
+      padding: 10px 20px;
+      color: var(--header-dark);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      transition: var(--transition);
+    }
+
+    .dropdown-menu li a:hover {
+      background-color: var(--light-blue-gray);
+      color: var(--header-dark);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .action-btn {
+      background: none;
+      border: none;
+      color: var(--header-dark);
+      font-size: 17px;
+      cursor: pointer;
+      position: relative;
+      padding: 6px;
+      transition: var(--transition);
+    }
+
+    .action-btn:hover {
+      color: rgba(2, 16, 36, 0.7);
+    }
+
+    .badge-btn .badge {
+      position: absolute;
+      top: 0px;
+      right: -2px;
+      background-color: var(--header-dark);
+      color: var(--white);
+      font-size: 8px;
+      font-weight: 700;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu-toggle-cb {
+      display: none;
+    }
+
+    .menu-toggle-btn {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 22px;
+      height: 16px;
+      cursor: pointer;
+      z-index: 1010;
+    }
+
+    .menu-toggle-btn span {
+      display: block;
+      height: 2px;
+      width: 100%;
+      background-color: var(--header-dark);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* ==========================================
+       3. BREADCRUMBS & SECTION TITLE
+       ========================================== */
+    .checkout-header-area {
+      padding: 40px 60px 20px 60px;
+      background-color: var(--white);
+    }
+
+    .checkout-header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .breadcrumbs {
+      font-size: 12px;
+      color: var(--text-gray);
+      margin-bottom: 15px;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+    }
+
+    .breadcrumbs span {
+      color: var(--header-dark);
+      font-weight: 500;
+    }
+
+    .checkout-main-title {
+      font-family: var(--font-serif);
+      font-size: 38px;
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--header-dark);
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .checkout-subtitle {
+      font-size: 13px;
+      color: var(--text-gray);
+      font-weight: 300;
+    }
+
+    .secure-checkout-tag {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--header-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ==========================================
+       4. CHECKOUT CONTAINER GRID
+       ========================================== */
+    .checkout-main-section {
+      padding: 20px 60px 80px 60px;
+      background-color: var(--white);
+    }
+
+    .checkout-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.15fr 0.65fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    /* Left Column: Checkout Procedural Steps */
+    .checkout-steps-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .step-header-row {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .step-number-circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-color: var(--header-dark);
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step-header-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      color: var(--header-dark);
+    }
+
+    /* Step 1: Delivery Address Card styling */
+    .delivery-address-card {
+      border: 1px solid var(--border-gray);
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 15px;
+      background-color: var(--white);
+    }
+
+    .delivery-card-left {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .delivery-radio-input {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid var(--border-gray);
+      border-radius: 50%;
+      outline: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 3px;
+      background-color: var(--white);
+      transition: var(--transition);
+    }
+
+    .delivery-radio-input:checked {
+      border-color: var(--header-dark);
+    }
+
+    .delivery-radio-input:checked::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--header-dark);
+    }
+
+    .delivery-info-block {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .delivery-recipient-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--header-dark);
+      margin-bottom: 4px;
+    }
+
+    .delivery-default-badge {
+      background-color: var(--header-dark);
+      color: var(--white);
+      font-size: 8px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 2px;
+    }
+
+    .delivery-address-text {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-gray);
+      font-weight: 300;
+    }
+
+    .delivery-phone {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--header-dark);
+      margin-top: 4px;
+    }
+
+    .delivery-edit-btn {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--header-dark);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: var(--transition);
+    }
+
+    .delivery-edit-btn:hover {
+      color: var(--text-gray);
+    }
+
+    .add-address-link {
+      font-size: 12px;
+      color: var(--header-dark);
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+      margin-top: 15px;
+    }
+
+    .add-address-link:hover {
+      color: var(--accent-gold);
+    }
+
+    /* Step 2: Shipping Method Options */
+    .shipping-methods-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .shipping-method-option {
+      border: 1px solid var(--border-gray);
+      border-radius: 8px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      cursor: pointer;
+      background-color: var(--white);
+      transition: var(--transition);
+    }
+
+    .shipping-method-option:hover {
+      border-color: #cbd5e1;
+    }
+
+    .shipping-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .shipping-info-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .shipping-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--header-dark);
+    }
+
+    .shipping-desc {
+      font-size: 11px;
+      color: var(--text-gray);
+      font-weight: 300;
+    }
+
+    .shipping-cost {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--header-dark);
+    }
+
+    .shipping-cost.free-text {
+      color: #166534;
+    }
+
+    /* Step 3: Payment Accordions */
+    .payment-accordions-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .payment-option-row {
+      border: 1px solid var(--border-gray);
+      border-radius: 8px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      cursor: pointer;
+      background-color: var(--white);
+      transition: var(--transition);
+    }
+
+    .payment-option-row:hover {
+      border-color: #cbd5e1;
+    }
+
+    .payment-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .payment-detail-box {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .payment-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--header-dark);
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .payment-logo-badge {
+      height: 18px;
+      display: block;
+    }
+
+    .payment-desc {
+      font-size: 11px;
+      color: var(--text-gray);
+      font-weight: 300;
+    }
+
+    .payment-chevron {
+      font-size: 12px;
+      color: var(--text-gray);
+    }
+
+    /* Step 4: Order Review Box */
+    .review-item-card {
+      background-color: var(--white);
+      border-radius: 8px;
+      border: 1px solid var(--border-gray);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .review-item-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .review-item-media {
+      width: 60px;
+      height: 60px;
+      border-radius: 4px;
+      border: 1px solid var(--border-gray);
+      background-color: var(--light-blue-gray);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .review-item-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .review-item-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .review-prod-title {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--header-dark);
+    }
+
+    .review-prod-meta {
+      font-size: 11px;
+      color: var(--text-gray);
+      font-weight: 400;
+    }
+
+    .review-prod-specs {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--header-dark);
+    }
+
+    .review-item-price {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--header-dark);
+    }
+
+    /* Security Encryption Banner */
+    .security-encryption-banner {
+      width: 100%;
+      background-color: var(--light-blue-gray);
+      border: 1px solid var(--border-gray);
+      border-radius: 8px;
+      padding: 15px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .security-banner-icon {
+      font-size: 18px;
+      color: var(--header-dark);
+    }
+
+    .security-banner-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .security-banner-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--header-dark);
+    }
+
+    .security-banner-desc {
+      font-size: 11px;
+      color: var(--text-gray);
+      font-weight: 300;
+    }
+
+    /* Right Column: Order Summary & Confidence */
+    .checkout-right-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .summary-card {
+      background-color: var(--white);
+      border-radius: 8px;
+      border: 1px solid var(--border-gray);
+      padding: 30px;
+    }
+
+    .summary-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid var(--border-gray);
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+
+    .summary-title {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--header-dark);
+    }
+
+    .summary-item-count {
+      font-size: 12px;
+      color: var(--text-gray);
+      font-weight: 600;
+    }
+
+    /* Compact list of products in sidebar summary */
+    .summary-compact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .compact-item-row {
+      display: grid;
+      grid-template-columns: 44px 1.4fr 1fr;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .compact-item-media {
+      width: 44px;
+      height: 44px;
+      border-radius: 3px;
+      border: 1px solid var(--border-gray);
+      background-color: var(--light-blue-gray);
+      overflow: hidden;
+    }
+
+    .compact-item-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .compact-item-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .compact-item-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--header-dark);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .compact-item-meta {
+      font-size: 10px;
+      color: var(--text-gray);
+    }
+
+    .compact-item-price {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--header-dark);
+      text-align: right;
+    }
+
+    /* Calculations summary lines */
+    .calculation-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    .calculation-row.total-row {
+      border-top: 1px solid var(--border-gray);
+      padding-top: 20px;
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+
+    .summary-key {
+      color: var(--text-gray);
+      font-weight: 400;
+    }
+
+    .summary-val {
+      color: var(--header-dark);
+      font-weight: 600;
+    }
+
+    .summary-val.free-text {
+      color: #166534;
+      font-weight: 700;
+    }
+
+    .total-key {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--header-dark);
+    }
+
+    .total-val {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--header-dark);
+    }
+
+    .total-tax-disclaimer {
+      font-size: 11px;
+      color: var(--text-gray);
+      font-weight: 300;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    /* Savings Alert Green Box */
+    .savings-alert-box {
+      border: 1px solid #166534;
+      background-color: #f0fdf4;
+      color: #166534;
+      padding: 12px 16px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* "Shop with Confidence" Card */
+    .confidence-card {
+      background-color: var(--white);
+      border-radius: 8px;
+      border: 1px solid var(--border-gray);
+      padding: 24px 30px;
+    }
+
+    .confidence-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--header-dark);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .confidence-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .confidence-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-gray);
+    }
+
+    .confidence-item i {
+      color: var(--header-dark);
+      font-size: 12px;
+    }
+
+    /* Bottom final action rows */
+    .bottom-action-panel {
+      border-top: 1px solid var(--border-gray);
+      padding-top: 40px;
+      margin-top: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .back-to-cart-link {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-gray);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: var(--transition);
+    }
+
+    .back-to-cart-link:hover {
+      color: var(--header-dark);
+    }
+
+    .action-place-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      width: 450px;
+    }
+
+    .place-order-btn {
+      width: 100%;
+      background-color: var(--header-dark);
+      color: var(--white);
+      border: 1px solid var(--header-dark);
+      padding: 15px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .place-order-btn:hover {
+      background-color: #0b2240;
+    }
+
+    .place-order-disclaimer {
+      font-size: 11px;
+      color: var(--text-gray);
+      font-weight: 300;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    /* ==========================================
+       5. TRUST BADGES BANNER
+       ========================================== */
+    .trust-banner {
+      background-color: var(--light-blue-gray);
+      border-top: 1px solid var(--border-gray);
+      border-bottom: 1px solid var(--border-gray);
+      padding: 30px 60px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+    }
+
+    .trust-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-right: 20px;
+      border-right: 1px solid var(--border-gray);
+    }
+
+    .trust-card:last-child {
+      border-right: none;
+      padding-right: 0;
+    }
+
+    .trust-icon {
+      font-size: 24px;
+      color: var(--header-dark);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .trust-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .trust-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--header-dark);
+      letter-spacing: 0.3px;
+    }
+
+    .trust-subtitle {
+      font-size: 11px;
+      color: var(--text-gray);
+      font-weight: 400;
+    }
+
+    /* ==========================================
+       6. NEWSLETTER & FOOTER BANNER
+       ========================================== */
+    .rd-footer-wrapper {
+      background-color: #010a15;
+      color: var(--white);
+    }
+
+    .rd-newsletter-section {
+      position: relative;
+      background: linear-gradient(to right, rgba(1, 10, 21, 0.15) 0%, rgba(1, 10, 21, 0.85) 45%, #010a15 100%), 
+                  url('https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=1200&q=80') no-repeat left center / cover;
+      padding: 80px 60px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .rd-newsletter-content {
+      max-width: 520px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .rd-newsletter-title {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .rd-newsletter-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      margin-bottom: 12px;
+    }
+
+    .rd-newsletter-form {
+      position: relative;
+      width: 100%;
+    }
+
+    .rd-newsletter-input {
+      width: 100%;
+      background-color: var(--white);
+      border: none;
+      padding: 15px 50px 15px 20px;
+      border-radius: 4px;
+      font-size: 13px;
+      color: var(--primary-navy);
+      outline: none;
+      letter-spacing: 0.3px;
+    }
+
+    .rd-newsletter-input::placeholder {
+      color: #94a3b8;
+    }
+
+    .rd-newsletter-submit {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--primary-navy);
+      font-size: 16px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .rd-newsletter-submit:hover {
+      color: var(--accent-gold);
+      transform: translateY(-50%) translateX(3px);
+    }
+
+    .rd-main-footer {
+      padding: 80px 60px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr 1.2fr;
+      gap: 40px;
+    }
+
+    .rd-footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .rd-footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--white);
+    }
+
+    .rd-brand-logo {
+      color: var(--white);
+    }
+
+    .rd-brand-name {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .rd-brand-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      max-width: 260px;
+    }
+
+    .rd-social-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .rd-social-icon {
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .rd-social-icon:hover {
+      background-color: var(--white);
+      color: #010a15;
+      border-color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .rd-col-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--white);
+      border-left: 2px solid var(--accent-gold);
+      padding-left: 10px;
+      line-height: 1;
+    }
+
+    .rd-footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .rd-footer-links li a {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-weight: 300;
+      transition: var(--transition);
+      display: inline-block;
+    }
+
+    .rd-footer-links li a:hover {
+      color: var(--white);
+      transform: translateX(4px);
+    }
+
+    .rd-contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .rd-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      line-height: 1.4;
+    }
+
+    .rd-contact-item i {
+      color: var(--accent-gold);
+      font-size: 14px;
+      margin-top: 2px;
+    }
+
+    .rd-whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--white);
+      color: var(--primary-navy);
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 12px;
+      text-decoration: none;
+      margin-top: 10px;
+      width: fit-content;
+      transition: var(--transition);
+      border: 1px solid var(--white);
+    }
+
+    .rd-whatsapp-btn:hover {
+      background-color: transparent;
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .rd-whatsapp-btn i {
+      color: #25D366;
+      font-size: 16px;
+    }
+
+    .rd-bottom-bar {
+      border-top: 1px solid var(--border-light);
+      padding: 24px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .rd-copyright {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+
+    .rd-payment-icons {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .rd-payment-badge {
+      height: 22px;
+      opacity: 0.85;
+      transition: var(--transition);
+      display: block;
+    }
+
+    .rd-payment-badge:hover {
+      opacity: 1;
+    }
+
+    /* ==========================================
+       7. RESPONSIVE CONSTRAINTS (FULL PAGE)
+       ========================================== */
+    @media (max-width: 1200px) {
+      .top-bar { padding: 10px 40px; }
+      .main-header { padding: 16px 40px; }
+      .checkout-header-area { padding: 30px 40px 15px 40px; }
+      .checkout-main-section { padding: 15px 40px 60px 40px; }
+      .checkout-container { gap: 30px; }
+      .trust-banner { padding: 25px 40px; }
+      .rd-newsletter-section { padding: 60px 40px; }
+      .rd-main-footer {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 35px;
+        padding: 60px 40px;
+      }
+      .rd-footer-col:first-child {
+        grid-column: span 3;
+        border-bottom: 1px solid var(--border-light);
+        padding-bottom: 30px;
+      }
+      .rd-bottom-bar { padding: 24px 40px; }
+    }
+
+    @media (max-width: 991px) {
+      .menu-toggle-btn { display: flex; }
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 300px;
+        height: 100vh;
+        background-color: var(--white);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 90px 40px;
+        gap: 25px;
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.08);
+        transition: right 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
+        z-index: 1005;
+      }
+      .nav-item {
+        font-size: 14px;
+        width: 100%;
+        border-bottom: 1px solid var(--light-blue-gray);
+        padding-bottom: 12px;
+      }
+      .nav-item.active::after { display: none; }
+      .dropdown-menu {
+        position: static;
+        transform: none !important;
+        box-shadow: none;
+        border: none;
+        padding-left: 15px;
+        padding-top: 5px;
+        opacity: 1;
+        visibility: visible;
+        display: none;
+        width: 100%;
+      }
+      .nav-item.dropdown:hover .dropdown-menu { display: block; }
+      .menu-toggle-cb:checked ~ .nav-menu { right: 0; }
+      .menu-toggle-cb:checked ~ .menu-toggle-btn span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .menu-toggle-cb:checked ~ .menu-toggle-btn span:nth-child(2) { opacity: 0; }
+      .menu-toggle-cb:checked ~ .menu-toggle-btn span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+      /* Visual Stacking on Tablet Screens */
+      .checkout-container { grid-template-columns: 1fr; gap: 40px; }
+      .checkout-steps-panel { width: 100%; }
+      .bottom-action-panel { flex-direction: column; gap: 20px; align-items: center; text-align: center; }
+      .action-place-wrapper { width: 100%; max-width: 480px; }
+
+      .trust-banner { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .trust-card:nth-child(2n) { border-right: none; }
+      
+      .rd-newsletter-section { background: #010a15; justify-content: center; padding: 50px 24px; text-align: center; }
+      .rd-newsletter-content { align-items: center; }
+      .rd-main-footer { grid-template-columns: repeat(2, 1fr); padding: 50px 24px; gap: 30px; }
+      .rd-footer-col:first-child { grid-column: span 2; }
+      .rd-bottom-bar { flex-direction: column; gap: 15px; text-align: center; padding: 24px; }
+    }
+
+    @media (max-width: 600px) {
+      .top-bar { display: none; }
+      .main-header { padding: 15px 24px; }
+      .checkout-header-area { padding: 20px 24px 10px 24px; }
+      .checkout-header-container { flex-direction: column; align-items: flex-start; gap: 15px; }
+      .checkout-main-title { font-size: 30px; }
+      .checkout-main-section { padding: 10px 24px 60px 24px; }
+
+      .delivery-address-card { flex-direction: column; gap: 15px; }
+      .delivery-edit-btn { align-self: flex-start; }
+
+      .shipping-method-option { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .shipping-cost { align-self: flex-end; }
+
+      .payment-option-row { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .payment-chevron { align-self: flex-end; }
+
+      .review-item-card { flex-direction: column; gap: 15px; text-align: center; }
+      .review-item-left { flex-direction: column; }
+      .review-item-price { align-self: center; }
+
+      .compact-item-row { grid-template-columns: 44px 1fr; text-align: left; }
+      .compact-item-price { grid-column: span 2; text-align: left; margin-top: 5px; }
+
+      .trust-banner { grid-template-columns: 1fr; padding: 20px 24px; }
+      .trust-card { border-right: none; border-bottom: 1px solid var(--border-gray); padding-bottom: 15px; }
+      .trust-card:last-child { border-bottom: none; }
+      .rd-main-footer { grid-template-columns: 1fr; }
+      .rd-footer-col:first-child { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       1. TOP UTILITY BAR
+       ========================================== -->
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <span><i class="fa-regular fa-gem"></i> 100% Certified Diamonds</span>
+      <span><i class="fa-solid fa-industry"></i> In-house Manufacturing</span>
+      <span><i class="fa-solid fa-ring"></i> Custom Made Jewellery</span>
+    </div>
+    <div class="top-bar-right">
+      <span><i class="fa-solid fa-phone"></i> +91 1234 567 890</span>
+      <a href="#">Track Order</a>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       2. MAIN NAVIGATION HEADER
+       ========================================== -->
+  <header class="main-header">
+    <a href="#" class="logo-container">
+      <svg class="logo-svg" width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="22" r="6" stroke="currentColor" stroke-width="4.5"/>
+        <path d="M48 22L50 20L52 22L50 24L48 22Z" fill="currentColor"/>
+        <path d="M30 42 C 38 32, 45 32, 50 42 C 55 32, 62 32, 70 42 C 78 52, 72 68, 50 82 C 28 68, 22 52, 30 42 Z" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+        <path d="M38 52 C 45 46, 55 46, 62 52" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <span class="logo-text">Rithika Diamonds</span>
+    </a>
+
+    <input type="checkbox" id="menu-toggle" class="menu-toggle-cb">
+    
+    <label for="menu-toggle" class="menu-toggle-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <nav class="nav-menu">
+      <a href="#" class="nav-item">HOME</a>
+      <div class="nav-item dropdown">
+        <a href="#">SHOP <i class="fa-solid fa-chevron-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Engagement Rings</a></li>
+          <li><a href="#">Diamond Necklaces</a></li>
+          <li><a href="#">Exclusive Bands</a></li>
+          <li><a href="#">Bespoke Earrings</a></li>
+        </ul>
+      </div>
+      <a href="#" class="nav-item">CUSTOM DESIGN</a>
+      <div class="nav-item dropdown">
+        <a href="#">COLLECTIONS <i class="fa-solid fa-chevron-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">The Solitaire Legacy</a></li>
+          <li><a href="#">Eternal Grace</a></li>
+          <li><a href="#">Modern Brilliance</a></li>
+        </ul>
+      </div>
+      <a href="#" class="nav-item">ABOUT US</a>
+      <a href="#" class="nav-item">CONTACT US</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="action-btn" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <button class="action-btn" aria-label="Account"><i class="fa-regular fa-user"></i></button>
+      <button class="action-btn badge-btn" aria-label="Wishlist">
+        <i class="fa-regular fa-heart"></i>
+        <span class="badge">2</span>
+      </button>
+      <button class="action-btn badge-btn" aria-label="Shopping Cart">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="badge">3</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       3. BREADCRUMBS & SECTION TITLE BANNER
+       ========================================== -->
+  <section class="checkout-header-area">
+    <div class="checkout-header-container">
+      <div>
+        <div class="breadcrumbs">Home > Your Cart > <span>Checkout</span></div>
+        <h1 class="checkout-main-title">Proceed to Checkout</h1>
+        <p class="checkout-subtitle">Almost there! Review your order details and complete your purchase.</p>
+      </div>
+      <span class="secure-checkout-tag"><i class="fa-solid fa-shield-halved"></i> Secure Checkout</span>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       4. CHECKOUT CONTAINER GRID
+       ========================================== -->
+  <section class="checkout-main-section">
+    <div class="checkout-container">
+      
+      <!-- Left Column: Checkout Steps -->
+      <div class="checkout-steps-panel">
+        
+        <!-- Step 1: Delivery Address -->
+        <div class="step-group">
+          <div class="step-header-row">
+            <span class="step-number-circle">1</span>
+            <h2 class="step-header-title">Delivery Address</h2>
+          </div>
+          <div class="delivery-address-card">
+            <div class="delivery-card-left">
+              <input type="radio" name="address-option" class="delivery-radio-input" checked id="addr-default">
+              <label class="delivery-info-block" for="addr-default">
+                <span class="delivery-recipient-row">Ananya R <span class="delivery-default-badge">Default</span></span>
+                <p class="delivery-address-text">
+                  4/123, Rose Apartment, MG Road,<br>
+                  Kochi, Kerala - 682011, India
+                </p>
+                <span class="delivery-phone">+91 98765 43210</span>
+              </label>
+            </div>
+            <a href="#" class="delivery-edit-btn">Edit</a>
+          </div>
+          <a href="#" class="add-address-link"><i class="fa-solid fa-plus"></i> Add New Address</a>
+        </div>
+
+        <!-- Step 2: Shipping Method -->
+        <div class="step-group">
+          <div class="step-header-row">
+            <span class="step-number-circle">2</span>
+            <h2 class="step-header-title">Shipping Method</h2>
+          </div>
+          <div class="shipping-methods-wrapper">
+            <!-- Option 1: Standard -->
+            <label class="shipping-method-option" for="ship-std">
+              <div class="shipping-left">
+                <input type="radio" name="shipping-option" class="delivery-radio-input" checked id="ship-std">
+                <div class="shipping-info-text">
+                  <span class="shipping-name">Standard Shipping (3-5 Business Days)</span>
+                  <p class="shipping-desc">Reliable and fast delivery</p>
+                </div>
+              </div>
+              <span class="shipping-cost free-text">FREE</span>
+            </label>
+            <!-- Option 2: Express -->
+            <label class="shipping-method-option" for="ship-exp">
+              <div class="shipping-left">
+                <input type="radio" name="shipping-option" class="delivery-radio-input" id="ship-exp">
+                <div class="shipping-info-text">
+                  <span class="shipping-name">Express Shipping (1-2 Business Days)</span>
+                  <p class="shipping-desc">Faster delivery to your doorstep</p>
+                </div>
+              </div>
+              <span class="shipping-cost">₹ 499</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Step 3: Payment Method -->
+        <div class="step-group">
+          <div class="step-header-row">
+            <span class="step-number-circle">3</span>
+            <h2 class="step-header-title">Payment Method</h2>
+          </div>
+          <div class="payment-accordions-wrapper">
+            <!-- Option 1: UPI -->
+            <label class="payment-option-row" for="pay-upi">
+              <div class="payment-left">
+                <input type="radio" name="payment-method" class="delivery-radio-input" checked id="pay-upi">
+                <div class="payment-detail-box">
+                  <span class="payment-name">
+                    UPI 
+                    <svg class="payment-logo-badge" viewBox="0 0 48 30" width="30" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="48" height="30" rx="3" fill="#fff" stroke="#cbd5e1" stroke-width="1"/>
+                      <path d="M12 11l4 8M16 11l-4 8M19 11v8h2c1.5 0 2.5-.8 2.5-2.2v-3.6c0-1.4-1-2.2-2.5-2.2h-2zm12 0l-3 8h2l2.5-5h2l.5 5h2l-3-8h-3zm-10 2h1c.5 0 .8.2.8.7v2.6c0 .5-.3.7-.8.7h-1v-4z" fill="#097939" stroke="#097939" stroke-width="0.5"/>
+                    </svg>
+                  </span>
+                  <p class="payment-desc">Pay securely using any UPI app</p>
+                </div>
+              </div>
+              <i class="fa-solid fa-chevron-down payment-chevron"></i>
+            </label>
+
+            <!-- Option 2: Cards -->
+            <label class="payment-option-row" for="pay-card">
+              <div class="payment-left">
+                <input type="radio" name="payment-method" class="delivery-radio-input" id="pay-card">
+                <div class="payment-detail-box">
+                  <span class="payment-name">
+                    Credit / Debit Card 
+                    <!-- Visa -->
+                    <svg class="payment-logo-badge" viewBox="0 0 48 30" width="28" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="48" height="30" rx="3" fill="#1434CB"/>
+                      <path d="M12 20.5l1.6-6.5h1.8l-1.6 6.5h-1.8zm6.5-6.5c-.3 0-.6.1-.8.4l-3 6.1h1.9l.4-.9h2.3l.2.9h1.7l-1.5-6.5h-1.2zm-.8 4.2l.9-2.5.5 2.5h-1.4zm9.3-4.2h-1.6c-.5 0-.9.3-1.1.7l-2.3 5.8h1.9l.4-1.1h2.3l.1.5c.1.4.4.6.9.6h1.5l-2.1-6.5zm-5.4.4l1.3 3.6h-1.8l.5-3.6z" fill="#fff"/>
+                    </svg>
+                    <!-- Mastercard -->
+                    <svg class="payment-logo-badge" viewBox="0 0 48 30" width="28" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="48" height="30" rx="3" fill="#222"/>
+                      <circle cx="20" cy="15" r="9" fill="#EB001B"/>
+                      <circle cx="28" cy="15" r="9" fill="#FF5F00" fill-opacity="0.85"/>
+                    </svg>
+                    <!-- RuPay -->
+                    <span style="font-size: 9px; font-weight: 700; color: #1e3a8a; letter-spacing: -0.5px;">RuPay<span style="color:#f59e0b;">▶</span></span>
+                  </span>
+                  <p class="payment-desc">Card payments are secure and encrypted</p>
+                </div>
+              </div>
+              <i class="fa-solid fa-chevron-down payment-chevron"></i>
+            </label>
+
+            <!-- Option 3: Net Banking -->
+            <label class="payment-option-row" for="pay-net">
+              <div class="payment-left">
+                <input type="radio" name="payment-method" class="delivery-radio-input" id="pay-net">
+                <div class="payment-detail-box">
+                  <span class="payment-name">
+                    Net Banking 
+                    <i class="fa-solid fa-building-columns" style="font-size: 14px; color: var(--text-gray);"></i>
+                  </span>
+                  <p class="payment-desc">Pay securely using your bank account</p>
+                </div>
+              </div>
+              <i class="fa-solid fa-chevron-down payment-chevron"></i>
+            </label>
+
+            <!-- Option 4: Paytm -->
+            <label class="payment-option-row" for="pay-tm">
+              <div class="payment-left">
+                <input type="radio" name="payment-method" class="delivery-radio-input" id="pay-tm">
+                <div class="payment-detail-box">
+                  <span class="payment-name">
+                    Paytm 
+                    <span style="font-size: 10px; font-weight: 800; color: #00baf2; text-transform: none;">paytm</span>
+                  </span>
+                  <p class="payment-desc">Pay using your wallet balance</p>
+                </div>
+              </div>
+              <i class="fa-solid fa-chevron-down payment-chevron"></i>
+            </label>
+          </div>
+        </div>
+
+        <!-- Step 4: Order Review -->
+        <div class="step-group">
+          <div class="step-header-row">
+            <span class="step-number-circle">4</span>
+            <h2 class="step-header-title">Order Review</h2>
+          </div>
+          <div class="review-item-card">
+            <div class="review-item-left">
+              <div class="review-item-media">
+                <img src="https://images.unsplash.com/photo-1543294001-f7cbfe92237e?q=80&w=150" alt="Classic Solitaire Ring">
+              </div>
+              <div class="review-item-info">
+                <h3 class="review-prod-title">Classic Solitaire Ring</h3>
+                <span class="review-prod-meta">18K White Gold | Round Cut Diamond</span>
+                <span class="review-prod-specs">Ring Size: 12 | Qty: 1</span>
+              </div>
+            </div>
+            <span class="review-item-price">₹ 78,500</span>
+          </div>
+
+          <!-- Encryption Banner -->
+          <div class="security-encryption-banner">
+            <i class="fa-solid fa-shield-halved security-banner-icon"></i>
+            <div class="security-banner-info">
+              <span class="security-banner-title">Your payments are 100% secure.</span>
+              <p class="security-banner-desc">We do not store your card or UPI details.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Checkout Sidebar Summary -->
+      <div class="checkout-right-panel">
+        
+        <!-- Order Summary Card -->
+        <div class="summary-card">
+          <div class="summary-title-row">
+            <h2 class="summary-title">Order Summary</h2>
+            <span class="summary-item-count">3 Items</span>
+          </div>
+
+          <!-- Compact Item Preview List -->
+          <div class="summary-compact-list">
+            <!-- Item 1 -->
+            <div class="compact-item-row">
+              <div class="compact-item-media">
+                <img src="https://images.unsplash.com/photo-1543294001-f7cbfe92237e?q=80&w=150" alt="Solitaire Ring">
+              </div>
+              <div class="compact-item-info">
+                <span class="compact-item-name">Classic Solitaire Ring</span>
+                <span class="compact-item-meta">18K White Gold | Qty: 1</span>
+              </div>
+              <span class="compact-item-price">₹ 78,500</span>
+            </div>
+            <!-- Item 2 -->
+            <div class="compact-item-row">
+              <div class="compact-item-media">
+                <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=150" alt="Diamond Pendant">
+              </div>
+              <div class="compact-item-info">
+                <span class="compact-item-name">Halo Diamond Pendant</span>
+                <span class="compact-item-meta">18K White Gold | Qty: 1</span>
+              </div>
+              <span class="compact-item-price">₹ 45,200</span>
+            </div>
+            <!-- Item 3 -->
+            <div class="compact-item-row">
+              <div class="compact-item-media">
+                <img src="https://images.unsplash.com/photo-1635767798638-3e25273a8236?q=80&w=150" alt="Diamond Studs">
+              </div>
+              <div class="compact-item-info">
+                <span class="compact-item-name">Classic Diamond Studs</span>
+                <span class="compact-item-meta">18K White Gold | Qty: 1</span>
+              </div>
+              <span class="compact-item-price">₹ 52,300</span>
+            </div>
+          </div>
+
+          <!-- Invoice Details -->
+          <div class="calculation-row">
+            <span class="summary-key">Subtotal (3 Items)</span>
+            <span class="summary-val">₹ 1,76,000</span>
+          </div>
+          <div class="calculation-row">
+            <span class="summary-key">Shipping</span>
+            <span class="summary-val free-text">FREE</span>
+          </div>
+          <div class="calculation-row">
+            <span class="summary-key">GST (3%)</span>
+            <span class="summary-val">₹ 5,280</span>
+          </div>
+          <div class="calculation-row total-row">
+            <span class="total-key">Total</span>
+            <span class="total-val">₹ 1,81,280</span>
+          </div>
+          <span class="total-tax-disclaimer">(Inclusive of all taxes)</span>
+          
+          <!-- Green Coupon Saving Banner -->
+          <div class="savings-alert-box">
+            <i class="fa-solid fa-tag"></i> You save ₹ 5,280 on this order
+          </div>
+        </div>
+
+        <!-- Confidence Checklist Box -->
+        <div class="confidence-card">
+          <span class="confidence-title"><i class="fa-solid fa-shield-halved"></i> Shop with Confidence</span>
+          <ul class="confidence-list">
+            <li class="confidence-item"><i class="fa-solid fa-check"></i> 100% Certified Diamonds</li>
+            <li class="confidence-item"><i class="fa-solid fa-check"></i> 15 Days Easy Returns</li>
+            <li class="confidence-item"><i class="fa-solid fa-check"></i> Free & Insured Shipping</li>
+            <li class="confidence-item"><i class="fa-solid fa-check"></i> Secure & Encrypted Payments</li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Bottom Action Row Band -->
+    <div class="bottom-action-panel">
+      <a href="#" class="back-to-cart-link">&larr; Back to Cart</a>
+      <div class="action-place-wrapper">
+        <button class="place-order-btn"><i class="fa-solid fa-lock"></i> Place Order</button>
+        <p class="place-order-disclaimer">You will not be charged until you review and confirm your order on the next page.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       5. MASTER TRUST BADGES BANNER
+       ========================================== -->
+  <section class="trust-banner">
+    <div class="trust-card">
+      <div class="trust-icon">
+        <i class="fa-solid fa-truck"></i>
+      </div>
+      <div class="trust-info">
+        <span class="trust-title">Free Shipping</span>
+        <span class="trust-subtitle">Across India</span>
+      </div>
+    </div>
+    
+    <div class="trust-card">
+      <div class="trust-icon">
+        <i class="fa-solid fa-shield-halved"></i>
+      </div>
+      <div class="trust-info">
+        <span class="trust-title">Secure Packaging</span>
+        <span class="trust-subtitle">100% Insured</span>
+      </div>
+    </div>
+
+    <div class="trust-card">
+      <div class="trust-icon">
+        <i class="fa-solid fa-rotate-left"></i>
+      </div>
+      <div class="trust-info">
+        <span class="trust-title">Easy Returns</span>
+        <span class="trust-subtitle">15 Days Return</span>
+      </div>
+    </div>
+
+    <div class="trust-card">
+      <div class="trust-icon">
+        <i class="fa-regular fa-gem"></i>
+      </div>
+      <div class="trust-info">
+        <span class="trust-title">Certified Diamonds</span>
+        <span class="trust-subtitle">IGI Certified</span>
+      </div>
+    </div>
+
+    <div class="trust-card">
+      <div class="trust-icon">
+        <i class="fa-solid fa-award"></i>
+      </div>
+      <div class="trust-info">
+        <span class="trust-title">Lifetime Care</span>
+        <span class="trust-subtitle">Cleaning & Maintenance</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       6. NEWSLETTER & FOOTER BANNER
+       ========================================== -->
+  <footer class="rd-footer-wrapper">
+    <div class="rd-newsletter-section">
+      <div class="rd-newsletter-content">
+        <h2 class="rd-newsletter-title">Stay Timeless. Stay Sparkling.</h2>
+        <p class="rd-newsletter-desc">Join our exclusive list and be the first to know about new collections, offers and more.</p>
+        <form class="rd-newsletter-form" onsubmit="event.preventDefault();">
+          <input type="email" class="rd-newsletter-input" placeholder="Enter your email address" required>
+          <button type="submit" class="rd-newsletter-submit" aria-label="Subscribe">
+            <i class="fa-solid fa-arrow-right-long"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="rd-main-footer">
+      <div class="rd-footer-col">
+        <a href="#" class="rd-footer-brand">
+          <svg class="rd-brand-logo" width="30" height="30" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="22" r="6" stroke="currentColor" stroke-width="4.5"/>
+            <path d="M48 22L50 20L52 22L50 24L48 22Z" fill="currentColor"/>
+            <path d="M30 42 C 38 32, 45 32, 50 42 C 55 32, 62 32, 70 42 C 78 52, 72 68, 50 82 C 28 68, 22 52, 30 42 Z" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+            <path d="M38 52 C 45 46, 55 46, 62 52" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <span class="rd-brand-name">Rithika Diamonds</span>
+        </a>
+        <p class="rd-brand-desc">
+          We are diamond manufacturers specializing in custom-made diamond jewellery with unmatched quality and craftsmanship.
+        </p>
+        <div class="rd-social-row">
+          <a href="#" class="rd-social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="rd-social-icon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="rd-social-icon" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" class="rd-social-icon" aria-label="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
+        </div>
+      </div>
+
+      <div class="rd-footer-col">
+        <h3 class="rd-col-title">Quick Links</h3>
+        <ul class="rd-footer-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">Custom Design</a></li>
+          <li><a href="#">Collections</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="rd-footer-col">
+        <h3 class="rd-col-title">Customer Service</h3>
+        <ul class="rd-footer-links">
+          <li><a href="#">Track Order</a></li>
+          <li><a href="#">Returns & Exchanges</a></li>
+          <li><a href="#">Shipping Policy</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="rd-footer-col">
+        <h3 class="rd-col-title">Information</h3>
+        <ul class="rd-footer-links">
+          <li><a href="#">About Our Manufacturing</a></li>
+          <li><a href="#">Diamond Guide</a></li>
+          <li><a href="#">Care & Maintenance</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+
+      <div class="rd-footer-col">
+        <h3 class="rd-col-title">Contact Us</h3>
+        <ul class="rd-contact-list">
+          <li class="rd-contact-item">
+            <i class="fa-solid fa-phone"></i>
+            <span>+91 1234 567 890</span>
+          </li>
+          <li class="rd-contact-item">
+            <i class="fa-solid fa-envelope"></i>
+            <span>hello@rithikadiamonds.com</span>
+          </li>
+          <li class="rd-contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Kozhikode, Kerala, India</span>
+          </li>
+        </ul>
+        <a href="#" class="rd-whatsapp-btn">
+          <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <div class="rd-bottom-bar">
+      <span class="rd-copyright">&copy; 2024 Rithika Diamonds. All Rights Reserved.</span>
+      <div class="rd-payment-icons">
+        <svg class="rd-payment-badge" viewBox="0 0 48 30" width="35" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="30" rx="3" fill="#1434CB"/>
+          <path d="M12 20.5l1.6-6.5h1.8l-1.6 6.5h-1.8zm6.5-6.5c-.3 0-.6.1-.8.4l-3 6.1h1.9l.4-.9h2.3l.2.9h1.7l-1.5-6.5h-1.2zm-.8 4.2l.9-2.5.5 2.5h-1.4zm9.3-4.2h-1.6c-.5 0-.9.3-1.1.7l-2.3 5.8h1.9l.4-1.1h2.3l.1.5c.1.4.4.6.9.6h1.5l-2.1-6.5zm-5.4.4l1.3 3.6h-1.8l.5-3.6z" fill="#fff"/>
+        </svg>
+        <svg class="rd-payment-badge" viewBox="0 0 48 30" width="35" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="30" rx="3" fill="#222"/>
+          <circle cx="20" cy="15" r="9" fill="#EB001B"/>
+          <circle cx="28" cy="15" r="9" fill="#FF5F00" fill-opacity="0.85"/>
+        </svg>
+        <svg class="rd-payment-badge" viewBox="0 0 48 30" width="35" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="30" rx="3" fill="#016FD0"/>
+          <path d="M10 20v-10h2.5l2.1 4.3 2.1-4.3H19.2v10h-2.1v-6.5l-2.4 4.8h-.8l-2.4-4.8v6.5h-1.5zm11.5 0v-10h5.2v2h-3.1v1.9h2.8v2h-2.8v2.1h3.1v2h-5.2zm7.4 0l2.3-5-2.3-5h2.1l1.2 2.7 1.2-2.7h2.1l-2.3 5 2.3 5h-2.1L32 17.3l-1.2 2.7h-2.1z" fill="#fff"/>
+        </svg>
+        <svg class="rd-payment-badge" viewBox="0 0 48 30" width="35" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="30" rx="3" fill="#fff" stroke="#cbd5e1" stroke-width="1"/>
+          <path d="M12 11l4 8M16 11l-4 8M19 11v8h2c1.5 0 2.5-.8 2.5-2.2v-3.6c0-1.4-1-2.2-2.5-2.2h-2zm12 0l-3 8h2l2.5-5h2l.5 5h2l-3-8h-3zm-10 2h1c.5 0 .8.2.8.7v2.6c0 .5-.3.7-.8.7h-1v-4z" fill="#097939" stroke="#097939" stroke-width="0.5"/>
+        </svg>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

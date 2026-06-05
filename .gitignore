@@ -1,0 +1,36 @@
+# Node.js
+node_modules/
+.npm
+package-lock.json
+
+# Next.js
+.next/
+out/
+
+# Vercel
+.vercel
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Local environment variables
+.env*.local
+
+# Python cache / virtual envs
+__pycache__/
+*.pyc
+.venv/
+env/
+venv/
+generate_pdf.py
+
+# Temp files
+*.bak
+*.tmp
