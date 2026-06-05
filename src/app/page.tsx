@@ -60,12 +60,18 @@ export default function Home() {
 
           <div className="slider-dots">
             {[0, 1, 2, 3].map((idx) => (
-              <span 
+              <button
                 key={idx} 
                 className={`dot ${activeSlide === idx ? "active" : ""}`}
                 onClick={() => setActiveSlide(idx)}
-                style={activeSlide === idx ? { backgroundColor: "var(--accent-blue)" } : {}}
-              ></span>
+                aria-label={`Go to slide ${idx + 1}`}
+                style={{
+                  ...(activeSlide === idx ? { backgroundColor: "var(--accent-blue)" } : {}),
+                  border: "none",
+                  padding: 0,
+                  display: "block"
+                }}
+              ></button>
             ))}
           </div>
         </section>

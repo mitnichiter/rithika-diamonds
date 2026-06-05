@@ -6,15 +6,21 @@ import Link from "next/link";
 export const Footer: React.FC = () => {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (email.trim()) {
-      setSubscribed(true);
-      setEmail("");
+      setIsSubmitting(true);
+      // Simulate API call for better UX
       setTimeout(() => {
-        setSubscribed(false);
-      }, 5000);
+        setIsSubmitting(false);
+        setSubscribed(true);
+        setEmail("");
+        setTimeout(() => {
+          setSubscribed(false);
+        }, 5000);
+      }, 800);
     }
   };
 
@@ -28,16 +34,30 @@ export const Footer: React.FC = () => {
             Be the first to know about our latest high-jewellery collections, private gallery exhibitions, and exclusive bespoke styling consultations.
           </p>
           <form className="rd-newsletter-form" onSubmit={handleSubscribe}>
+            <label htmlFor="footer-newsletter-email" className="sr-only">
+              Email Address
+            </label>
             <input
+              id="footer-newsletter-email"
               type="email"
               className="rd-newsletter-input"
               placeholder="Enter your email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              disabled={isSubmitting}
             />
-            <button type="submit" className="rd-newsletter-submit" aria-label="Subscribe">
-              <i className="fa-solid fa-arrow-right"></i>
+            <button
+              type="submit"
+              className="rd-newsletter-submit"
+              aria-label={isSubmitting ? "Subscribing..." : "Subscribe"}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <i className="fa-solid fa-circle-notch fa-spin"></i>
+              ) : (
+                <i className="fa-solid fa-arrow-right"></i>
+              )}
             </button>
           </form>
           {subscribed && (
