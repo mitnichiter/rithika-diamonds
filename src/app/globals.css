@@ -73,10 +73,17 @@ body {
   gap: 30px;
 }
 
-.top-bar-left span {
+.top-bar-link {
   display: flex;
   align-items: center;
   gap: 8px;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.top-bar-link:hover {
+  color: var(--white);
 }
 
 .top-bar-left i {
@@ -575,6 +582,20 @@ body {
   }
 }
 
+/* Utility Classes */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Responsiveness */
 @media (max-width: 768px) {
   .top-bar-left {
     display: none;

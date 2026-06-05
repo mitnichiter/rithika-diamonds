@@ -11,12 +11,17 @@ export const TopBar: React.FC = () => {
   return (
     <div className="top-bar">
       <div className="top-bar-left">
-        <span>
+        <a href="tel:+15550192834" className="top-bar-link">
           <i className="fa-solid fa-phone"></i> +1 (555) 019-2834
-        </span>
-        <span>
-          <i className="fa-solid fa-location-dot"></i> 5th Avenue, New York, NY
-        </span>
+        </a>
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=730+Fifth+Avenue,+14th+Floor,+New+York,+NY+10019"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="top-bar-link"
+        >
+          <i className="fa-solid fa-location-dot"></i> 730 Fifth Ave, New York
+        </a>
       </div>
       <div className="top-bar-right">
         {unreadCount > 0 && (
