@@ -154,7 +154,7 @@ export default function CollectionsPage() {
           <div className="banner-left-area">
             <div className="banner-text-content">
               <div className="banner-breadcrumbs">
-                Home &gt; <span style={{ color: "var(--accent-blue)" }}>Collections</span>
+                Home &gt; <span style={{ color: "#C9A680" }}>Collections</span>
               </div>
               <h1 className="banner-headline-title">Explore Our Exquisite Collections</h1>
               <p className="banner-subtitle-desc">Handcrafted diamond jewellery for every moment worth celebrating.</p>
@@ -200,7 +200,7 @@ export default function CollectionsPage() {
                   border: "none",
                   fontSize: "18px",
                   cursor: "pointer",
-                  color: "var(--header-dark)"
+                  color: "#122742"
                 }}>
                   <i className="fa-solid fa-xmark"></i>
                 </button>
@@ -228,10 +228,10 @@ export default function CollectionsPage() {
                         setSelectedCategory(cat.name);
                         setMobileMenuOpen(false);
                       }}
-                      style={selectedCategory === cat.name ? { fontWeight: 600, color: "var(--accent-blue)" } : {}}
+                      style={selectedCategory === cat.name ? { fontWeight: 600, color: "#C9A680" } : {}}
                     >
                       <span>
-                        <i className={`fa-solid ${cat.icon}`} style={selectedCategory === cat.name ? { color: "var(--accent-blue)" } : {}}></i> 
+                        <i className={`fa-solid ${cat.icon}`} style={selectedCategory === cat.name ? { color: "#C9A680" } : {}}></i> 
                         {cat.name}
                       </span>
                       <span className="count">({cat.count})</span>
@@ -261,7 +261,7 @@ export default function CollectionsPage() {
                             id={`metal-${metal.name}`} 
                             checked={selectedMetals.includes(metal.name)}
                             onChange={() => {}} // handled by li onClick
-                            style={selectedMetals.includes(metal.name) ? { backgroundColor: "var(--accent-blue)", borderColor: "var(--accent-blue)" } : {}}
+                            style={selectedMetals.includes(metal.name) ? { backgroundColor: "#122742", borderColor: "#122742" } : {}}
                           />
                           <label htmlFor={`metal-${metal.name}`} style={{ cursor: "pointer" }}>{metal.name}</label>
                         </div>
@@ -288,7 +288,7 @@ export default function CollectionsPage() {
                             id={`occ-${occ.name}`} 
                             checked={selectedOccasions.includes(occ.name)}
                             onChange={() => {}} // handled by li onClick
-                            style={selectedOccasions.includes(occ.name) ? { backgroundColor: "var(--accent-blue)", borderColor: "var(--accent-blue)" } : {}}
+                            style={selectedOccasions.includes(occ.name) ? { backgroundColor: "#122742", borderColor: "#122742" } : {}}
                           />
                           <label htmlFor={`occ-${occ.name}`} style={{ cursor: "pointer" }}>{occ.name}</label>
                         </div>
@@ -331,17 +331,19 @@ export default function CollectionsPage() {
                 </div>
               ) : (
                 <div className="collections-grid">
-                  {filteredCollections.map((col) => (
+                  {filteredCollections.map((col, index) => (
                     <article key={col.id} className={`collection-card ${col.wide ? "wide-card" : ""}`}>
-                      <div className="card-media-wrapper">
-                        <img src={col.image} alt={col.name} className="collection-img" />
-                      </div>
-                      <div className="collection-info">
-                        <h3 className="collection-name">{col.name}</h3>
-                        <p className="collection-card-desc">{col.desc}</p>
-                        <Link href={`/shop?category=${encodeURIComponent(col.category === "All Collections" || col.category === "Bridal Collection" || col.category === "Loose Diamonds" ? "" : col.category)}`} className="collection-link">
-                          Explore Collection <i className="fa-solid fa-arrow-right-long"></i>
-                        </Link>
+                      <div className="collection-card-inner">
+                        <div className="card-media-wrapper">
+                          <img src={col.image} alt={col.name} className="collection-img" />
+                        </div>
+                        <div className="collection-info">
+                          <h3 className="collection-name">{col.name}</h3>
+                          <p className="collection-card-desc">{col.desc}</p>
+                          <Link href={`/shop?category=${encodeURIComponent(col.category === "All Collections" || col.category === "Bridal Collection" || col.category === "Loose Diamonds" ? "" : col.category)}`} className="collection-link">
+                            Explore Collection <i className="fa-solid fa-arrow-right-long"></i>
+                          </Link>
+                        </div>
                       </div>
                     </article>
                   ))}
@@ -357,7 +359,7 @@ export default function CollectionsPage() {
              ========================================== */}
         <section className="trust-banner">
           <div className="trust-card">
-            <div className="trust-icon" style={{ color: "var(--accent-blue)" }}><i className="fa-regular fa-gem"></i></div>
+            <div className="trust-icon" style={{ color: "#C9A680" }}><i className="fa-regular fa-gem"></i></div>
             <div className="trust-info">
               <span className="trust-title">100% Certified Diamonds</span>
               <span className="trust-subtitle">Authenticity Guaranteed</span>
@@ -365,7 +367,7 @@ export default function CollectionsPage() {
           </div>
           
           <div className="trust-card">
-            <div className="trust-icon" style={{ color: "var(--accent-blue)" }}><i className="fa-solid fa-industry"></i></div>
+            <div className="trust-icon" style={{ color: "#C9A680" }}><i className="fa-solid fa-industry"></i></div>
             <div className="trust-info">
               <span className="trust-title">In-house Manufacturing</span>
               <span className="trust-subtitle">Precision & Quality</span>
@@ -373,7 +375,7 @@ export default function CollectionsPage() {
           </div>
 
           <div className="trust-card">
-            <div className="trust-icon" style={{ color: "var(--accent-blue)" }}>
+            <div className="trust-icon" style={{ color: "#C9A680" }}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
             </div>
             <div className="trust-info">
@@ -383,7 +385,7 @@ export default function CollectionsPage() {
           </div>
 
           <div className="trust-card">
-            <div className="trust-icon" style={{ color: "var(--accent-blue)" }}><i className="fa-solid fa-shield-halved"></i></div>
+            <div className="trust-icon" style={{ color: "#C9A680" }}><i className="fa-solid fa-shield-halved"></i></div>
             <div className="trust-info">
               <span className="trust-title">Secure Payments</span>
               <span className="trust-subtitle">Safe & Encrypted</span>
@@ -391,7 +393,7 @@ export default function CollectionsPage() {
           </div>
 
           <div className="trust-card">
-            <div className="trust-icon" style={{ color: "var(--accent-blue)" }}><i className="fa-solid fa-rotate-left"></i></div>
+            <div className="trust-icon" style={{ color: "#C9A680" }}><i className="fa-solid fa-rotate-left"></i></div>
             <div className="trust-info">
               <span className="trust-title">Easy Returns</span>
               <span className="trust-subtitle">Hassle Free Returns</span>
@@ -404,7 +406,7 @@ export default function CollectionsPage() {
         /* Collections page specific styles */
         .collections-header-banner {
           position: relative;
-          background-color: var(--primary-navy);
+          background-color: #122742;
           display: flex;
           height: 260px;
           overflow: hidden;
@@ -453,7 +455,7 @@ export default function CollectionsPage() {
 
         .banner-right-area {
           flex: 1;
-          background: linear-gradient(to right, var(--primary-navy) 0%, rgba(2, 11, 22, 0.5) 30%, transparent 100%),
+          background: linear-gradient(to right, #122742 0%, rgba(18, 39, 66, 0.5) 30%, transparent 100%),
                       url('https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1200&q=80') no-repeat center center / cover;
           position: relative;
           z-index: 1;
@@ -475,7 +477,7 @@ export default function CollectionsPage() {
         .mobile-filter-bar {
           display: none;
           width: 100%;
-          background-color: var(--light-blue-gray);
+          background-color: #EBE3DC;
           border: 1px solid var(--border-gray);
           padding: 12px 20px;
           border-radius: 4px;
@@ -489,7 +491,7 @@ export default function CollectionsPage() {
           border: none;
           font-size: 13px;
           font-weight: 600;
-          color: var(--header-dark);
+          color: #122742;
           cursor: pointer;
           display: flex;
           align-items: center;
@@ -520,7 +522,7 @@ export default function CollectionsPage() {
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 1px;
-          color: var(--header-dark);
+          color: #122742;
           margin-bottom: 18px;
         }
 
@@ -552,7 +554,7 @@ export default function CollectionsPage() {
 
         .category-filter-list li:hover,
         .category-filter-list li.active {
-          color: var(--header-dark);
+          color: #122742;
           font-weight: 600;
         }
 
@@ -601,8 +603,8 @@ export default function CollectionsPage() {
         }
 
         .checkbox-item-left input[type="checkbox"]:checked {
-          background-color: var(--header-dark);
-          border-color: var(--header-dark);
+          background-color: #122742;
+          border-color: #122742;
         }
 
         .checkbox-item-left input[type="checkbox"]:checked::before {
@@ -614,7 +616,7 @@ export default function CollectionsPage() {
         }
 
         .checkbox-item:hover {
-          color: var(--header-dark);
+          color: #122742;
         }
 
         .checkbox-item .count {
@@ -625,7 +627,7 @@ export default function CollectionsPage() {
           width: 100%;
           border: 1px solid var(--border-gray);
           background-color: var(--white);
-          color: var(--header-dark);
+          color: #122742;
           padding: 12px;
           font-size: 11px;
           font-weight: 700;
@@ -641,9 +643,9 @@ export default function CollectionsPage() {
         }
 
         .clear-filters-btn:hover {
-          background-color: var(--header-dark);
+          background-color: #122742;
           color: var(--white);
-          border-color: var(--header-dark);
+          border-color: #122742;
         }
 
         /* CATALOG COLUMN */
@@ -685,7 +687,7 @@ export default function CollectionsPage() {
         .select-dropdown-wrap select {
           border: 1px solid var(--border-gray);
           background-color: var(--white);
-          color: var(--header-dark);
+          color: #122742;
           padding: 8px 12px;
           font-size: 13px;
           font-weight: 500;
@@ -696,42 +698,80 @@ export default function CollectionsPage() {
         }
 
         .select-dropdown-wrap select:hover {
-          border-color: var(--header-dark);
+          border-color: #122742;
         }
 
-        /* Catalog Grid */
+        /* Asymmetrical Bento Grid */
         .collections-grid {
           display: grid;
-          grid-template-columns: repeat(6, 1fr);
+          grid-template-columns: repeat(12, 1fr);
+          grid-auto-rows: minmax(380px, auto);
           gap: 24px;
         }
 
+        /* Double-Bezel Architecture */
         .collection-card {
-          background-color: var(--white);
-          border-radius: 8px;
-          overflow: hidden;
-          border: 1px solid var(--border-gray);
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
-          transition: var(--transition);
+          background-color: #FAFAFA;
+          border: 1px solid #EAEAEA;
+          border-radius: 2rem;
+          padding: 0.5rem;
           display: flex;
           flex-direction: column;
-          grid-column: span 2;
+          transition: transform 0.6s cubic-bezier(0.32,0.72,0,1);
+          grid-column: span 4;
         }
 
-        .collection-card.wide-card {
-          grid-column: span 3;
+        .collection-card-inner {
+          background-color: #FFFFFF;
+          border-radius: calc(2rem - 0.5rem);
+          box-shadow: inset 0 1px 1px rgba(255,255,255,0.8), 0 4px 12px rgba(0,0,0,0.03);
+          display: flex;
+          flex-direction: column;
+          flex-grow: 1;
+          overflow: hidden;
+          position: relative;
+        }
+
+        /* Asymmetrical pattern */
+        .collection-card:nth-child(7n + 1) {
+          grid-column: span 8;
+          grid-row: span 2;
+        }
+        .collection-card:nth-child(7n + 2),
+        .collection-card:nth-child(7n + 3) {
+          grid-column: span 4;
+          grid-row: span 1;
+        }
+        .collection-card:nth-child(7n + 4),
+        .collection-card:nth-child(7n + 5),
+        .collection-card:nth-child(7n + 6) {
+          grid-column: span 4;
+          grid-row: span 1;
+        }
+        .collection-card:nth-child(7n + 7) {
+          grid-column: span 12;
+          grid-row: span 1;
         }
 
         .collection-card:hover {
-          transform: translateY(-8px);
-          box-shadow: 0 16px 30px rgba(2, 16, 36, 0.08);
-          border-color: #cbd5e1;
+          transform: translateY(-6px);
+          border-color: #122742;
         }
 
         .card-media-wrapper {
           position: relative;
           height: 310px;
           overflow: hidden;
+          flex-shrink: 0;
+        }
+
+        /* Adjust media height for taller cards */
+        .collection-card:nth-child(7n + 1) .card-media-wrapper {
+          height: 100%;
+          min-height: 500px;
+        }
+        .collection-card:nth-child(7n + 7) .card-media-wrapper {
+          height: 400px;
         }
 
         .collection-img {
@@ -751,15 +791,25 @@ export default function CollectionsPage() {
           display: flex;
           flex-direction: column;
           gap: 8px;
-          background-color: var(--white);
+          background-color: #FFFFFF;
           flex-grow: 1;
+        }
+
+        /* For the large spanning cards, overlay the text or keep it at bottom */
+        .collection-card:nth-child(7n + 1) .collection-info {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.9) 60%, rgba(255,255,255,0) 100%);
+          padding-top: 60px;
         }
 
         .collection-name {
           font-family: var(--font-serif);
           font-size: 20px;
           font-weight: 500;
-          color: var(--header-dark);
+          color: #122742;
         }
 
         .collection-card-desc {
@@ -773,7 +823,7 @@ export default function CollectionsPage() {
         .collection-link {
           font-size: 11px;
           font-weight: 600;
-          color: var(--header-dark);
+          color: #122742;
           text-decoration: none;
           letter-spacing: 0.5px;
           display: inline-flex;
@@ -793,12 +843,12 @@ export default function CollectionsPage() {
         }
 
         .collection-link:hover {
-          color: var(--accent-blue);
+          color: #C9A680;
         }
 
         /* TRUST BANNER */
         .trust-banner {
-          background-color: var(--light-blue-gray);
+          background-color: #EBE3DC;
           border-top: 1px solid var(--border-gray);
           border-bottom: 1px solid var(--border-gray);
           padding: 30px 60px;
@@ -822,7 +872,7 @@ export default function CollectionsPage() {
 
         .trust-icon {
           font-size: 28px;
-          color: var(--header-dark);
+          color: #122742;
           flex-shrink: 0;
           display: flex;
           align-items: center;
@@ -838,7 +888,7 @@ export default function CollectionsPage() {
         .trust-title {
           font-size: 13px;
           font-weight: 700;
-          color: var(--header-dark);
+          color: #122742;
           letter-spacing: 0.3px;
         }
 
@@ -863,10 +913,20 @@ export default function CollectionsPage() {
             display: flex !important;
           }
           .collections-grid {
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(8, 1fr);
           }
           .collection-card {
-            grid-column: span 2 !important;
+            grid-column: span 4 !important;
+            grid-row: span 1 !important;
+          }
+          .collection-card:nth-child(7n + 1) .card-media-wrapper {
+            height: 310px;
+            min-height: auto;
+          }
+          .collection-card:nth-child(7n + 1) .collection-info {
+            position: relative;
+            background: #FFFFFF;
+            padding-top: 24px;
           }
           .trust-banner {
             grid-template-columns: repeat(3, 1fr);
@@ -900,7 +960,7 @@ export default function CollectionsPage() {
             grid-template-columns: 1fr;
           }
           .collection-card {
-            grid-column: span 4 !important;
+            grid-column: span 1 !important;
           }
           .trust-banner {
             grid-template-columns: 1fr;

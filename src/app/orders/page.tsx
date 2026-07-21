@@ -9,440 +9,333 @@ export default function OrdersPage() {
 
   return (
     <>
-      <main className="account-details-wrap">
-        {/* ==========================================
-             3. BREADCRUMBS & ACCOUNT HEADER BANNER
-             ========================================== */}
-        <section className="account-header-area">
-          <div className="account-header-container">
-            <div>
-              <div className="breadcrumbs">Home &gt; My Account &gt; <span style={{ color: "var(--accent-blue)" }}>My Orders</span></div>
-              <h1 className="account-title">My Orders</h1>
-              <p className="account-subtitle">View and track your jewellery orders.</p>
-            </div>
-          </div>
-        </section>
+      <main className="dashboard-wrap">
+        <div className="dashboard-container">
+          
+          {/* Minimal Side Nav */}
+          <aside className="dashboard-nav">
+            <h1 className="nav-header">My Account</h1>
+            <nav className="nav-links">
+              <Link href="/orders" className="nav-link active">Orders</Link>
+              <Link href="/address-book" className="nav-link">Address Book</Link>
+              <Link href="/wishlist" className="nav-link">Wishlist</Link>
+            </nav>
+          </aside>
 
-        {/* ==========================================
-             4. ACCOUNT DASHBOARD LAYOUT
-             ========================================== */}
-        <section className="dashboard-section">
-          <div className="dashboard-container">
-            
-            {/* Sidebar Column */}
-            <aside className="dashboard-sidebar">
-              <div className="user-profile-summary">
-                <div className="avatar-circle" style={{ backgroundColor: "var(--accent-blue)" }}>
-                  <i className="fa-regular fa-user"></i>
-                </div>
-                <div className="user-meta">
-                  <span className="user-name">Guest Customer</span>
-                  <span className="user-email">concierge@rithikadiamonds.com</span>
-                </div>
+          {/* Main Content */}
+          <div className="dashboard-content">
+            <div className="content-header">
+              <h2 className="content-title">Order History</h2>
+              <span className="content-meta">{orders.length} Orders</span>
+            </div>
+
+            {orders.length === 0 ? (
+              <div className="empty-state">
+                <p>You have not placed any orders yet.</p>
+                <Link href="/shop" className="btn-primary">Explore Collection</Link>
               </div>
-
-              <nav className="sidebar-menu">
-                <Link href="/orders" className="menu-link active" style={{ color: "var(--accent-blue)", fontWeight: 600 }}>
-                  <i className="fa-solid fa-box"></i> My Orders
-                </Link>
-                <Link href="/address-book" className="menu-link">
-                  <i className="fa-solid fa-map-location-dot"></i> Address Book
-                </Link>
-                <Link href="/notifications" className="menu-link">
-                  <i className="fa-solid fa-bell"></i> Notifications
-                </Link>
-              </nav>
-            </aside>
-
-            {/* Main Content Column */}
-            <div className="dashboard-main-panel">
-              <h2 className="panel-title">Order History ({orders.length})</h2>
-              
-              {orders.length === 0 ? (
-                <div style={{
-                  padding: "60px 20px",
-                  textAlign: "center",
-                  border: "1px dashed var(--border-gray)",
-                  borderRadius: "8px"
-                }}>
-                  <i className="fa-solid fa-box" style={{ fontSize: "42px", color: "#cbd5e1", marginBottom: "15px" }}></i>
-                  <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "18px", fontWeight: 400, marginBottom: "10px" }}>No Orders Placed Yet</h3>
-                  <p style={{ color: "var(--text-gray)", fontSize: "13px", marginBottom: "20px" }}>You have not placed any orders yet. Discover our collection to place your first order.</p>
-                  <Link href="/shop" style={{
-                    backgroundColor: "var(--accent-blue)",
-                    color: "white",
-                    border: "none",
-                    padding: "10px 24px",
-                    borderRadius: "4px",
-                    fontSize: "11px",
-                    fontWeight: 700,
-                    textTransform: "uppercase",
-                    letterSpacing: "1px",
-                    textDecoration: "none",
-                    display: "inline-block"
-                  }}>
-                    Explore Shop
-                  </Link>
-                </div>
-              ) : (
-                <div className="orders-list">
-                  {orders.map((order) => (
-                    <div className="order-group-card" key={order.id}>
-                      <div className="order-card-header">
-                        <div className="header-meta-group">
-                          <div className="meta-item">
-                            <span className="meta-label">ORDER PLACED</span>
-                            <span className="meta-val">{order.date}</span>
-                          </div>
-                          <div className="meta-item">
-                            <span className="meta-label">TOTAL</span>
-                            <span className="meta-val">${order.total.toLocaleString()}</span>
-                          </div>
-                          <div className="meta-item">
-                            <span className="meta-label">SHIP TO</span>
-                            <span className="meta-val">{order.shippingAddress.name}</span>
-                          </div>
-                        </div>
-                        <div className="header-order-id">
-                          <span className="id-label">ORDER # {order.id}</span>
-                          <span className="status-badge" style={{ backgroundColor: "#eff6ff", color: "var(--accent-blue)" }}>{order.status}</span>
-                        </div>
+            ) : (
+              <div className="orders-grid">
+                {orders.map((order, index) => (
+                  <div className={`order-card ${index % 2 !== 0 ? 'offset-card' : ''}`} key={order.id}>
+                    <div className="order-meta">
+                      <div className="meta-group">
+                        <span className="meta-label">Order Number</span>
+                        <span className="meta-value">#{order.id}</span>
                       </div>
-
-                      <div className="order-card-body">
-                        {order.items.map((item) => (
-                          <div className="order-product-row" key={item.id}>
-                            <div className="product-media-block">
-                              <img src={item.image} alt={item.name} />
-                            </div>
-                            <div className="product-details-block">
-                              <h4 className="prod-name-title">{item.name}</h4>
-                              <p className="prod-desc-meta">Price: ${item.price.toLocaleString()} | Qty: {item.quantity}</p>
-                              <div style={{ display: "flex", gap: "15px", marginTop: "10px" }}>
-                                <Link href={`/product/${item.id}`} style={{
-                                  fontSize: "11px",
-                                  fontWeight: 700,
-                                  color: "var(--accent-blue)",
-                                  textDecoration: "none",
-                                  textTransform: "uppercase"
-                                }}>
-                                  Buy It Again
-                                </Link>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
+                      <div className="meta-group">
+                        <span className="meta-label">Date</span>
+                        <span className="meta-value">{order.date}</span>
                       </div>
+                      <div className="meta-group">
+                        <span className="meta-label">Total</span>
+                        <span className="meta-value">${order.total.toLocaleString()}</span>
+                      </div>
+                      <div className="status-pill">{order.status}</div>
                     </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
+                    <div className="order-items">
+                      {order.items.map((item) => (
+                        <div className="order-item" key={item.id}>
+                          <img src={item.image} alt={item.name} className="item-image" />
+                          <div className="item-details">
+                            <h4 className="item-name">{item.name}</h4>
+                            <p className="item-meta">Qty: {item.quantity} &mdash; ${item.price.toLocaleString()}</p>
+                            <Link href={`/product/${item.id}`} className="item-action">Buy Again</Link>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-        </section>
+        </div>
       </main>
 
       <style dangerouslySetInnerHTML={{ __html: `
-        /* Account Dashboard Shared Styles */
-        .account-details-wrap {
-          background-color: var(--white);
-        }
-
-        .account-header-area {
-          background-color: var(--light-blue-gray);
-          border-bottom: 1px solid var(--border-gray);
-          padding: 40px 60px;
-        }
-
-        .account-header-container {
-          max-width: 1400px;
-          margin: 0 auto;
-        }
-
-        .breadcrumbs {
-          font-size: 12px;
-          color: var(--text-gray);
-          margin-bottom: 15px;
-          font-weight: 400;
-          letter-spacing: 0.3px;
-        }
-
-        .account-title {
-          font-family: var(--font-serif);
-          font-size: 38px;
-          font-weight: 400;
-          line-height: 1.2;
-          color: var(--header-dark);
-          letter-spacing: 0.5px;
-          margin-bottom: 6px;
-        }
-
-        .account-subtitle {
-          font-size: 13px;
-          color: var(--text-gray);
-          font-weight: 300;
-        }
-
-        .dashboard-section {
-          padding: 40px 60px 80px 60px;
+        .dashboard-wrap {
+          background-color: #ffffff;
+          color: #122742;
+          min-height: 100vh;
+          padding: 80px 40px;
         }
 
         .dashboard-container {
-          max-width: 1400px;
+          max-width: 1200px;
           margin: 0 auto;
           display: grid;
-          grid-template-columns: 280px 1fr;
-          gap: 50px;
+          grid-template-columns: 200px 1fr;
+          gap: 100px;
           align-items: start;
         }
 
-        /* Sidebar Column */
-        .dashboard-sidebar {
-          border: 1px solid var(--border-gray);
-          border-radius: 8px;
-          padding: 24px;
-          background-color: #fafbfc;
+        .dashboard-nav {
           display: flex;
           flex-direction: column;
-          gap: 25px;
+          gap: 40px;
+          position: sticky;
+          top: 120px;
         }
 
-        .user-profile-summary {
-          display: flex;
-          align-items: center;
-          gap: 15px;
-          border-bottom: 1px solid var(--border-gray);
-          padding-bottom: 20px;
+        .nav-header {
+          font-family: var(--font-serif, serif);
+          font-size: 24px;
+          font-weight: 400;
+          color: #122742;
+          margin: 0;
         }
 
-        .avatar-circle {
-          width: 44px;
-          height: 44px;
-          border-radius: 50%;
-          color: white;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 18px;
-        }
-
-        .user-meta {
+        .nav-links {
           display: flex;
           flex-direction: column;
-          gap: 4px;
+          gap: 20px;
         }
 
-        .user-name {
-          font-size: 14px;
-          font-weight: 700;
-          color: var(--header-dark);
-        }
-
-        .user-email {
+        .nav-link {
           font-size: 11px;
-          color: var(--text-gray);
-        }
-
-        .sidebar-menu {
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-        }
-
-        .menu-link {
+          text-transform: uppercase;
+          letter-spacing: 1.5px;
+          color: #888;
+          text-decoration: none;
+          transition: color 0.3s ease;
           display: flex;
           align-items: center;
           gap: 12px;
-          padding: 12px 16px;
-          font-size: 13px;
-          font-weight: 500;
-          color: var(--text-gray);
-          text-decoration: none;
-          border-radius: 4px;
-          transition: var(--transition);
         }
 
-        .menu-link i {
-          width: 16px;
-          text-align: center;
+        .nav-link:hover, .nav-link.active {
+          color: #122742;
+          font-weight: 600;
         }
 
-        .menu-link:hover, .menu-link.active {
-          background-color: white;
-          box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-          color: var(--header-dark);
+        .nav-link.active::before {
+          content: "";
+          display: block;
+          width: 4px;
+          height: 4px;
+          background-color: #C9A680;
+          border-radius: 50%;
         }
 
-        /* Main panel */
-        .dashboard-main-panel {
+        .dashboard-content {
           display: flex;
           flex-direction: column;
-          gap: 25px;
+          gap: 60px;
         }
 
-        .panel-title {
-          font-family: var(--font-serif);
-          font-size: 24px;
-          font-weight: 500;
-          color: var(--header-dark);
-          border-bottom: 1px solid var(--border-gray);
-          padding-bottom: 15px;
-          margin-bottom: 5px;
-        }
-
-        /* Orders card */
-        .orders-list {
-          display: flex;
-          flex-direction: column;
-          gap: 25px;
-        }
-
-        .order-group-card {
-          border: 1px solid var(--border-gray);
-          border-radius: 8px;
-          overflow: hidden;
-          background-color: white;
-          transition: var(--transition);
-        }
-
-        .order-group-card:hover {
-          box-shadow: 0 4px 20px rgba(0,0,0,0.02);
-        }
-
-        .order-card-header {
-          background-color: #fafbfc;
-          border-bottom: 1px solid var(--border-gray);
-          padding: 18px 24px;
+        .content-header {
           display: flex;
           justify-content: space-between;
-          align-items: center;
-          flex-wrap: wrap;
-          gap: 15px;
+          align-items: baseline;
+          border-bottom: 1px solid #F4F4F4;
+          padding-bottom: 20px;
         }
 
-        .header-meta-group {
-          display: flex;
-          gap: 30px;
-          flex-wrap: wrap;
+        .content-title {
+          font-family: var(--font-serif, serif);
+          font-size: 32px;
+          font-weight: 400;
+          color: #122742;
+          margin: 0;
         }
 
-        .meta-item {
+        .content-meta {
+          font-size: 12px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          color: #888;
+        }
+
+        .empty-state {
+          padding: 80px 0;
+          text-align: center;
           display: flex;
           flex-direction: column;
-          gap: 4px;
+          align-items: center;
+          gap: 30px;
+        }
+
+        .empty-state p {
+          font-size: 14px;
+          color: #888;
+        }
+
+        .btn-primary {
+          background-color: #122742;
+          color: #ffffff;
+          padding: 14px 32px;
+          font-size: 11px;
+          text-transform: uppercase;
+          letter-spacing: 1.5px;
+          text-decoration: none;
+          transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+          background-color: #C9A680;
+        }
+
+        .orders-grid {
+          display: flex;
+          flex-direction: column;
+          gap: 60px;
+        }
+
+        .order-card {
+          display: grid;
+          grid-template-columns: 200px 1fr;
+          gap: 60px;
+          padding-bottom: 60px;
+          border-bottom: 1px solid #F4F4F4;
+        }
+
+        .order-card.offset-card {
+          padding-left: 80px;
+        }
+
+        .order-meta {
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+        }
+
+        .meta-group {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
         }
 
         .meta-label {
           font-size: 10px;
-          font-weight: 700;
-          color: var(--text-gray);
           text-transform: uppercase;
-          letter-spacing: 0.8px;
+          letter-spacing: 1px;
+          color: #888;
         }
 
-        .meta-val {
+        .meta-value {
           font-size: 13px;
-          font-weight: 600;
-          color: var(--header-dark);
+          color: #122742;
         }
 
-        .header-order-id {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-end;
-          gap: 6px;
-        }
-
-        .id-label {
-          font-size: 12px;
-          font-weight: 700;
-          color: var(--header-dark);
-        }
-
-        .status-badge {
+        .status-pill {
+          display: inline-block;
+          padding: 6px 14px;
+          background-color: #EBE3DC;
+          color: #122742;
           font-size: 10px;
-          font-weight: 700;
           text-transform: uppercase;
-          padding: 2px 8px;
-          border-radius: 12px;
+          letter-spacing: 1px;
+          border-radius: 2px;
+          font-weight: 600;
+          width: fit-content;
+          margin-top: 10px;
         }
 
-        .order-card-body {
-          padding: 24px;
+        .order-items {
           display: flex;
           flex-direction: column;
-          gap: 20px;
+          gap: 30px;
         }
 
-        .order-product-row {
+        .order-item {
           display: flex;
-          gap: 20px;
+          gap: 30px;
           align-items: center;
         }
 
-        .order-product-row:not(:last-child) {
-          border-bottom: 1px solid var(--border-gray);
-          padding-bottom: 20px;
-        }
-
-        .product-media-block {
-          width: 80px;
-          height: 80px;
-          border-radius: 4px;
-          border: 1px solid var(--border-gray);
-          overflow: hidden;
-          flex-shrink: 0;
-        }
-
-        .product-media-block img {
-          width: 100%;
-          height: 100%;
+        .item-image {
+          width: 100px;
+          height: 120px;
+          background-color: #F4F4F4;
           object-fit: cover;
         }
 
-        .product-details-block {
+        .item-details {
           display: flex;
           flex-direction: column;
-          gap: 4px;
+          gap: 10px;
         }
 
-        .prod-name-title {
-          font-family: var(--font-serif);
-          font-size: 16px;
-          font-weight: 600;
-          color: var(--header-dark);
+        .item-name {
+          font-family: var(--font-serif, serif);
+          font-size: 18px;
+          color: #122742;
+          margin: 0;
         }
 
-        .prod-desc-meta {
+        .item-meta {
           font-size: 12px;
-          color: var(--text-gray);
+          color: #888;
+          margin: 0;
         }
 
-        /* Responsiveness */
+        .item-action {
+          font-size: 10px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          color: #C9A680;
+          text-decoration: none;
+          margin-top: 10px;
+          transition: color 0.3s ease;
+        }
+
+        .item-action:hover {
+          color: #122742;
+        }
+
         @media (max-width: 1024px) {
           .dashboard-container {
             grid-template-columns: 1fr;
-            gap: 40px;
+            gap: 60px;
+          }
+          .dashboard-nav {
+            position: static;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #F4F4F4;
+            padding-bottom: 20px;
+          }
+          .nav-links {
+            flex-direction: row;
+            gap: 30px;
+          }
+          .order-card.offset-card {
+            padding-left: 0;
           }
         }
 
         @media (max-width: 768px) {
-          .account-header-area {
-            padding: 30px 20px;
-          }
-          .dashboard-section {
+          .dashboard-wrap {
             padding: 40px 20px;
           }
-          .order-card-header {
-            flex-direction: column;
-            align-items: flex-start;
+          .order-card {
+            grid-template-columns: 1fr;
+            gap: 40px;
           }
-          .header-order-id {
-            align-items: flex-start;
-            border-top: 1px solid var(--border-gray);
-            padding-top: 10px;
-            width: 100%;
+          .nav-links {
+            display: none;
           }
         }
       `}} />

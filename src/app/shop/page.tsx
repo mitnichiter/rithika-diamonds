@@ -111,7 +111,7 @@ function ShopContent() {
           <div className="shop-banner-left">
             <div className="shop-banner-content">
               <div className="shop-breadcrumbs">
-                Home &gt; <span style={{ color: "var(--accent-blue)" }}>Shop</span>
+                Home &gt; <span style={{ color: "#C9A680" }}>Shop</span>
               </div>
               <h1 className="shop-banner-title">{selectedCategory === "All Jewellery" ? "Shop Exquisite Diamonds" : selectedCategory}</h1>
               <p className="shop-banner-description">Discover exquisite diamond jewellery crafted with precision, passion and perfection.</p>
@@ -157,7 +157,7 @@ function ShopContent() {
                   border: "none",
                   fontSize: "18px",
                   cursor: "pointer",
-                  color: "var(--header-dark)"
+                  color: "#122742"
                 }}>
                   <i className="fa-solid fa-xmark"></i>
                 </button>
@@ -181,10 +181,10 @@ function ShopContent() {
                         setSelectedCategory(cat.name);
                         setMobileMenuOpen(false);
                       }}
-                      style={selectedCategory === cat.name ? { fontWeight: 600, color: "var(--accent-blue)" } : {}}
+                      style={selectedCategory === cat.name ? { fontWeight: 600, color: "#C9A680" } : {}}
                     >
                       <span>
-                        <i className={`fa-solid ${cat.icon}`} style={selectedCategory === cat.name ? { color: "var(--accent-blue)" } : {}}></i> 
+                        <i className={`fa-solid ${cat.icon}`} style={selectedCategory === cat.name ? { color: "#C9A680" } : {}}></i> 
                         {cat.name}
                       </span>
                       <span className="count">({cat.count})</span>
@@ -200,7 +200,7 @@ function ShopContent() {
                 {/* Search Term Status */}
                 {searchFilter && (
                   <div style={{ marginBottom: "20px", display: "flex", gap: "8px", alignItems: "center" }}>
-                    <span style={{ fontSize: "12px", color: "var(--accent-blue)", fontWeight: 500 }}>
+                    <span style={{ fontSize: "12px", color: "#C9A680", fontWeight: 500 }}>
                       Query: "{searchFilter}"
                     </span>
                     <button onClick={() => setSearchFilter("")} style={{
@@ -232,7 +232,7 @@ function ShopContent() {
                             id={`metal-${metal.name}`} 
                             checked={selectedMetal.includes(metal.name)}
                             onChange={() => {}} // handled by li click
-                            style={selectedMetal.includes(metal.name) ? { backgroundColor: "var(--accent-blue)", borderColor: "var(--accent-blue)" } : {}}
+                            style={selectedMetal.includes(metal.name) ? { backgroundColor: "#122742", borderColor: "#122742" } : {}}
                           />
                           <label htmlFor={`metal-${metal.name}`} style={{ cursor: "pointer" }}>{metal.name}</label>
                         </div>
@@ -276,41 +276,43 @@ function ShopContent() {
                 </div>
               ) : (
                 <div className="catalog-grid">
-                  {filteredProducts.map((product) => {
+                  {filteredProducts.map((product, index) => {
                     const wishlisted = isInWishlist(product.id);
                     return (
                       <article className="catalog-card" key={product.id}>
-                        <div className="card-media">
-                          <button 
-                            className="wishlist-icon-btn" 
-                            onClick={() => toggleWishlist({ id: product.id, name: product.name, price: product.price, image: product.image })}
-                            aria-label="Wishlist"
-                            style={wishlisted ? { color: "#ef4444", backgroundColor: "rgba(255,255,255,0.9)" } : {}}
-                          >
-                            <i className={wishlisted ? "fa-solid fa-heart" : "fa-regular fa-heart"}></i>
-                          </button>
-                          <img src={product.image} alt={product.name} className="card-img" />
-                        </div>
-                        <div className="card-desc-box">
-                          <div className="product-titles-block">
-                            <Link href={`/product/${product.id}`} className="product-title-name-link" style={{ textDecoration: "none" }}>
-                              <h3 className="product-title-name">{product.name}</h3>
-                            </Link>
-                            <span className="product-price-label">${product.price.toLocaleString()}</span>
-                          </div>
-                          <div className="rating-wrapper">
-                            <div className="rating-stars" style={{ color: "var(--accent-blue)" }}>
-                              {Array.from({ length: 5 }).map((_, i) => (
-                                <i key={i} className={i < Math.floor(product.rating) ? "fa-solid fa-star" : "fa-regular fa-star"}></i>
-                              ))}
-                            </div>
-                            <span className="rating-count">({product.reviewsCount})</span>
-                          </div>
-                          <div className="card-actions-row">
-                            <button className="add-cart-pill-btn" style={{ backgroundColor: "var(--accent-blue)", borderColor: "var(--accent-blue)" }} onClick={() => handleQuickAdd(product)}>Add to Cart</button>
-                            <button className="quick-bag-btn" aria-label="Quick Add" onClick={() => handleQuickAdd(product)}>
-                              <i className="fa-solid fa-bag-shopping"></i>
+                        <div className="catalog-card-inner">
+                          <div className="card-media">
+                            <button 
+                              className="wishlist-icon-btn" 
+                              onClick={() => toggleWishlist({ id: product.id, name: product.name, price: product.price, image: product.image })}
+                              aria-label="Wishlist"
+                              style={wishlisted ? { color: "#ef4444", backgroundColor: "rgba(255,255,255,0.9)" } : {}}
+                            >
+                              <i className={wishlisted ? "fa-solid fa-heart" : "fa-regular fa-heart"}></i>
                             </button>
+                            <img src={product.image} alt={product.name} className="card-img" />
+                          </div>
+                          <div className="card-desc-box">
+                            <div className="product-titles-block">
+                              <Link href={`/product/${product.id}`} className="product-title-name-link" style={{ textDecoration: "none" }}>
+                                <h3 className="product-title-name">{product.name}</h3>
+                              </Link>
+                              <span className="product-price-label">${product.price.toLocaleString()}</span>
+                            </div>
+                            <div className="rating-wrapper">
+                              <div className="rating-stars" style={{ color: "#C9A680" }}>
+                                {Array.from({ length: 5 }).map((_, i) => (
+                                  <i key={i} className={i < Math.floor(product.rating) ? "fa-solid fa-star" : "fa-regular fa-star"}></i>
+                                ))}
+                              </div>
+                              <span className="rating-count">({product.reviewsCount})</span>
+                            </div>
+                            <div className="card-actions-row">
+                              <button className="add-cart-pill-btn" style={{ backgroundColor: "#122742", borderColor: "#122742" }} onClick={() => handleQuickAdd(product)}>Add to Cart</button>
+                              <button className="quick-bag-btn" aria-label="Quick Add" onClick={() => handleQuickAdd(product)}>
+                                <i className="fa-solid fa-bag-shopping"></i>
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </article>
@@ -328,7 +330,7 @@ function ShopContent() {
              ========================================== */}
         <section className="trust-banner">
           <div className="trust-card">
-            <div className="trust-icon" style={{ color: "var(--accent-blue)" }}><i className="fa-regular fa-gem"></i></div>
+            <div className="trust-icon" style={{ color: "#C9A680" }}><i className="fa-regular fa-gem"></i></div>
             <div className="trust-info">
               <span className="trust-title">100% Certified Diamonds</span>
               <span className="trust-subtitle">Authenticity Guaranteed</span>
@@ -336,7 +338,7 @@ function ShopContent() {
           </div>
           
           <div className="trust-card">
-            <div className="trust-icon" style={{ color: "var(--accent-blue)" }}><i className="fa-solid fa-industry"></i></div>
+            <div className="trust-icon" style={{ color: "#C9A680" }}><i className="fa-solid fa-industry"></i></div>
             <div className="trust-info">
               <span className="trust-title">In-house Manufacturing</span>
               <span className="trust-subtitle">Precision & Quality</span>
@@ -344,7 +346,7 @@ function ShopContent() {
           </div>
 
           <div className="trust-card">
-            <div className="trust-icon" style={{ color: "var(--accent-blue)" }}>
+            <div className="trust-icon" style={{ color: "#C9A680" }}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
             </div>
             <div className="trust-info">
@@ -354,7 +356,7 @@ function ShopContent() {
           </div>
 
           <div className="trust-card">
-            <div className="trust-icon" style={{ color: "var(--accent-blue)" }}><i className="fa-solid fa-shield-halved"></i></div>
+            <div className="trust-icon" style={{ color: "#C9A680" }}><i className="fa-solid fa-shield-halved"></i></div>
             <div className="trust-info">
               <span className="trust-title">Secure Payments</span>
               <span className="trust-subtitle">Safe & Encrypted</span>
@@ -362,7 +364,7 @@ function ShopContent() {
           </div>
 
           <div className="trust-card">
-            <div className="trust-icon" style={{ color: "var(--accent-blue)" }}><i className="fa-solid fa-rotate-left"></i></div>
+            <div className="trust-icon" style={{ color: "#C9A680" }}><i className="fa-solid fa-rotate-left"></i></div>
             <div className="trust-info">
               <span className="trust-title">Easy Returns</span>
               <span className="trust-subtitle">Hassle Free Returns</span>
@@ -375,7 +377,7 @@ function ShopContent() {
         /* Shop page specific styles */
         .shop-header-banner {
           position: relative;
-          background-color: var(--primary-navy);
+          background-color: #122742;
           display: flex;
           height: 260px;
           overflow: hidden;
@@ -424,7 +426,7 @@ function ShopContent() {
 
         .shop-banner-right {
           flex: 1;
-          background: linear-gradient(to right, var(--primary-navy) 0%, rgba(2, 11, 22, 0.5) 30%, transparent 100%),
+          background: linear-gradient(to right, #122742 0%, rgba(18, 39, 66, 0.5) 30%, transparent 100%),
                       url('https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1200&q=80') no-repeat center center / cover;
           position: relative;
           z-index: 1;
@@ -446,7 +448,7 @@ function ShopContent() {
         .mobile-filter-bar {
           display: none;
           width: 100%;
-          background-color: var(--light-blue-gray);
+          background-color: #EBE3DC;
           border: 1px solid var(--border-gray);
           padding: 12px 20px;
           border-radius: 4px;
@@ -460,7 +462,7 @@ function ShopContent() {
           border: none;
           font-size: 13px;
           font-weight: 600;
-          color: var(--header-dark);
+          color: #122742;
           cursor: pointer;
           display: flex;
           align-items: center;
@@ -491,7 +493,7 @@ function ShopContent() {
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 1px;
-          color: var(--header-dark);
+          color: #122742;
           margin-bottom: 18px;
         }
 
@@ -523,7 +525,7 @@ function ShopContent() {
 
         .category-filter-list li:hover,
         .category-filter-list li.active {
-          color: var(--header-dark);
+          color: #122742;
           font-weight: 600;
         }
 
@@ -572,8 +574,8 @@ function ShopContent() {
         }
 
         .checkbox-item-left input[type="checkbox"]:checked {
-          background-color: var(--header-dark);
-          border-color: var(--header-dark);
+          background-color: #122742;
+          border-color: #122742;
         }
 
         .checkbox-item-left input[type="checkbox"]:checked::before {
@@ -585,7 +587,7 @@ function ShopContent() {
         }
 
         .checkbox-item:hover {
-          color: var(--header-dark);
+          color: #122742;
         }
 
         .checkbox-item .count {
@@ -596,7 +598,7 @@ function ShopContent() {
           width: 100%;
           border: 1px solid var(--border-gray);
           background-color: var(--white);
-          color: var(--header-dark);
+          color: #122742;
           padding: 12px;
           font-size: 11px;
           font-weight: 700;
@@ -612,9 +614,9 @@ function ShopContent() {
         }
 
         .clear-filters-btn:hover {
-          background-color: var(--header-dark);
+          background-color: #122742;
           color: var(--white);
-          border-color: var(--header-dark);
+          border-color: #122742;
         }
 
         /* CATALOG REGION */
@@ -656,7 +658,7 @@ function ShopContent() {
         .select-dropdown-wrap select {
           border: 1px solid var(--border-gray);
           background-color: var(--white);
-          color: var(--header-dark);
+          color: #122742;
           padding: 8px 12px;
           font-size: 13px;
           font-weight: 500;
@@ -667,31 +669,64 @@ function ShopContent() {
         }
 
         .select-dropdown-wrap select:hover {
-          border-color: var(--header-dark);
+          border-color: #122742;
         }
 
-        /* Catalog Grid of Cards */
+        /* Asymmetrical Bento Grid */
         .catalog-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(12, 1fr);
+          grid-auto-rows: minmax(380px, auto);
           gap: 24px;
         }
 
+        /* Double-Bezel Architecture */
         .catalog-card {
-          background-color: var(--white);
-          border-radius: 8px;
-          border: 1px solid var(--border-gray);
-          overflow: hidden;
+          background-color: #FAFAFA;
+          border: 1px solid #EAEAEA;
+          border-radius: 2rem;
+          padding: 0.5rem;
           display: flex;
           flex-direction: column;
-          transition: var(--transition);
+          transition: transform 0.6s cubic-bezier(0.32,0.72,0,1);
+          grid-column: span 4;
+        }
+
+        .catalog-card-inner {
+          background-color: #FFFFFF;
+          border-radius: calc(2rem - 0.5rem);
+          box-shadow: inset 0 1px 1px rgba(255,255,255,0.8), 0 4px 12px rgba(0,0,0,0.03);
+          display: flex;
+          flex-direction: column;
+          flex-grow: 1;
+          overflow: hidden;
           position: relative;
+        }
+
+        /* Asymmetrical pattern */
+        .catalog-card:nth-child(7n + 1) {
+          grid-column: span 8;
+          grid-row: span 2;
+        }
+        .catalog-card:nth-child(7n + 2),
+        .catalog-card:nth-child(7n + 3) {
+          grid-column: span 4;
+          grid-row: span 1;
+        }
+        .catalog-card:nth-child(7n + 4),
+        .catalog-card:nth-child(7n + 5),
+        .catalog-card:nth-child(7n + 6) {
+          grid-column: span 4;
+          grid-row: span 1;
+        }
+        .catalog-card:nth-child(7n + 7) {
+          grid-column: span 12;
+          grid-row: span 1;
         }
 
         .catalog-card:hover {
           transform: translateY(-6px);
-          box-shadow: 0 12px 30px rgba(2, 16, 36, 0.06);
-          border-color: #cbd5e1;
+          border-color: #122742;
         }
 
         .card-media {
@@ -700,6 +735,16 @@ function ShopContent() {
           width: 100%;
           overflow: hidden;
           background-color: #f8fafc;
+          flex-shrink: 0;
+        }
+
+        /* Adjust media height for taller cards */
+        .catalog-card:nth-child(7n + 1) .card-media {
+          height: 100%;
+          min-height: 500px;
+        }
+        .catalog-card:nth-child(7n + 7) .card-media {
+          height: 400px;
         }
 
         .card-img {
@@ -719,7 +764,7 @@ function ShopContent() {
           right: 15px;
           background: none;
           border: none;
-          color: var(--header-dark);
+          color: #122742;
           font-size: 18px;
           cursor: pointer;
           z-index: 5;
@@ -743,6 +788,17 @@ function ShopContent() {
           flex-direction: column;
           gap: 12px;
           flex-grow: 1;
+          background: #FFFFFF;
+        }
+
+        /* For the large spanning cards, overlay the text or keep it at bottom */
+        .catalog-card:nth-child(7n + 1) .card-desc-box {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.9) 60%, rgba(255,255,255,0) 100%);
+          padding-top: 60px;
         }
 
         .product-titles-block {
@@ -754,19 +810,19 @@ function ShopContent() {
         .product-title-name {
           font-size: 14px;
           font-weight: 600;
-          color: var(--header-dark);
+          color: #122742;
           letter-spacing: 0.2px;
           transition: var(--transition);
         }
 
         .product-title-name:hover {
-          color: var(--accent-blue);
+          color: #C9A680;
         }
 
         .product-price-label {
           font-size: 15px;
           font-weight: 600;
-          color: var(--header-dark);
+          color: #122742;
         }
 
         .rating-wrapper {
@@ -797,7 +853,7 @@ function ShopContent() {
         .add-cart-pill-btn {
           flex-grow: 1;
           color: var(--white);
-          border: 1px solid var(--accent-blue);
+          border: 1px solid #122742;
           border-radius: 4px;
           font-size: 11px;
           font-weight: 600;
@@ -816,7 +872,7 @@ function ShopContent() {
         .quick-bag-btn {
           background: none;
           border: 1px solid var(--border-gray);
-          color: var(--header-dark);
+          color: #122742;
           border-radius: 4px;
           width: 38px;
           height: 36px;
@@ -829,13 +885,13 @@ function ShopContent() {
         }
 
         .quick-bag-btn:hover {
-          border-color: var(--header-dark);
-          background-color: var(--light-blue-gray);
+          border-color: #122742;
+          background-color: #EBE3DC;
         }
 
         /* TRUST BANNER */
         .trust-banner {
-          background-color: var(--light-blue-gray);
+          background-color: #EBE3DC;
           border-top: 1px solid var(--border-gray);
           border-bottom: 1px solid var(--border-gray);
           padding: 30px 60px;
@@ -859,7 +915,7 @@ function ShopContent() {
 
         .trust-icon {
           font-size: 28px;
-          color: var(--header-dark);
+          color: #122742;
           flex-shrink: 0;
           display: flex;
           align-items: center;
@@ -875,7 +931,7 @@ function ShopContent() {
         .trust-title {
           font-size: 13px;
           font-weight: 700;
-          color: var(--header-dark);
+          color: #122742;
           letter-spacing: 0.3px;
         }
 
@@ -900,7 +956,20 @@ function ShopContent() {
             display: flex !important;
           }
           .catalog-grid {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(8, 1fr);
+          }
+          .catalog-card {
+            grid-column: span 4 !important;
+            grid-row: span 1 !important;
+          }
+          .catalog-card:nth-child(7n + 1) .card-media {
+            height: 310px;
+            min-height: auto;
+          }
+          .catalog-card:nth-child(7n + 1) .card-desc-box {
+            position: relative;
+            background: #FFFFFF;
+            padding-top: 24px;
           }
           .trust-banner {
             grid-template-columns: repeat(3, 1fr);
@@ -932,6 +1001,9 @@ function ShopContent() {
           }
           .catalog-grid {
             grid-template-columns: 1fr;
+          }
+          .catalog-card {
+            grid-column: span 1 !important;
           }
           .trust-banner {
             grid-template-columns: 1fr;

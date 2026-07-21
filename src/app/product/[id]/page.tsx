@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { useApp, Product } from "@/context/AppContext";
+import { useApp } from "@/context/AppContext";
 
 export default function ProductDetailsPage() {
   const params = useParams();
@@ -12,22 +12,22 @@ export default function ProductDetailsPage() {
 
   const id = params?.id as string;
 
-  // Find the selected product, default to floral-cluster-ring
   const product = useMemo(() => {
     return products.find((p) => p.id === id) || products[0];
   }, [products, id]);
 
   const wishlisted = isInWishlist(product.id);
 
-  // States
   const [selectedMetal, setSelectedMetal] = useState("18K White Gold");
   const [selectedSize, setSelectedSize] = useState("10");
-  const [activeTab, setActiveTab] = useState("Description");
   const [mainImage, setMainDisplayImage] = useState(product.image);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  // Sync main image when product changes
-  React.useEffect(() => {
+  useEffect(() => {
     setMainDisplayImage(product.image);
+    // Trigger entry animations
+    const timer = setTimeout(() => setIsLoaded(true), 100);
+    return () => clearTimeout(timer);
   }, [product]);
 
   const handleAddToCart = () => {
@@ -42,10 +42,6 @@ export default function ProductDetailsPage() {
     });
   };
 
-  const relatedProducts = useMemo(() => {
-    return products.filter((p) => p.id !== product.id).slice(0, 4);
-  }, [products, product]);
-
   const thumbImages = [
     product.image,
     "https://images.unsplash.com/photo-1543294001-f7cbfe92237e?auto=format&fit=crop&w=600&q=80",
@@ -54,832 +50,179 @@ export default function ProductDetailsPage() {
   ];
 
   return (
-    <>
-      <main className="product-details-wrap">
-        <div className="product-container">
+    <main className="min-h-[100dvh] bg-[#EBE3DC] text-[#122742] selection:bg-[#C9A680] selection:text-[#122742] overflow-hidden">
+      <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 py-24 lg:py-40">
+        
+        {/* The Editorial Split */}
+        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
           
-          {/* Breadcrumbs */}
-          <div className="product-breadcrumbs">
-            Home &gt; Shop &gt; {product.category} &gt; <span style={{ color: "var(--accent-blue)" }}>{product.name}</span>
-          </div>
-
-          {/* Main Configurations Split */}
-          <div className="product-main-grid">
+          {/* Left: Massive Typography */}
+          <div className={`w-full lg:w-1/2 flex flex-col gap-12 transition-all duration-1000 ease-[cubic-bezier(0.32,0.72,0,1)] ${isLoaded ? 'translate-y-0 blur-0 opacity-100' : 'translate-y-16 blur-md opacity-0'}`}>
             
-            {/* Left Image Gallery Component */}
-            <div className="product-gallery">
-              <div className="thumb-column">
-                {thumbImages.map((imgUrl, index) => (
-                  <div 
-                    key={index} 
-                    className={`thumb-box ${mainImage === imgUrl ? "active" : ""}`}
-                    onClick={() => setMainDisplayImage(imgUrl)}
-                    style={mainImage === imgUrl ? { borderColor: "var(--accent-blue)" } : {}}
-                  >
-                    <img src={imgUrl} alt={`${product.name} thumbnail ${index + 1}`} />
-                  </div>
+            {/* Breadcrumbs */}
+            <div className="text-[10px] uppercase tracking-[0.2em] font-medium opacity-60">
+              Home / Shop / {product.category} / {product.name}
+            </div>
+
+            {/* Title & Price */}
+            <div className="flex flex-col gap-6">
+              <div className="inline-flex items-center gap-3">
+                <span className="rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.2em] font-medium border border-[#122742]/20">
+                  Exquisite Diamond
+                </span>
+                <span className="rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.2em] font-medium bg-[#C9A680] text-[#122742]">
+                  IGI Certified
+                </span>
+              </div>
+              <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[1.1] tracking-tight">
+                {product.name}
+              </h1>
+              <div className="text-3xl md:text-4xl font-light tracking-wide">
+                ${product.price.toLocaleString()}
+              </div>
+            </div>
+
+            {/* Description */}
+            <div className="text-lg md:text-xl leading-relaxed opacity-80 max-w-2xl font-light">
+              {product.description} Elegant curves and high art craftsmanship merge to symbolize love and femininity. Designed to draw light from all directions to amplify sparkle.
+            </div>
+
+            {/* Details Accordion / List */}
+            <div className="flex flex-col gap-6 pt-8 border-t border-[#122742]/10">
+              <h3 className="text-sm uppercase tracking-[0.2em] font-medium">The Details</h3>
+              <ul className="flex flex-col gap-4">
+                {[
+                  { label: "Diamond Type", value: "Natural Diamonds" },
+                  { label: "Clarity & Color", value: "VVS1, F-G Color" },
+                  { label: "Shape", value: "Round Brilliant" },
+                  { label: "Total Carat", value: "0.75 - 1.25 Ct (Approx.)" }
+                ].map((detail, idx) => (
+                  <li key={idx} className="flex justify-between items-center py-3 border-b border-[#122742]/5">
+                    <span className="opacity-60">{detail.label}</span>
+                    <span className="font-medium">{detail.value}</span>
+                  </li>
                 ))}
-              </div>
-
-              <div className="main-display-box" style={{ background: "linear-gradient(135deg, #05162e 0%, var(--primary-navy) 100%)" }}>
-                <img src="/logo.png" alt="Rithika Diamonds Badge" className="brand-logo-badge" width={72} height={72} style={{ opacity: 0.15, objectFit: "contain", marginLeft: "-14px", marginRight: "-14px", marginTop: "-14px", marginBottom: "-14px" }} />
-                <img className="main-display-img" src={mainImage} alt={product.name} />
-              </div>
-            </div>
-
-            {/* Right Product Settings & Metadata Panel */}
-            <div className="product-config-panel">
-              
-              <div className="bestseller-badge">Exquisite Diamond</div>
-              <h1 className="product-main-title">{product.name}</h1>
-              
-              <div className="meta-rating-row">
-                <span>SKU: RD-{product.category.toUpperCase().slice(0, 3)}-{product.id.slice(0, 4).toUpperCase()}</span>
-                <span>|</span>
-                <div className="star-block" style={{ color: "var(--accent-blue)" }}>
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <i key={i} className={i < Math.floor(product.rating) ? "fa-solid fa-star" : "fa-regular fa-star"}></i>
-                  ))}
-                </div>
-                <span>({product.reviewsCount} Reviews)</span>
-              </div>
-
-              <div className="product-price-block">
-                <span className="panel-price">${product.price.toLocaleString()}</span>
-                <span className="tax-disclaimer">(Complimentary Insured Shipping &amp; Duties Included)</span>
-              </div>
-
-              <div className="certified-callout">
-                <i className="fa-regular fa-gem" style={{ color: "var(--accent-blue)" }}></i> True brilliance. Certified excellence.
-              </div>
-
-              {/* Config Option: Metal selection */}
-              <div>
-                <div className="config-label-title">Metal</div>
-                <div className="metal-button-group">
-                  {["18K White Gold", "18K Yellow Gold", "18K Rose Gold", "Platinum"].map((metal) => (
-                    <button 
-                      key={metal}
-                      className={`metal-select-btn ${selectedMetal === metal ? "active" : ""}`}
-                      onClick={() => setSelectedMetal(metal)}
-                      style={selectedMetal === metal ? { backgroundColor: "var(--accent-blue)", borderColor: "var(--accent-blue)", color: "white" } : {}}
-                    >
-                      {metal} {metal === "Platinum" && <i className="fa-solid fa-sparkles" style={{ color: "var(--accent-blue)", marginLeft: "4px" }}></i>}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Config Option: Size Selection */}
-              <div>
-                <div className="config-label-title">
-                  <span>Ring / Jewellery Size</span>
-                  <a href="#" className="size-ruler-link"><i className="fa-solid fa-ruler" style={{ color: "var(--accent-blue)" }}></i> Find your size</a>
-                </div>
-                <div className="size-button-group">
-                  {["6", "7", "8", "9", "10", "11", "12"].map((size) => (
-                    <button 
-                      key={size}
-                      className={`size-select-btn ${selectedSize === size ? "active" : ""}`}
-                      onClick={() => setSelectedSize(size)}
-                      style={selectedSize === size ? { backgroundColor: "var(--accent-blue)", borderColor: "var(--accent-blue)", color: "white" } : {}}
-                    >
-                      {size}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* CTA Buttons */}
-              <div className="cta-row-panel">
-                <button className="add-cart-cta-btn" style={{ backgroundColor: "var(--accent-blue)", borderColor: "var(--accent-blue)" }} onClick={handleAddToCart}>
-                  <i className="fa-solid fa-cart-shopping"></i> Add to Cart
-                </button>
-                <button 
-                  className="add-wishlist-cta-btn" 
-                  onClick={() => toggleWishlist({ id: product.id, name: product.name, price: product.price, image: product.image })}
-                  style={wishlisted ? { color: "#ef4444", borderColor: "#fca5a5", backgroundColor: "#fef2f2" } : {}}
-                >
-                  <i className={wishlisted ? "fa-solid fa-heart" : "fa-regular fa-heart"}></i>
-                  {wishlisted ? "Wishlisted" : "Add to Wishlist"}
-                </button>
-              </div>
-
-              {/* Micro Features trust indicators */}
-              <div className="panel-trust-grid">
-                <div className="micro-trust-card">
-                  <i className="fa-solid fa-truck micro-trust-icon" style={{ color: "var(--accent-blue)" }}></i>
-                  <div className="micro-trust-info">
-                    <span className="micro-trust-title">Free Shipping</span>
-                    <span className="micro-trust-subtitle">Fully Insured Delivery</span>
-                  </div>
-                </div>
-                <div className="micro-trust-card">
-                  <i className="fa-solid fa-shield-halved micro-trust-icon" style={{ color: "var(--accent-blue)" }}></i>
-                  <div className="micro-trust-info">
-                    <span className="micro-trust-title">Secure Payments</span>
-                    <span className="micro-trust-subtitle">Safe &amp; Encrypted</span>
-                  </div>
-                </div>
-                <div className="micro-trust-card">
-                  <i className="fa-solid fa-rotate-left micro-trust-icon" style={{ color: "var(--accent-blue)" }}></i>
-                  <div className="micro-trust-info">
-                    <span className="micro-trust-title">Easy Returns</span>
-                    <span className="micro-trust-subtitle">30 Day Returns</span>
-                  </div>
-                </div>
-                <div className="micro-trust-card">
-                  <i className="fa-regular fa-gem micro-trust-icon" style={{ color: "var(--accent-blue)" }}></i>
-                  <div className="micro-trust-info">
-                    <span className="micro-trust-title">Certification</span>
-                    <span className="micro-trust-subtitle">IGI Certified Excellence</span>
-                  </div>
-                </div>
-              </div>
-
+              </ul>
             </div>
 
           </div>
 
-          {/* Customize Option Box */}
-          <section className="customize-banner-box">
-            <div className="cust-banner-text">
-              <h3>Want it in your own style?</h3>
-              <p>We specialize in custom-made diamond jewellery. Start the designer to create your masterpiece.</p>
-            </div>
-            <Link href="/bespoke" className="cust-banner-btn">
-              <i className="fa-solid fa-pen-fancy" style={{ color: "var(--accent-blue)" }}></i> Customize This Design
-            </Link>
-          </section>
-
-          {/* Technical Spec Tabs System */}
-          <section className="info-tabs-wrapper">
-            <div className="tabs-header">
-              {["Description", "Diamond Details", "Shipping & Returns"].map((tab) => (
-                <button 
-                  key={tab}
-                  className={`tab-trigger ${activeTab === tab ? "active" : ""}`}
-                  onClick={() => setActiveTab(tab)}
-                  style={activeTab === tab ? { color: "var(--accent-blue)" } : {}}
-                >
-                  {tab}
-                </button>
-              ))}
-            </div>
-
-            <div className="tab-panel-grid">
-              {activeTab === "Description" && (
-                <div className="tab-panel-desc">
-                  <p className="tab-panel-text">
-                    {product.description} Elegant curves and high art craftsmanship merge to symbolize love and femininity. Designed to draw light from all directions to amplify sparkle.
-                  </p>
-                  <ul className="tab-panel-bullets">
-                    <li><i className="fa-solid fa-circle-check" style={{ color: "var(--accent-blue)" }}></i> Exquisite handcrafted setting for maximum brilliance</li>
-                    <li><i className="fa-solid fa-circle-check" style={{ color: "var(--accent-blue)" }}></i> Crafted with ethically sourced, certified conflict-free diamonds</li>
-                    <li><i className="fa-solid fa-circle-check" style={{ color: "var(--accent-blue)" }}></i> Perfect for engagements, anniversaries &amp; special celebrations</li>
-                    <li><i className="fa-solid fa-circle-check" style={{ color: "var(--accent-blue)" }}></i> Available in multiple precious metals and custom sizing</li>
-                  </ul>
-                </div>
-              )}
-
-              {activeTab === "Diamond Details" && (
-                <div className="tab-panel-specs">
-                  <div className="spec-table-list">
-                    <div className="spec-row">
-                      <span className="spec-key">Precious Metal</span>
-                      <span className="spec-val">{selectedMetal}</span>
-                    </div>
-                    <div className="spec-row">
-                      <span className="spec-key">Diamond Type</span>
-                      <span className="spec-val">Natural Diamonds</span>
-                    </div>
-                    <div className="spec-row">
-                      <span className="spec-key">Clarity &amp; Color</span>
-                      <span className="spec-val">VVS1, F-G Color</span>
-                    </div>
-                    <div className="spec-row">
-                      <span className="spec-key">Diamond Shape</span>
-                      <span className="spec-val">Round Brilliant</span>
-                    </div>
-                    <div className="spec-row">
-                      <span className="spec-key">Total Carat Weight</span>
-                      <span className="spec-val">0.75 - 1.25 Ct (Approx.)</span>
-                    </div>
-                    <div className="spec-row">
-                      <span className="spec-key">Setting Type</span>
-                      <span className="spec-val">Multi-Prong Luxury Setting</span>
-                    </div>
-                    <div className="spec-row">
-                      <span className="spec-key">Certification</span>
-                      <span className="spec-val">IGI Certified Authenticity</span>
-                    </div>
+          {/* Right: Sticky Interactive */}
+          <div className={`w-full lg:w-1/2 relative transition-all duration-1000 delay-200 ease-[cubic-bezier(0.32,0.72,0,1)] ${isLoaded ? 'translate-y-0 blur-0 opacity-100' : 'translate-y-16 blur-md opacity-0'}`}>
+            <div className="lg:sticky lg:top-32 flex flex-col gap-12">
+              
+              {/* Image Gallery (Double-Bezel) */}
+              <div className="p-2 rounded-[2rem] bg-white/20 ring-1 ring-[#122742]/5 backdrop-blur-xl">
+                <div className="relative rounded-[calc(2rem-0.5rem)] overflow-hidden bg-[#122742]/5 aspect-[4/5] shadow-[inset_0_1px_1px_rgba(255,255,255,0.5)]">
+                  <img 
+                    src={mainImage} 
+                    alt={product.name} 
+                    className="w-full h-full object-cover transition-transform duration-1000 ease-[cubic-bezier(0.32,0.72,0,1)] hover:scale-105"
+                  />
+                  {/* Thumbnails */}
+                  <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 p-2 rounded-full bg-white/80 backdrop-blur-md ring-1 ring-black/5">
+                    {thumbImages.map((imgUrl, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setMainDisplayImage(imgUrl)}
+                        className={`w-12 h-12 rounded-full overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${mainImage === imgUrl ? 'ring-2 ring-[#122742] scale-110' : 'opacity-60 hover:opacity-100'}`}
+                      >
+                        <img src={imgUrl} alt={`Thumb ${index}`} className="w-full h-full object-cover" />
+                      </button>
+                    ))}
                   </div>
                 </div>
-              )}
+              </div>
 
-              {activeTab === "Shipping & Returns" && (
-                <div className="tab-panel-desc">
-                  <p className="tab-panel-text">
-                    Every piece of Rithika jewellery is delivered with complimentary, fully insured shipping. Out of security and care, packages are delivered in discrete, high-end packaging.
-                  </p>
-                  <ul className="tab-panel-bullets">
-                    <li><i className="fa-solid fa-circle-check" style={{ color: "var(--accent-blue)" }}></i> Insured transit with signature required upon delivery</li>
-                    <li><i className="fa-solid fa-circle-check" style={{ color: "var(--accent-blue)" }}></i> Complimentary 30-day return policy for peace of mind</li>
-                    <li><i className="fa-solid fa-circle-check" style={{ color: "var(--accent-blue)" }}></i> Included high-jewellery case and professional cleaning cloth</li>
-                  </ul>
-                </div>
-              )}
-            </div>
-          </section>
-
-          {/* Related Products Section */}
-          <section className="related-products-section" style={{ borderTop: "1px solid var(--border-gray)", paddingTop: "50px" }}>
-            <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "28px", fontWeight: 400, textAlign: "center", marginBottom: "40px" }}>You May Also Fall In Love With</h2>
-            
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "24px" }}>
-              {relatedProducts.map((p) => (
-                <article key={p.id} style={{ border: "1px solid var(--border-gray)", borderRadius: "8px", overflow: "hidden", backgroundColor: "white" }}>
-                  <div style={{ position: "relative", height: "200px" }}>
-                    <img src={p.image} alt={p.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              {/* Configuration Panel (Double-Bezel) */}
+              <div className="p-2 rounded-[2rem] bg-white/20 ring-1 ring-[#122742]/5 backdrop-blur-xl">
+                <div className="flex flex-col gap-8 p-6 md:p-8 rounded-[calc(2rem-0.5rem)] bg-white/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.5)]">
+                  
+                  {/* Metal Selection */}
+                  <div className="flex flex-col gap-4">
+                    <div className="text-xs uppercase tracking-[0.2em] font-medium flex justify-between">
+                      <span>Metal</span>
+                      <span className="opacity-60">{selectedMetal}</span>
+                    </div>
+                    <div className="flex flex-wrap gap-3">
+                      {["18K White Gold", "18K Yellow Gold", "18K Rose Gold", "Platinum"].map((metal) => (
+                        <button
+                          key={metal}
+                          onClick={() => setSelectedMetal(metal)}
+                          className={`px-5 py-3 rounded-full text-xs font-medium transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${
+                            selectedMetal === metal 
+                              ? 'bg-[#122742] text-[#EBE3DC] scale-105' 
+                              : 'bg-white/50 text-[#122742] hover:bg-white ring-1 ring-[#122742]/10'
+                          }`}
+                        >
+                          {metal}
+                        </button>
+                      ))}
+                    </div>
                   </div>
-                  <div style={{ padding: "20px", display: "flex", flexDirection: "column", gap: "10px" }}>
-                    <h3 style={{ fontSize: "14px", fontWeight: 600, color: "var(--header-dark)", margin: 0 }}>{p.name}</h3>
-                    <span style={{ fontSize: "14px", fontWeight: 700 }}>${p.price.toLocaleString()}</span>
+
+                  {/* Size Selection */}
+                  <div className="flex flex-col gap-4">
+                    <div className="text-xs uppercase tracking-[0.2em] font-medium flex justify-between">
+                      <span>Size</span>
+                      <button className="opacity-60 hover:opacity-100 underline underline-offset-4 transition-opacity">Size Guide</button>
+                    </div>
+                    <div className="flex flex-wrap gap-3">
+                      {["6", "7", "8", "9", "10", "11", "12"].map((size) => (
+                        <button
+                          key={size}
+                          onClick={() => setSelectedSize(size)}
+                          className={`w-12 h-12 rounded-full text-xs font-medium transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] flex items-center justify-center ${
+                            selectedSize === size 
+                              ? 'bg-[#122742] text-[#EBE3DC] scale-110' 
+                              : 'bg-white/50 text-[#122742] hover:bg-white ring-1 ring-[#122742]/10'
+                          }`}
+                        >
+                          {size}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* CTA Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                    {/* Add to Cart - Nested Button Architecture */}
                     <button 
-                      onClick={() => router.push(`/product/${p.id}`)}
-                      style={{
-                        backgroundColor: "var(--accent-blue)",
-                        color: "white",
-                        border: "none",
-                        padding: "8px 12px",
-                        fontSize: "11px",
-                        fontWeight: 600,
-                        textTransform: "uppercase",
-                        letterSpacing: "1px",
-                        borderRadius: "4px",
-                        cursor: "pointer",
-                        marginTop: "5px"
-                      }}
+                      onClick={handleAddToCart}
+                      className="group relative flex-1 flex items-center justify-between bg-[#122742] text-[#EBE3DC] rounded-full pl-6 pr-2 py-2 overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98]"
                     >
-                      View Details
+                      <span className="text-xs uppercase tracking-[0.15em] font-bold z-10">Add to Cart</span>
+                      <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-1 group-hover:-translate-y-[1px] group-hover:scale-105 group-hover:bg-[#C9A680] group-hover:text-[#122742] z-10">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                      </div>
+                      {/* Hover background effect */}
+                      <div className="absolute inset-0 bg-[#0a1626] translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] rounded-full"></div>
+                    </button>
+
+                    {/* Wishlist Button */}
+                    <button 
+                      onClick={() => toggleWishlist({ id: product.id, name: product.name, price: product.price, image: product.image })}
+                      className={`group relative flex items-center justify-center w-14 h-14 rounded-full transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] ${
+                        wishlisted 
+                          ? 'bg-[#C9A680] text-[#122742]' 
+                          : 'bg-white/50 text-[#122742] hover:bg-white ring-1 ring-[#122742]/10'
+                      }`}
+                    >
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill={wishlisted ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] ${wishlisted ? 'scale-110' : 'group-hover:scale-110'}`}>
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                      </svg>
                     </button>
                   </div>
-                </article>
-              ))}
+
+                </div>
+              </div>
             </div>
-          </section>
+          </div>
 
         </div>
-      </main>
-
-      <style dangerouslySetInnerHTML={{ __html: `
-        /* Scoped product details styles */
-        .product-details-wrap {
-          padding: 30px 60px 80px 60px;
-          background-color: var(--white);
-        }
-
-        .product-container {
-          max-width: 1400px;
-          margin: 0 auto;
-        }
-
-        .product-breadcrumbs {
-          font-size: 12px;
-          color: var(--text-gray);
-          margin-bottom: 30px;
-          font-weight: 400;
-          letter-spacing: 0.3px;
-        }
-
-        .product-main-grid {
-          display: grid;
-          grid-template-columns: 1.1fr 0.9fr;
-          gap: 50px;
-          margin-bottom: 60px;
-        }
-
-        .product-gallery {
-          display: flex;
-          gap: 20px;
-        }
-
-        .thumb-column {
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
-          width: 80px;
-          flex-shrink: 0;
-        }
-
-        .thumb-box {
-          width: 100%;
-          height: 80px;
-          border-radius: 4px;
-          border: 1px solid var(--border-gray);
-          overflow: hidden;
-          cursor: pointer;
-          position: relative;
-          transition: var(--transition);
-        }
-
-        .thumb-box img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        .thumb-box.active, .thumb-box:hover {
-          border-color: var(--header-dark);
-        }
-
-        .main-display-box {
-          flex-grow: 1;
-          height: 580px;
-          border-radius: 6px;
-          overflow: hidden;
-          position: relative;
-        }
-
-        .main-display-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        .brand-logo-badge {
-          position: absolute;
-          top: 25px;
-          right: 25px;
-          pointer-events: none;
-        }
-
-        .product-config-panel {
-          display: flex;
-          flex-direction: column;
-          gap: 25px;
-        }
-
-        .bestseller-badge {
-          font-size: 10px;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 1.5px;
-          color: var(--text-gray);
-        }
-
-        .product-main-title {
-          font-family: var(--font-serif);
-          font-size: 36px;
-          font-weight: 400;
-          line-height: 1.15;
-        }
-
-        .meta-rating-row {
-          display: flex;
-          align-items: center;
-          gap: 15px;
-          font-size: 13px;
-          color: var(--text-gray);
-        }
-
-        .star-block {
-          font-size: 11px;
-          display: flex;
-          gap: 2px;
-        }
-
-        .product-price-block {
-          display: flex;
-          flex-direction: column;
-          gap: 4px;
-        }
-
-        .panel-price {
-          font-size: 28px;
-          font-weight: 700;
-          color: var(--header-dark);
-        }
-
-        .tax-disclaimer {
-          font-size: 11px;
-          color: var(--text-gray);
-          font-weight: 400;
-        }
-
-        .certified-callout {
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          background-color: var(--light-blue-gray);
-          padding: 12px 18px;
-          border-radius: 4px;
-          font-size: 12px;
-          font-weight: 600;
-          color: var(--header-dark);
-          width: fit-content;
-        }
-
-        .config-label-title {
-          font-size: 11px;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 1.5px;
-          color: var(--header-dark);
-          margin-bottom: 12px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-
-        .metal-button-group {
-          display: flex;
-          gap: 10px;
-          flex-wrap: wrap;
-        }
-
-        .metal-select-btn {
-          background: none;
-          border: 1px solid var(--border-gray);
-          color: var(--text-gray);
-          padding: 10px 18px;
-          font-size: 12px;
-          font-weight: 600;
-          border-radius: 4px;
-          cursor: pointer;
-          transition: var(--transition);
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-        }
-
-        .metal-select-btn:hover {
-          border-color: var(--header-dark);
-          color: var(--header-dark);
-        }
-
-        .metal-select-btn.active {
-          background-color: var(--header-dark);
-          border-color: var(--header-dark);
-          color: var(--white);
-        }
-
-        .size-ruler-link {
-          font-size: 11px;
-          text-transform: none;
-          color: var(--text-gray);
-          text-decoration: none;
-          font-weight: 500;
-          display: inline-flex;
-          align-items: center;
-          gap: 5px;
-        }
-
-        .size-button-group {
-          display: flex;
-          gap: 8px;
-          flex-wrap: wrap;
-        }
-
-        .size-select-btn {
-          background: none;
-          border: 1px solid var(--border-gray);
-          color: var(--text-gray);
-          width: 40px;
-          height: 40px;
-          font-size: 13px;
-          font-weight: 600;
-          border-radius: 4px;
-          cursor: pointer;
-          transition: var(--transition);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .size-select-btn:hover {
-          border-color: var(--header-dark);
-          color: var(--header-dark);
-        }
-
-        .size-select-btn.active {
-          background-color: var(--header-dark);
-          border-color: var(--header-dark);
-          color: var(--white);
-        }
-
-        .cta-row-panel {
-          display: flex;
-          gap: 15px;
-          margin-top: 10px;
-        }
-
-        .add-cart-cta-btn {
-          flex: 1.5;
-          color: var(--white);
-          border: 1px solid var(--accent-blue);
-          padding: 16px 24px;
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 1.5px;
-          text-transform: uppercase;
-          border-radius: 4px;
-          cursor: pointer;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          transition: var(--transition);
-        }
-
-        .add-cart-cta-btn:hover {
-          opacity: 0.9;
-        }
-
-        .add-wishlist-cta-btn {
-          flex: 1;
-          background: none;
-          border: 1px solid var(--border-gray);
-          color: var(--header-dark);
-          padding: 16px 24px;
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 1.5px;
-          text-transform: uppercase;
-          border-radius: 4px;
-          cursor: pointer;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          transition: var(--transition);
-        }
-
-        .add-wishlist-cta-btn:hover {
-          border-color: var(--header-dark);
-          background-color: var(--light-blue-gray);
-        }
-
-        .panel-trust-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 15px;
-          border-top: 1px solid var(--border-gray);
-          padding-top: 25px;
-          margin-top: 10px;
-        }
-
-        .micro-trust-card {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-        }
-
-        .micro-trust-icon {
-          font-size: 20px;
-        }
-
-        .micro-trust-info {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .micro-trust-title {
-          font-size: 11px;
-          font-weight: 700;
-          color: var(--header-dark);
-        }
-
-        .micro-trust-subtitle {
-          font-size: 10px;
-          color: var(--text-gray);
-        }
-
-        /* CUSTOMIZE BANNER BOX */
-        .customize-banner-box {
-          background-color: var(--light-blue-gray);
-          border-radius: 6px;
-          padding: 30px 40px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 60px;
-          border: 1px solid var(--border-gray);
-        }
-
-        .cust-banner-text h3 {
-          font-family: var(--font-serif);
-          font-size: 20px;
-          font-weight: 600;
-          margin-bottom: 6px;
-        }
-
-        .cust-banner-text p {
-          font-size: 13px;
-          color: var(--text-gray);
-          font-weight: 300;
-        }
-
-        .cust-banner-btn {
-          background-color: var(--white);
-          color: var(--header-dark);
-          border: 1px solid var(--border-gray);
-          padding: 12px 24px;
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 1.2px;
-          text-transform: uppercase;
-          text-decoration: none;
-          border-radius: 4px;
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          transition: var(--transition);
-        }
-
-        .cust-banner-btn:hover {
-          background-color: var(--header-dark);
-          color: var(--white);
-          border-color: var(--header-dark);
-        }
-
-        /* INFORMATION TABS */
-        .info-tabs-wrapper {
-          border-bottom: 1px solid var(--border-gray);
-          padding-bottom: 50px;
-          margin-bottom: 80px;
-        }
-
-        .tabs-header {
-          display: flex;
-          gap: 40px;
-          border-bottom: 1px solid var(--border-gray);
-          margin-bottom: 40px;
-        }
-
-        .tab-trigger {
-          background: none;
-          border: none;
-          font-size: 12px;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 1.5px;
-          color: var(--text-gray);
-          padding-bottom: 15px;
-          cursor: pointer;
-          position: relative;
-          transition: var(--transition);
-        }
-
-        .tab-trigger.active {
-          color: var(--header-dark);
-        }
-
-        .tab-trigger.active::after {
-          content: '';
-          position: absolute;
-          bottom: -1px;
-          left: 0;
-          width: 100%;
-          height: 2px;
-          background-color: var(--accent-blue);
-        }
-
-        .tab-panel-grid {
-          display: grid;
-          grid-template-columns: 1.1fr 0.9fr;
-          gap: 60px;
-        }
-
-        .tab-panel-desc {
-          display: flex;
-          flex-direction: column;
-          gap: 25px;
-        }
-
-        .tab-panel-text {
-          font-size: 14px;
-          line-height: 1.65;
-          color: var(--text-gray);
-          font-weight: 300;
-        }
-
-        .tab-panel-bullets {
-          list-style: none;
-          display: flex;
-          flex-direction: column;
-          gap: 15px;
-        }
-
-        .tab-panel-bullets li {
-          display: flex;
-          align-items: flex-start;
-          gap: 12px;
-          font-size: 13px;
-          color: var(--header-dark);
-          font-weight: 500;
-        }
-
-        .spec-table-list {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .spec-row {
-          display: flex;
-          justify-content: space-between;
-          border-bottom: 1px solid var(--border-gray);
-          padding: 12px 0;
-          font-size: 13px;
-        }
-
-        .spec-row:first-child {
-          padding-top: 0;
-        }
-
-        .spec-row:last-child {
-          border-bottom: none;
-        }
-
-        .spec-key {
-          color: var(--text-gray);
-          font-weight: 400;
-        }
-
-        .spec-val {
-          color: var(--header-dark);
-          font-weight: 600;
-        }
-
-        /* Responsiveness */
-        @media (max-width: 1024px) {
-          .product-details-wrap {
-            padding: 30px;
-          }
-          .product-main-grid {
-            grid-template-columns: 1fr;
-            gap: 40px;
-          }
-          .main-display-box {
-            height: 400px;
-          }
-          .customize-banner-box {
-            flex-direction: column;
-            gap: 20px;
-            align-items: flex-start;
-          }
-          .cust-banner-btn {
-            width: 100%;
-            justify-content: center;
-          }
-          .tab-panel-grid {
-            grid-template-columns: 1fr;
-            gap: 40px;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .product-details-wrap {
-            padding: 30px 20px;
-          }
-          .product-gallery {
-            flex-direction: column-reverse;
-          }
-          .thumb-column {
-            flex-direction: row;
-            width: 100%;
-            overflow-x: auto;
-            padding-bottom: 5px;
-          }
-          .thumb-box {
-            width: 70px;
-            height: 70px;
-          }
-          .main-display-box {
-            height: 320px;
-          }
-          .product-main-title {
-            font-size: 28px;
-          }
-          .cta-row-panel {
-            flex-direction: column;
-          }
-          .add-cart-cta-btn, .add-wishlist-cta-btn {
-            width: 100%;
-          }
-          .panel-trust-grid {
-            grid-template-columns: 1fr;
-          }
-          .tabs-header {
-            gap: 20px;
-            overflow-x: auto;
-            padding-bottom: 5px;
-          }
-          .tab-trigger {
-            white-space: nowrap;
-          }
-        }
-      `}} />
-    </>
+      </div>
+    </main>
   );
 }

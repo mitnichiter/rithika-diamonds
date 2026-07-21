@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { useApp, Address } from "@/context/AppContext";
+import { useApp } from "@/context/AppContext";
 
 export default function AddressBookPage() {
   const { addresses, addAddress, updateAddress, deleteAddress } = useApp();
@@ -43,387 +43,416 @@ export default function AddressBookPage() {
 
   return (
     <>
-      <main className="account-details-wrap">
-        <section className="account-header-area">
-          <div className="account-header-container">
-            <div>
-              <div className="breadcrumbs">Home &gt; My Account &gt; <span style={{ color: "var(--accent-blue)" }}>Address Book</span></div>
-              <h1 className="account-title">Address Book</h1>
-              <p className="account-subtitle">Manage your saved shipping addresses.</p>
+      <main className="dashboard-wrap">
+        <div className="dashboard-container">
+          
+          {/* Minimal Side Nav */}
+          <aside className="dashboard-nav">
+            <h1 className="nav-header">My Account</h1>
+            <nav className="nav-links">
+              <Link href="/orders" className="nav-link">Orders</Link>
+              <Link href="/address-book" className="nav-link active">Address Book</Link>
+              <Link href="/wishlist" className="nav-link">Wishlist</Link>
+            </nav>
+          </aside>
+
+          {/* Main Content */}
+          <div className="dashboard-content">
+            <div className="content-header">
+              <h2 className="content-title">Address Book</h2>
+              <button className="btn-outline" onClick={() => setFormOpen(!formOpen)}>
+                {formOpen ? "Cancel" : "Add New Address"}
+              </button>
             </div>
-          </div>
-        </section>
 
-        <section className="dashboard-section">
-          <div className="dashboard-container">
-            
-            {/* Sidebar Column */}
-            <aside className="dashboard-sidebar">
-              <div className="user-profile-summary">
-                <div className="avatar-circle" style={{ backgroundColor: "var(--accent-blue)" }}>
-                  <i className="fa-regular fa-user"></i>
-                </div>
-                <div className="user-meta">
-                  <span className="user-name">Guest Customer</span>
-                  <span className="user-email">concierge@rithikadiamonds.com</span>
-                </div>
-              </div>
-
-              <nav className="sidebar-menu">
-                <Link href="/orders" className="menu-link">
-                  <i className="fa-solid fa-box"></i> My Orders
-                </Link>
-                <Link href="/address-book" className="menu-link active" style={{ color: "var(--accent-blue)", fontWeight: 600 }}>
-                  <i className="fa-solid fa-map-location-dot"></i> Address Book
-                </Link>
-                <Link href="/notifications" className="menu-link">
-                  <i className="fa-solid fa-bell"></i> Notifications
-                </Link>
-              </nav>
-            </aside>
-
-            {/* Main Content Column */}
-            <div className="dashboard-main-panel">
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid var(--border-gray)", paddingBottom: "15px", marginBottom: "5px" }}>
-                <h2 className="panel-title" style={{ borderBottom: "none", marginBottom: 0, paddingBottom: 0 }}>Saved Addresses ({addresses.length})</h2>
-                <button 
-                  onClick={() => setFormOpen(!formOpen)}
-                  style={{
-                    backgroundColor: "var(--accent-blue)",
-                    color: "white",
-                    border: "none",
-                    borderRadius: "4px",
-                    padding: "8px 16px",
-                    fontSize: "11px",
-                    fontWeight: 700,
-                    textTransform: "uppercase",
-                    letterSpacing: "1px",
-                    cursor: "pointer"
-                  }}
-                >
-                  {formOpen ? "Cancel" : "Add New Address"}
-                </button>
-              </div>
-
-              {formOpen && (
-                <form onSubmit={handleCreate} style={{
-                  border: "1px solid var(--border-gray)",
-                  borderRadius: "8px",
-                  padding: "24px",
-                  backgroundColor: "#fafbfc",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "15px"
-                }}>
-                  <h3 style={{ fontSize: "14px", fontWeight: 700, textTransform: "uppercase" }}>New Address</h3>
-                  
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "15px" }}>
-                    <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                      <label style={{ fontSize: "11px", fontWeight: 700, color: "var(--text-gray)" }}>Recipient Name</label>
-                      <input 
-                        type="text" 
-                        required 
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        style={{ padding: "10px", borderRadius: "4px", border: "1px solid var(--border-gray)" }}
-                      />
+            {formOpen && (
+              <div className="form-wrapper">
+                <h3 className="form-title">New Address</h3>
+                <form onSubmit={handleCreate} className="address-form">
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label>Recipient Name</label>
+                      <input type="text" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
                     </div>
-                    <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                      <label style={{ fontSize: "11px", fontWeight: 700, color: "var(--text-gray)" }}>Phone Number</label>
-                      <input 
-                        type="tel" 
-                        required 
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        style={{ padding: "10px", borderRadius: "4px", border: "1px solid var(--border-gray)" }}
-                      />
+                    <div className="form-group">
+                      <label>Phone Number</label>
+                      <input type="tel" required value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} />
                     </div>
                   </div>
 
-                  <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                    <label style={{ fontSize: "11px", fontWeight: 700, color: "var(--text-gray)" }}>Address Line 1</label>
-                    <input 
-                      type="text" 
-                      required 
-                      value={formData.addressLine1}
-                      onChange={(e) => setFormData({ ...formData, addressLine1: e.target.value })}
-                      style={{ padding: "10px", borderRadius: "4px", border: "1px solid var(--border-gray)" }}
-                    />
+                  <div className="form-group">
+                    <label>Address Line 1</label>
+                    <input type="text" required value={formData.addressLine1} onChange={(e) => setFormData({ ...formData, addressLine1: e.target.value })} />
                   </div>
 
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "15px" }}>
-                    <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                      <label style={{ fontSize: "11px", fontWeight: 700, color: "var(--text-gray)" }}>City</label>
-                      <input 
-                        type="text" 
-                        required 
-                        value={formData.city}
-                        onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                        style={{ padding: "10px", borderRadius: "4px", border: "1px solid var(--border-gray)" }}
-                      />
+                  <div className="form-row three-cols">
+                    <div className="form-group">
+                      <label>City</label>
+                      <input type="text" required value={formData.city} onChange={(e) => setFormData({ ...formData, city: e.target.value })} />
                     </div>
-                    <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                      <label style={{ fontSize: "11px", fontWeight: 700, color: "var(--text-gray)" }}>State / Province</label>
-                      <input 
-                        type="text" 
-                        required 
-                        value={formData.state}
-                        onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-                        style={{ padding: "10px", borderRadius: "4px", border: "1px solid var(--border-gray)" }}
-                      />
+                    <div className="form-group">
+                      <label>State / Province</label>
+                      <input type="text" required value={formData.state} onChange={(e) => setFormData({ ...formData, state: e.target.value })} />
                     </div>
-                    <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                      <label style={{ fontSize: "11px", fontWeight: 700, color: "var(--text-gray)" }}>ZIP / Postal Code</label>
-                      <input 
-                        type="text" 
-                        required 
-                        value={formData.zip}
-                        onChange={(e) => setFormData({ ...formData, zip: e.target.value })}
-                        style={{ padding: "10px", borderRadius: "4px", border: "1px solid var(--border-gray)" }}
-                      />
+                    <div className="form-group">
+                      <label>ZIP / Postal Code</label>
+                      <input type="text" required value={formData.zip} onChange={(e) => setFormData({ ...formData, zip: e.target.value })} />
                     </div>
                   </div>
 
-                  <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-                    <input 
-                      type="checkbox" 
-                      id="set-default"
-                      checked={formData.isDefault}
-                      onChange={(e) => setFormData({ ...formData, isDefault: e.target.checked })}
-                    />
-                    <label htmlFor="set-default" style={{ fontSize: "12px", color: "var(--text-gray)", cursor: "pointer" }}>Set as default shipping address</label>
+                  <div className="form-checkbox">
+                    <input type="checkbox" id="set-default" checked={formData.isDefault} onChange={(e) => setFormData({ ...formData, isDefault: e.target.checked })} />
+                    <label htmlFor="set-default">Set as default shipping address</label>
                   </div>
 
-                  <button 
-                    type="submit"
-                    style={{
-                      backgroundColor: "var(--accent-blue)",
-                      color: "white",
-                      border: "none",
-                      borderRadius: "4px",
-                      padding: "12px",
-                      fontSize: "12px",
-                      fontWeight: 700,
-                      textTransform: "uppercase",
-                      letterSpacing: "1px",
-                      cursor: "pointer",
-                      marginTop: "10px"
-                    }}
-                  >
-                    Save Address
-                  </button>
+                  <button type="submit" className="btn-primary">Save Address</button>
                 </form>
-              )}
-
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }} className="addresses-grid">
-                {addresses.map((addr) => (
-                  <div key={addr.id} style={{
-                    border: "1px solid var(--border-gray)",
-                    borderRadius: "8px",
-                    padding: "24px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "10px",
-                    backgroundColor: "white"
-                  }}>
-                    <span style={{ fontSize: "14px", fontWeight: 700, display: "flex", alignItems: "center", gap: "10px" }}>
-                      {addr.name}
-                      {addr.isDefault && <span style={{ fontSize: "9px", padding: "1px 6px", borderRadius: "10px", backgroundColor: "var(--accent-blue)", color: "white" }}>Default</span>}
-                    </span>
-                    <p style={{ fontSize: "13px", color: "var(--text-gray)", lineHeight: "1.5" }}>
-                      {addr.addressLine1},<br />
-                      {addr.city}, {addr.state} - {addr.zip}, {addr.country}
-                    </p>
-                    <span style={{ fontSize: "12px", fontWeight: 600 }}>{addr.phone}</span>
-                    
-                    <div style={{ display: "flex", gap: "15px", marginTop: "15px", borderTop: "1px solid var(--border-gray)", paddingTop: "15px" }}>
-                      {!addr.isDefault && (
-                        <button onClick={() => handleSetDefault(addr.id)} style={{
-                          background: "none", border: "none", color: "var(--accent-blue)", fontSize: "11px", fontWeight: 700, cursor: "pointer", textTransform: "uppercase"
-                        }}>
-                          Set Default
-                        </button>
-                      )}
-                      {addresses.length > 1 && (
-                        <button onClick={() => deleteAddress(addr.id)} style={{
-                          background: "none", border: "none", color: "#ef4444", fontSize: "11px", fontWeight: 700, cursor: "pointer", textTransform: "uppercase"
-                        }}>
-                          Delete
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                ))}
               </div>
+            )}
 
+            <div className="addresses-grid">
+              {addresses.map((addr, index) => (
+                <div className={`address-card ${index % 2 !== 0 ? 'offset-card' : ''}`} key={addr.id}>
+                  <div className="address-header">
+                    <h4 className="address-name">{addr.name}</h4>
+                    {addr.isDefault && <span className="status-pill">Default</span>}
+                  </div>
+                  <p className="address-details">
+                    {addr.addressLine1}<br />
+                    {addr.city}, {addr.state} {addr.zip}<br />
+                    {addr.country}
+                  </p>
+                  <p className="address-phone">{addr.phone}</p>
+                  
+                  <div className="address-actions">
+                    {!addr.isDefault && (
+                      <button onClick={() => handleSetDefault(addr.id)} className="action-btn">Set Default</button>
+                    )}
+                    {addresses.length > 1 && (
+                      <button onClick={() => deleteAddress(addr.id)} className="action-btn delete-btn">Delete</button>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
-
           </div>
-        </section>
+        </div>
       </main>
 
       <style dangerouslySetInnerHTML={{ __html: `
-        /* Account Dashboard Shared Styles */
-        .account-details-wrap {
-          background-color: var(--white);
-        }
-
-        .account-header-area {
-          background-color: var(--light-blue-gray);
-          border-bottom: 1px solid var(--border-gray);
-          padding: 40px 60px;
-        }
-
-        .account-header-container {
-          max-width: 1400px;
-          margin: 0 auto;
-        }
-
-        .breadcrumbs {
-          font-size: 12px;
-          color: var(--text-gray);
-          margin-bottom: 15px;
-          font-weight: 400;
-          letter-spacing: 0.3px;
-        }
-
-        .account-title {
-          font-family: var(--font-serif);
-          font-size: 38px;
-          font-weight: 400;
-          line-height: 1.2;
-          color: var(--header-dark);
-          letter-spacing: 0.5px;
-          margin-bottom: 6px;
-        }
-
-        .account-subtitle {
-          font-size: 13px;
-          color: var(--text-gray);
-          font-weight: 300;
-        }
-
-        .dashboard-section {
-          padding: 40px 60px 80px 60px;
+        .dashboard-wrap {
+          background-color: #ffffff;
+          color: #122742;
+          min-height: 100vh;
+          padding: 80px 40px;
         }
 
         .dashboard-container {
-          max-width: 1400px;
+          max-width: 1200px;
           margin: 0 auto;
           display: grid;
-          grid-template-columns: 280px 1fr;
-          gap: 50px;
+          grid-template-columns: 200px 1fr;
+          gap: 100px;
           align-items: start;
         }
 
-        /* Sidebar Column */
-        .dashboard-sidebar {
-          border: 1px solid var(--border-gray);
-          border-radius: 8px;
-          padding: 24px;
-          background-color: #fafbfc;
+        .dashboard-nav {
           display: flex;
           flex-direction: column;
-          gap: 25px;
+          gap: 40px;
+          position: sticky;
+          top: 120px;
         }
 
-        .user-profile-summary {
+        .nav-header {
+          font-family: var(--font-serif, serif);
+          font-size: 24px;
+          font-weight: 400;
+          color: #122742;
+          margin: 0;
+        }
+
+        .nav-links {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .nav-link {
+          font-size: 11px;
+          text-transform: uppercase;
+          letter-spacing: 1.5px;
+          color: #888;
+          text-decoration: none;
+          transition: color 0.3s ease;
           display: flex;
           align-items: center;
-          gap: 15px;
-          border-bottom: 1px solid var(--border-gray);
+          gap: 12px;
+        }
+
+        .nav-link:hover, .nav-link.active {
+          color: #122742;
+          font-weight: 600;
+        }
+
+        .nav-link.active::before {
+          content: "";
+          display: block;
+          width: 4px;
+          height: 4px;
+          background-color: #C9A680;
+          border-radius: 50%;
+        }
+
+        .dashboard-content {
+          display: flex;
+          flex-direction: column;
+          gap: 60px;
+        }
+
+        .content-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+          border-bottom: 1px solid #F4F4F4;
           padding-bottom: 20px;
         }
 
-        .avatar-circle {
-          width: 44px;
-          height: 44px;
-          border-radius: 50%;
-          color: white;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 18px;
+        .content-title {
+          font-family: var(--font-serif, serif);
+          font-size: 32px;
+          font-weight: 400;
+          color: #122742;
+          margin: 0;
         }
 
-        .user-meta {
+        .btn-outline {
+          background: transparent;
+          border: 1px solid #122742;
+          color: #122742;
+          padding: 10px 24px;
+          font-size: 10px;
+          text-transform: uppercase;
+          letter-spacing: 1.5px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+          background: #122742;
+          color: #ffffff;
+        }
+
+        .btn-primary {
+          background-color: #122742;
+          color: #ffffff;
+          border: none;
+          padding: 14px 32px;
+          font-size: 11px;
+          text-transform: uppercase;
+          letter-spacing: 1.5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          margin-top: 20px;
+        }
+
+        .btn-primary:hover {
+          background-color: #C9A680;
+        }
+
+        .form-wrapper {
+          background-color: #F4F4F4;
+          padding: 40px;
+        }
+
+        .form-title {
+          font-family: var(--font-serif, serif);
+          font-size: 20px;
+          color: #122742;
+          margin-top: 0;
+          margin-bottom: 30px;
+          font-weight: 400;
+        }
+
+        .address-form {
           display: flex;
           flex-direction: column;
-          gap: 4px;
+          gap: 24px;
         }
 
-        .user-name {
-          font-size: 14px;
-          font-weight: 700;
-          color: var(--header-dark);
+        .form-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 24px;
         }
 
-        .user-email {
-          font-size: 11px;
-          color: var(--text-gray);
+        .form-row.three-cols {
+          grid-template-columns: 1fr 1fr 1fr;
         }
 
-        .sidebar-menu {
+        .form-group {
           display: flex;
           flex-direction: column;
           gap: 8px;
         }
 
-        .menu-link {
+        .form-group label {
+          font-size: 10px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          color: #888;
+        }
+
+        .form-group input {
+          padding: 12px 16px;
+          border: 1px solid #EBE3DC;
+          background-color: #ffffff;
+          font-size: 13px;
+          color: #122742;
+          outline: none;
+          transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+          border-color: #122742;
+        }
+
+        .form-checkbox {
           display: flex;
           align-items: center;
-          gap: 12px;
-          padding: 12px 16px;
-          font-size: 13px;
-          font-weight: 500;
-          color: var(--text-gray);
-          text-decoration: none;
-          border-radius: 4px;
-          transition: var(--transition);
+          gap: 10px;
+          margin-top: 10px;
         }
 
-        .menu-link i {
-          width: 16px;
-          text-align: center;
+        .form-checkbox label {
+          font-size: 12px;
+          color: #122742;
+          cursor: pointer;
         }
 
-        .menu-link:hover, .menu-link.active {
-          background-color: white;
-          box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-          color: var(--header-dark);
+        .addresses-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 40px;
         }
 
-        /* Main panel */
-        .dashboard-main-panel {
+        .address-card {
+          padding: 40px;
+          border: 1px solid #F4F4F4;
           display: flex;
           flex-direction: column;
-          gap: 25px;
+          gap: 20px;
+          transition: transform 0.4s ease;
         }
 
-        .panel-title {
-          font-family: var(--font-serif);
-          font-size: 24px;
-          font-weight: 500;
-          color: var(--header-dark);
+        .address-card.offset-card {
+          margin-top: 40px;
         }
 
-        /* Responsiveness */
+        .address-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 20px 40px rgba(18, 39, 66, 0.04);
+        }
+
+        .address-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+        }
+
+        .address-name {
+          font-family: var(--font-serif, serif);
+          font-size: 20px;
+          color: #122742;
+          margin: 0;
+          font-weight: 400;
+        }
+
+        .status-pill {
+          display: inline-block;
+          padding: 4px 10px;
+          background-color: #EBE3DC;
+          color: #122742;
+          font-size: 9px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          border-radius: 2px;
+          font-weight: 600;
+        }
+
+        .address-details, .address-phone {
+          font-size: 13px;
+          line-height: 1.6;
+          color: #888;
+          margin: 0;
+        }
+
+        .address-actions {
+          display: flex;
+          gap: 20px;
+          margin-top: auto;
+          padding-top: 20px;
+          border-top: 1px solid #F4F4F4;
+        }
+
+        .action-btn {
+          background: none;
+          border: none;
+          color: #C9A680;
+          font-size: 10px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          cursor: pointer;
+          padding: 0;
+          transition: color 0.3s ease;
+        }
+
+        .action-btn:hover {
+          color: #122742;
+        }
+
+        .delete-btn {
+          color: #888;
+        }
+
+        .delete-btn:hover {
+          color: #ef4444;
+        }
+
         @media (max-width: 1024px) {
           .dashboard-container {
             grid-template-columns: 1fr;
-            gap: 40px;
+            gap: 60px;
+          }
+          .dashboard-nav {
+            position: static;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #F4F4F4;
+            padding-bottom: 20px;
+          }
+          .nav-links {
+            flex-direction: row;
+            gap: 30px;
+          }
+          .address-card.offset-card {
+            margin-top: 0;
           }
         }
 
         @media (max-width: 768px) {
-          .account-header-area {
-            padding: 30px 20px;
-          }
-          .dashboard-section {
+          .dashboard-wrap {
             padding: 40px 20px;
           }
           .addresses-grid {
-            grid-template-columns: 1fr !important;
+            grid-template-columns: 1fr;
+          }
+          .form-row, .form-row.three-cols {
+            grid-template-columns: 1fr;
+          }
+          .nav-links {
+            display: none;
           }
         }
       `}} />

@@ -2,12 +2,12 @@
 
 import React from "react";
 import Link from "next/link";
-import { useApp } from "@/context/AppContext";
+import { useApp, WishlistItem } from "@/context/AppContext";
 
 export default function WishlistPage() {
   const { wishlist, toggleWishlist, addToCart } = useApp();
 
-  const handleAddToCart = (item: any) => {
+  const handleAddToCart = (item: WishlistItem) => {
     addToCart({
       id: item.id,
       name: item.name,
@@ -16,151 +16,231 @@ export default function WishlistPage() {
       metal: "18K White Gold",
       size: "7"
     });
-    // Remove from wishlist after adding to cart
     toggleWishlist(item);
   };
 
   return (
     <>
-      <main className="wishlist-details-wrap">
-        <div className="wishlist-container">
+      <main className="dashboard-wrap">
+        <div className="dashboard-container">
           
-          {/* Breadcrumbs */}
-          <div className="wishlist-breadcrumbs">
-            Home &gt; <span style={{ color: "var(--accent-blue)" }}>My Wishlist</span>
-          </div>
+          {/* Minimal Side Nav */}
+          <aside className="dashboard-nav">
+            <h1 className="nav-header">My Account</h1>
+            <nav className="nav-links">
+              <Link href="/orders" className="nav-link">Orders</Link>
+              <Link href="/address-book" className="nav-link">Address Book</Link>
+              <Link href="/wishlist" className="nav-link active">Wishlist</Link>
+            </nav>
+          </aside>
 
-          <div className="wishlist-header">
-            <h1 className="wishlist-title">My Wishlist ({wishlist.length})</h1>
-            <p className="wishlist-subtitle">Your private collection of favorite diamond masterpieces.</p>
-          </div>
-
-          {wishlist.length === 0 ? (
-            <div style={{
-              padding: "80px 20px",
-              textAlign: "center",
-              border: "1px dashed var(--border-gray)",
-              borderRadius: "8px"
-            }}>
-              <i className="fa-regular fa-heart" style={{ fontSize: "48px", color: "#cbd5e1", marginBottom: "20px" }}></i>
-              <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "22px", fontWeight: 400, marginBottom: "10px" }}>Your Wishlist is Empty</h2>
-              <p style={{ color: "var(--text-gray)", fontSize: "14px", marginBottom: "25px" }}>Save your favorite diamond masterpieces to view them here.</p>
-              <Link href="/shop" style={{
-                backgroundColor: "var(--accent-blue)",
-                color: "white",
-                padding: "12px 30px",
-                borderRadius: "4px",
-                fontSize: "12px",
-                fontWeight: 700,
-                textTransform: "uppercase",
-                letterSpacing: "1px",
-                textDecoration: "none"
-              }}>
-                Explore Shop
-              </Link>
+          {/* Main Content */}
+          <div className="dashboard-content">
+            <div className="content-header">
+              <h2 className="content-title">Wishlist</h2>
+              <span className="content-meta">{wishlist.length} Items</span>
             </div>
-          ) : (
-            <div className="wishlist-grid">
-              {wishlist.map((item) => (
-                <article className="wishlist-card" key={item.id}>
-                  <div className="card-media">
-                    <button 
-                      className="wishlist-remove-btn" 
-                      onClick={() => toggleWishlist(item)}
-                      aria-label="Remove from Wishlist"
-                    >
-                      <i className="fa-solid fa-xmark"></i>
-                    </button>
-                    <img src={item.image} alt={item.name} className="card-img" />
-                  </div>
-                  <div className="card-desc-box">
-                    <h3 className="product-title">{item.name}</h3>
-                    <span className="product-price">${item.price.toLocaleString()}</span>
-                    
-                    <div className="card-actions">
-                      <button className="add-cart-btn" onClick={() => handleAddToCart(item)}>
-                        <i className="fa-solid fa-bag-shopping"></i> Add to Cart
+
+            {wishlist.length === 0 ? (
+              <div className="empty-state">
+                <p>Your private collection is currently empty.</p>
+                <Link href="/shop" className="btn-primary">Explore Collection</Link>
+              </div>
+            ) : (
+              <div className="wishlist-grid">
+                {wishlist.map((item, index) => (
+                  <article className={`wishlist-card ${index % 2 !== 0 ? 'offset-card' : ''}`} key={item.id}>
+                    <div className="card-media">
+                      <button 
+                        className="remove-btn" 
+                        onClick={() => toggleWishlist(item)}
+                        aria-label="Remove from Wishlist"
+                      >
+                        &times;
+                      </button>
+                      <img src={item.image} alt={item.name} className="card-img" />
+                    </div>
+                    <div className="card-info">
+                      <h3 className="item-name">{item.name}</h3>
+                      <span className="item-price">${item.price.toLocaleString()}</span>
+                      <button className="btn-outline add-cart-btn" onClick={() => handleAddToCart(item)}>
+                        Add to Cart
                       </button>
                     </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          )}
-
+                  </article>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </main>
 
       <style dangerouslySetInnerHTML={{ __html: `
-        /* Scoped wishlist styles */
-        .wishlist-details-wrap {
-          padding: 40px 60px 80px 60px;
-          background-color: var(--white);
+        .dashboard-wrap {
+          background-color: #ffffff;
+          color: #122742;
+          min-height: 100vh;
+          padding: 80px 40px;
         }
 
-        .wishlist-container {
-          max-width: 1400px;
+        .dashboard-container {
+          max-width: 1200px;
           margin: 0 auto;
+          display: grid;
+          grid-template-columns: 200px 1fr;
+          gap: 100px;
+          align-items: start;
         }
 
-        .wishlist-breadcrumbs {
+        .dashboard-nav {
+          display: flex;
+          flex-direction: column;
+          gap: 40px;
+          position: sticky;
+          top: 120px;
+        }
+
+        .nav-header {
+          font-family: var(--font-serif, serif);
+          font-size: 24px;
+          font-weight: 400;
+          color: #122742;
+          margin: 0;
+        }
+
+        .nav-links {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .nav-link {
+          font-size: 11px;
+          text-transform: uppercase;
+          letter-spacing: 1.5px;
+          color: #888;
+          text-decoration: none;
+          transition: color 0.3s ease;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .nav-link:hover, .nav-link.active {
+          color: #122742;
+          font-weight: 600;
+        }
+
+        .nav-link.active::before {
+          content: "";
+          display: block;
+          width: 4px;
+          height: 4px;
+          background-color: #C9A680;
+          border-radius: 50%;
+        }
+
+        .dashboard-content {
+          display: flex;
+          flex-direction: column;
+          gap: 60px;
+        }
+
+        .content-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+          border-bottom: 1px solid #F4F4F4;
+          padding-bottom: 20px;
+        }
+
+        .content-title {
+          font-family: var(--font-serif, serif);
+          font-size: 32px;
+          font-weight: 400;
+          color: #122742;
+          margin: 0;
+        }
+
+        .content-meta {
           font-size: 12px;
-          color: var(--text-gray);
-          margin-bottom: 30px;
-          font-weight: 400;
-          letter-spacing: 0.3px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          color: #888;
         }
 
-        .wishlist-header {
-          margin-bottom: 40px;
+        .empty-state {
+          padding: 80px 0;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 30px;
         }
 
-        .wishlist-title {
-          font-family: var(--font-serif);
-          font-size: 38px;
-          font-weight: 400;
-          line-height: 1.2;
-          color: var(--header-dark);
-          letter-spacing: 0.5px;
-          margin-bottom: 6px;
+        .empty-state p {
+          font-size: 14px;
+          color: #888;
         }
 
-        .wishlist-subtitle {
-          font-size: 13px;
-          color: var(--text-gray);
-          font-weight: 300;
+        .btn-primary {
+          background-color: #122742;
+          color: #ffffff;
+          padding: 14px 32px;
+          font-size: 11px;
+          text-transform: uppercase;
+          letter-spacing: 1.5px;
+          text-decoration: none;
+          transition: background-color 0.3s ease;
         }
 
-        /* Grid */
+        .btn-primary:hover {
+          background-color: #C9A680;
+        }
+
+        .btn-outline {
+          background: transparent;
+          border: 1px solid #122742;
+          color: #122742;
+          padding: 12px 24px;
+          font-size: 10px;
+          text-transform: uppercase;
+          letter-spacing: 1.5px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+          background: #122742;
+          color: #ffffff;
+        }
+
         .wishlist-grid {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 24px;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 40px;
         }
 
         .wishlist-card {
-          background-color: var(--white);
-          border-radius: 8px;
-          border: 1px solid var(--border-gray);
-          overflow: hidden;
           display: flex;
           flex-direction: column;
-          transition: var(--transition);
-          position: relative;
+          gap: 20px;
+          transition: transform 0.4s ease;
+        }
+
+        .wishlist-card.offset-card {
+          margin-top: 40px;
         }
 
         .wishlist-card:hover {
-          transform: translateY(-6px);
-          box-shadow: 0 12px 30px rgba(2, 16, 36, 0.06);
-          border-color: #cbd5e1;
+          transform: translateY(-4px);
         }
 
         .card-media {
           position: relative;
-          height: 310px;
-          width: 100%;
+          aspect-ratio: 4/5;
+          background-color: #F4F4F4;
           overflow: hidden;
-          background-color: #f8fafc;
         }
 
         .card-img {
@@ -171,100 +251,92 @@ export default function WishlistPage() {
         }
 
         .wishlist-card:hover .card-img {
-          transform: scale(1.04);
+          transform: scale(1.05);
         }
 
-        .wishlist-remove-btn {
+        .remove-btn {
           position: absolute;
           top: 15px;
           right: 15px;
-          background-color: rgba(255, 255, 255, 0.9);
+          background: #ffffff;
           border: none;
-          color: var(--header-dark);
-          font-size: 14px;
-          cursor: pointer;
-          z-index: 5;
-          transition: var(--transition);
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 28px;
-          height: 28px;
-          border-radius: 50%;
+          font-size: 18px;
+          color: #122742;
+          cursor: pointer;
+          z-index: 10;
+          transition: all 0.3s ease;
         }
 
-        .wishlist-remove-btn:hover {
-          background-color: #ef4444;
-          color: white;
-          transform: scale(1.1) rotate(90deg);
+        .remove-btn:hover {
+          background: #122742;
+          color: #ffffff;
         }
 
-        .card-desc-box {
-          padding: 20px;
+        .card-info {
           display: flex;
           flex-direction: column;
           gap: 10px;
-          flex-grow: 1;
+          align-items: flex-start;
         }
 
-        .product-title {
-          font-size: 14px;
-          font-weight: 600;
-          color: var(--header-dark);
-          letter-spacing: 0.2px;
+        .item-name {
+          font-family: var(--font-serif, serif);
+          font-size: 18px;
+          color: #122742;
           margin: 0;
+          font-weight: 400;
         }
 
-        .product-price {
-          font-size: 15px;
-          font-weight: 650;
-          color: var(--header-dark);
-        }
-
-        .card-actions {
-          margin-top: auto;
-          padding-top: 10px;
+        .item-price {
+          font-size: 13px;
+          color: #888;
         }
 
         .add-cart-btn {
+          margin-top: 10px;
           width: 100%;
-          background-color: var(--accent-blue);
-          color: white;
-          border: none;
-          border-radius: 4px;
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 1.2px;
-          text-transform: uppercase;
-          padding: 12px;
-          cursor: pointer;
-          transition: var(--transition);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 8px;
         }
 
-        .add-cart-btn:hover {
-          opacity: 0.9;
-        }
-
-        /* Responsiveness */
         @media (max-width: 1024px) {
-          .wishlist-details-wrap {
-            padding: 30px;
+          .dashboard-container {
+            grid-template-columns: 1fr;
+            gap: 60px;
+          }
+          .dashboard-nav {
+            position: static;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #F4F4F4;
+            padding-bottom: 20px;
+          }
+          .nav-links {
+            flex-direction: row;
+            gap: 30px;
           }
           .wishlist-grid {
             grid-template-columns: repeat(2, 1fr);
           }
+          .wishlist-card.offset-card {
+            margin-top: 0;
+          }
         }
 
         @media (max-width: 768px) {
-          .wishlist-details-wrap {
-            padding: 30px 20px;
+          .dashboard-wrap {
+            padding: 40px 20px;
           }
           .wishlist-grid {
             grid-template-columns: 1fr;
+          }
+          .nav-links {
+            display: none;
           }
         }
       `}} />
